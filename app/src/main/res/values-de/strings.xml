@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyRoutines</string>
+    <string name="EditTextHintAddRoutine">Routine Name</string>
+    <string name="AllRoutinesAction">Alle Routine Aktionen</string>
+    <string name="NoAction">Keine Aktion</string>
+    <string name="BluetoothOn">Bluetooth an</string>
+    <string name="BluetoothOFF">Bluetooth aus</string>
+    <string name="SpeakerVolumeDown">" Lautstärke lautlos -"</string>
+    <string name="SpeakerVolumeUP"> Lautstärke hoch +</string>
+    <string name="MediaSpeakerVolumeDown">Medien Laustärke lautlos -</string>
+    <string name="Action">Aktion</string>
+    <string name="MediaSpeakerVolumeUP">Medien Lautstärke hoch +</string>
+    <string name="SpeakerVolumeVibration">Lautsträke Vibration</string>
+</resources>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">MyRoutines</string>
+
+    <string name="EditTextHintAddRoutine"> Routine Name</string>
+    <string name="AllRoutinesAction"> All Routine Actions</string>
+    <string name="NoAction">No Action</string>
+
+    <string-array name="CustomDialogListArray">
+        <item>test</item>
+    </string-array>
+
+    <string name="BluetoothOn">Bluetooth On</string>
+    <string name="BluetoothOFF"> Bluetooth OFF</string>
+    <string name="MediaSpeakerVolumeUP">Media Volume UP + </string>
+    <string name="MediaSpeakerVolumeDown"> Media Volume mute -</string>
+    <string name="Action">Action</string>
+    <string name="SpeakerVolumeDown">Volume mute -</string>
+    <string name="SpeakerVolumeVibration"> Volume Vibration</string>
+    <string name="SpeakerVolumeUP">Volume UP +</string>
+
+
+</resources>
