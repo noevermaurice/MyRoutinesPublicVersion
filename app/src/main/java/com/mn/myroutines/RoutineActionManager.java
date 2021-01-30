@@ -2,7 +2,11 @@ package com.mn.myroutines;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
+import android.provider.AlarmClock;
+
+import java.time.Clock;
 
 public class RoutineActionManager {
     Context context;
@@ -42,9 +46,9 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
                     0);
         } else if (routine.getRoutineSlot1() == 5) {
-
-
             am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+
+
         }  else if (routine.getRoutineSlot1() == 6){
 
             am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.RINGER_MODE_VIBRATE, 0);
@@ -57,6 +61,11 @@ public class RoutineActionManager {
                     AudioManager.STREAM_RING,
                     am.getStreamMaxVolume(AudioManager.STREAM_RING),
                     0);
+        } else if (routine.getRoutineSlot1() == 8){
+
+        } else if (routine.getRoutineSlot1() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
 
         if (routine.getRoutineSlot2() == 0) {
@@ -96,6 +105,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot2() == 8){
+
+        } else if (routine.getRoutineSlot2() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
 
         if (routine.getRoutineSlot3() == 0) {
@@ -135,6 +149,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot3() == 8){
+
+        } else if (routine.getRoutineSlot3() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
 
 
@@ -175,6 +194,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        } else if (routine.getRoutineSlot4() == 8){
+
+        } else if (routine.getRoutineSlot4() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
 
         if (routine.getRoutineSlot5() == 0) {
@@ -215,6 +239,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        } else if (routine.getRoutineSlot5() == 8){
+
+        } else if (routine.getRoutineSlot5() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
 
         if (routine.getRoutineSlot6() == 0) {
@@ -255,6 +284,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        } else if (routine.getRoutineSlot6() == 8){
+
+        } else if (routine.getRoutineSlot6() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
         if (routine.getRoutineSlot7() == 0) {
             // do notthing
@@ -294,6 +328,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot7() == 8){
+
+        } else if (routine.getRoutineSlot7() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
         if (routine.getRoutineSlot8() == 0) {
             // do notthing
@@ -333,6 +372,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot8() == 8){
+
+        } else if (routine.getRoutineSlot8() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
         if (routine.getRoutineSlot9() == 0) {
             // do notthing
@@ -372,6 +416,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot9() == 8){
+
+        } else if (routine.getRoutineSlot9() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
         if (routine.getRoutineSlot10() == 0) {
             // do notthing
@@ -407,6 +456,11 @@ public class RoutineActionManager {
                     AudioManager.USE_DEFAULT_STREAM_TYPE,
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
+        }else if (routine.getRoutineSlot10() == 8){
+
+        } else if (routine.getRoutineSlot10() == 9){
+            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            context.startActivity(intent);
         }
     }
     }

@@ -3,7 +3,10 @@ package com.mn.myroutines;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -32,6 +35,14 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
     public String newActionString;
     public String noActionString;
     public String bluetoothOff;
+    public String bluetoothOn;
+    public String mediaVolumeMute;
+    public String mediaVolumeMax;
+    public String speakerVolumeMute;
+    public String speakerVolumeVibration;
+    public String speakerVolumeMax;
+    public String runApp;
+    public String runTimer;
 
     int listViewItemPosition;
     int routinelistPositionSlot1;
@@ -45,6 +56,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
     int routinelistPositionSlot9;
     int routinelistPositionSlot10;
     int whichSlotPosition;
+    private Object ResolveInfo;
 
 
     @Override
@@ -70,6 +82,15 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
         ArrayListSlotDefault = getString(R.string.NoAction);
         noActionString = getString(R.string.NoAction);
         bluetoothOff = getString(R.string.BluetoothOFF);
+        bluetoothOn = getString(R.string.BluetoothOn);
+        mediaVolumeMute = getString(R.string.MediaSpeakerVolumeMute);
+        mediaVolumeMax = getString(R.string.MediaSpeakerVolumeMax);
+        speakerVolumeMute = getString(R.string.SpeakerVolumeMute);
+        speakerVolumeVibration = getString(R.string.SpeakerVolumeVibration);
+        speakerVolumeMax = getString(R.string.MediaSpeakerVolumeMax);
+        runApp = getString(R.string.runApp);
+        runTimer = getString(R.string.runTimer);
+
 
     }
 
@@ -101,13 +122,12 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
         // set title
         builder.setTitle(getString(R.string.Action));
         // set String
-        String[] actions = {getString(R.string.NoAction), getString(R.string.BluetoothOFF)};
+        String[] actions = {noActionString, bluetoothOff, bluetoothOn,mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer};
         // set on click listener
         builder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-            routineSlotManager.setRoutineSlots(which);
+                routineSlotManager.setRoutineSlots(which);
 
             }
         });
@@ -117,6 +137,15 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
 
         }
 
+    private void ShowAllAppsDialog() {
+        AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
+        builderApps.setTitle("choose App");
+
+        AlertDialog dialog = builderApps.create();
+        dialog.show();
+
+    }
+
 
     private void initManagers() {
         // inisalraztion for all Mangers in the App
@@ -125,7 +154,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition);
+        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition);
     }
 
     public void setDefaultSlots(){

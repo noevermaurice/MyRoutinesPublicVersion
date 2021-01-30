@@ -11,12 +11,15 @@
 
     <string name="BluetoothOn">Bluetooth On</string>
     <string name="BluetoothOFF"> Bluetooth OFF</string>
-    <string name="MediaSpeakerVolumeUP">Media Volume UP + </string>
-    <string name="MediaSpeakerVolumeDown"> Media Volume mute -</string>
+    <string name="MediaSpeakerVolumeMax">Media Volume max + </string>
+    <string name="MediaSpeakerVolumeMute"> Media Volume mute -</string>
     <string name="Action">Action</string>
-    <string name="SpeakerVolumeDown">Volume mute -</string>
+    <string name="SpeakerVolumeMute">Volume mute -</string>
     <string name="SpeakerVolumeVibration"> Volume Vibration</string>
-    <string name="SpeakerVolumeUP">Volume UP +</string>
+    <string name="SpeakerVolumeMax">Volume Max +</string>
+    <string name="runApp"> run app</string>
+    <string name="runTimer"> run timer</string>
+
 
 
 </resources>

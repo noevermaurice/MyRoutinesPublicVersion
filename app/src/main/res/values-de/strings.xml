@@ -6,10 +6,13 @@
     <string name="NoAction">Keine Aktion</string>
     <string name="BluetoothOn">Bluetooth an</string>
     <string name="BluetoothOFF">Bluetooth aus</string>
-    <string name="SpeakerVolumeDown">" Lautstärke lautlos -"</string>
-    <string name="SpeakerVolumeUP"> Lautstärke hoch +</string>
-    <string name="MediaSpeakerVolumeDown">Medien Laustärke lautlos -</string>
+    <string name="SpeakerVolumeMute">" Lautstärke lautlos -"</string>
+    <string name="SpeakerVolumeMax"> Lautstärke max +</string>
+    <string name="MediaSpeakerVolumeMute">Medien Laustärke lautlos -</string>
     <string name="Action">Aktion</string>
-    <string name="MediaSpeakerVolumeUP">Medien Lautstärke hoch +</string>
+    <string name="MediaSpeakerVolumeMax">Medien Lautstärke maximal +</string>
     <string name="SpeakerVolumeVibration">Lautsträke Vibration</string>
+    <string name="runApp">starte App</string>
+    <string name="runTimer">starte Timer</string>
+
 </resources>
