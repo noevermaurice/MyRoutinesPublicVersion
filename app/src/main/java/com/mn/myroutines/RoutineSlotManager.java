@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.widget.EditText;
 import android.widget.ListPopupWindow;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -420,6 +421,51 @@ public class RoutineSlotManager  {
 
         listView.setAdapter(listviewAdapterRoutine);
         listviewAdapterRoutine.arrayListSlots.set(whichSlotPosition,newActionString);
+    }
+
+    public void createRoutine(Routine routine, EditText editText, RoutineManager routineManager){
+
+
+        String newRoutineName = editText.getText().toString();
+        if (newRoutineName.length() >0){
+            routine.setRoutineName(newRoutineName);
+            routine.setRoutineSlot1(routinelistPositionSlot1);
+            Log.d("AddRoutineActivity", "Solt 1 hat den wert = " + routine.getRoutineSlot1());
+            // set Slot position nummer2
+            routine.setRoutineSlot2(routinelistPositionSlot2);
+            Log.d("AddRoutineActivity", "Solt 2 hat den wert = " + routine.getRoutineSlot2());
+            // set Slot position nummer3
+            routine.setRoutineSlot3(routinelistPositionSlot3);
+            Log.d("AddRoutineActivity", "Solt 3 hat den wert =" + routine.getRoutineSlot3());
+            // set Slot position nummer4
+            routine.setRoutineSlot4(routinelistPositionSlot4);
+            Log.d("AddRoutineActivity", "Solt 4 hat den wert =" + routine.getRoutineSlot4());
+            // set Slot position nummer5
+            routine.setRoutineSlot5(routinelistPositionSlot5);
+            Log.d("AddRoutineActivity", "Solt 5 hat den wert =" + routine.getRoutineSlot5());
+            // set Slot position nummer6
+            routine.setRoutineSlot6(routinelistPositionSlot6);
+            Log.d("AddRoutineActivity", "Solt 6 hat den wert =" + routine.getRoutineSlot6());
+            // set Slot position nummer7
+            routine.setRoutineSlot7(routinelistPositionSlot7);
+            Log.d("AddRoutineActivity", "Solt 7 hat den wert =" + routine.getRoutineSlot7());
+            // set Slot position nummer8
+            routine.setRoutineSlot8(routinelistPositionSlot8);
+            Log.d("AddRoutineActivity", "Solt 8 hat den wert =" + routine.getRoutineSlot8());
+            // set Slot position nummer9
+            routine.setRoutineSlot9(routinelistPositionSlot9);
+            Log.d("AddRoutineActivity", "Solt 9 hat den wert =" + routine.getRoutineSlot9());
+            // set Slot position nummer9
+            routine.setRoutineSlot10(routinelistPositionSlot10);
+            Log.d("AddRoutineActivity", "Solt 10 hat den wert =" + routine.getRoutineSlot10());
+
+
+            // add the routine to the list
+            routineManager.addRoutine(routine);
+            // save changes into the list
+            routineManager.saveRoutineList();
+        }
+
     }
 
 

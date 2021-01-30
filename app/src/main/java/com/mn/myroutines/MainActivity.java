@@ -1,6 +1,7 @@
 package com.mn.myroutines;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     // Objects Deklartation
    RecyclerView recyclerView;
     FloatingActionButton addNewRoutine;
+    RoutineListAdapter routineListAdapter;
+    RoutineManager routineManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +29,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void initViews(){
         // serach views with id
+        routineManager = new RoutineManager(this);
+        routineListAdapter = new RoutineListAdapter(routineManager, this);
         recyclerView = findViewById(R.id.routinesList);
         addNewRoutine = findViewById(R.id.addRoutine);
+
+        recyclerView = findViewById(R.id.routinesList);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(routineListAdapter);
+        routineListAdapter.notifyDataSetChanged();
     }
 
     private void initClickListener() {

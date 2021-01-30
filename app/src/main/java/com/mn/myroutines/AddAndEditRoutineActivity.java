@@ -13,12 +13,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class AddAndEditRoutineActivity extends AppCompatActivity {
 
     // Object Deklartion
     EditText editTextRoutineName;
+    FloatingActionButton saveButton;
     ListView listView;
     RoutineManager routineManager;
     RoutineSlotManager routineSlotManager;
@@ -60,6 +63,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
     private void initViews() {
         // serach for Views with id
         editTextRoutineName = findViewById(R.id.EditTextRoutineName);
+        saveButton = findViewById(R.id.saveRoutineButton);
         listView = findViewById(R.id.listviewAddAction);
         listView.setAdapter(listviewAdapterRoutine);
         arrayList = new ArrayList<>();
@@ -78,6 +82,17 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
                 routineSlotManager.setWhichSlotPosition(position);
             }
         });
+
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Routine routine = new Routine();
+                routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
+                onBackPressed();
+            }
+        });
+
+
     }
 
     private void ShowDialog() {
