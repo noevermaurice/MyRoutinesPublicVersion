@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.AlarmClock;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class AddAndEditRoutineActivity extends AppCompatActivity {
+public class AddAndEditRoutineActivity extends AppCompatActivity implements SetTimerDialog.setTimerInterface {
 
     // Object Deklartion
     EditText editTextRoutineName;
@@ -43,6 +44,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
     public String speakerVolumeMax;
     public String runApp;
     public String runTimer;
+    public String timerName;
 
     int listViewItemPosition;
     int routinelistPositionSlot1;
@@ -56,7 +58,10 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
     int routinelistPositionSlot9;
     int routinelistPositionSlot10;
     int whichSlotPosition;
-    private Object ResolveInfo;
+    int timerSeconds;
+    int timerMinutes;
+    int timerHours;
+
 
 
     @Override
@@ -133,6 +138,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
                     // if Action = 9 than show timer Dialog
                     SetTimerDialog setTimerDialog = new SetTimerDialog();
                     setTimerDialog.show(getSupportFragmentManager(), "dialog");
+                    // set timer settings in slotmanager
+                    routineSlotManager.getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
                 }
 
             }
@@ -179,5 +186,16 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
         finish();
         // start new Activity
         startActivity(intent);
+    }
+
+
+    @Override
+    public void setTimerSettings(int seconds, int minutes, int hour, String TimerName) {
+       this.timerSeconds = seconds;
+        Log.d("AddAcivity", "seconds in der Activity vom Interface " + timerSeconds);
+
+       this.timerMinutes = minutes;
+       this.timerHours = hour;
+       this.timerName = TimerName;
     }
 }

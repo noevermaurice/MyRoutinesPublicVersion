@@ -29,6 +29,7 @@ public class RoutineSlotManager  {
     private String speakerVolumeMax;
     private String runApp;
     private String runTimer;
+    private String timerName;
     int listviewItemPosition;
     int routinelistPositionSlot1;
     int routinelistPositionSlot2;
@@ -41,6 +42,9 @@ public class RoutineSlotManager  {
     int routinelistPositionSlot9;
     int routinelistPositionSlot10;
     int whichSlotPosition;
+    int timerSeconds;
+    int timerMinutes;
+    int timerHours;
     Activity activity = (Activity) context;
 
 
@@ -876,6 +880,7 @@ public class RoutineSlotManager  {
         String newRoutineName = editText.getText().toString();
         if (newRoutineName.length() >0){
             routine.setRoutineName(newRoutineName);
+            Log.d("AddRoutineActivity", "Routine Name"  + routine.getRoutineName());
             routine.setRoutineSlot1(routinelistPositionSlot1);
             Log.d("AddRoutineActivity", "Solt 1 hat den wert = " + routine.getRoutineSlot1());
             // set Slot position nummer2
@@ -905,15 +910,33 @@ public class RoutineSlotManager  {
             // set Slot position nummer9
             routine.setRoutineSlot10(routinelistPositionSlot10);
             Log.d("AddRoutineActivity", "Solt 10 hat den wert =" + routine.getRoutineSlot10());
-
-
+            routine.setTimerSeconds(timerSeconds);
+            Log.d("AddRoutineActivity", "Seconds  =" + routine.getTimerSeconds());
+            routine.setTimerMinutes(timerMinutes);
+            Log.d("AddRoutineActivity", "Minutes  =" + routine.getTimerName());
+            routine.setTimerHours(timerHours);
+            Log.d("AddRoutineActivity", " Hour  =" + routine.getTimerHours());
+            routine.setTimerName(timerName);
+            Log.d("AddRoutineActivity", "Seconds  =" + routine.getTimerName());
             // add the routine to the list
             routineManager.addRoutine(routine);
             // save changes into the list
             routineManager.saveRoutineList();
         }
 
+
+
     }
+
+    public void getTimerSettings(int timerSeconds, int timerMinutes, int timerHours,String timerName){
+        this.timerSeconds = timerSeconds;
+        this.timerMinutes = timerMinutes;
+        this.timerHours = timerHours;
+        this.timerName = timerName;
+    }
+
+
+
 
 
 }

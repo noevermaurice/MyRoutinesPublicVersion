@@ -1,5 +1,7 @@
 package com.mn.myroutines;
 
+import com.google.gson.internal.$Gson$Preconditions;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,6 +9,7 @@ public class Routine implements Serializable {
 
 
     public String routineName;
+    public String timerName;
     public int routineSlot1;
     public int routineSlot2;
     public int routineSlot3;
@@ -17,6 +20,9 @@ public class Routine implements Serializable {
     public int routineSlot8;
     public int routineSlot9;
     public int routineSlot10;
+    public int timerSeconds;
+    public int timerMinutes;
+    public int timerHours;
 
 
 
@@ -108,5 +114,37 @@ public class Routine implements Serializable {
 
     public int getRoutineSlot10() {
         return routineSlot10;
+    }
+
+    public void setTimerSeconds(int timerSeconds){
+        this.timerSeconds = timerSeconds;
+
+    }
+    public int getTimerSeconds(){
+        return  timerSeconds;
+    }
+
+    public void setTimerMinutes(int timerMinutes){
+        this.timerMinutes = timerMinutes;
+    }
+
+    public int getTimerMinutes(){
+        return  timerMinutes;
+    }
+
+    public void setTimerHours(int hours){
+        this.timerHours = hours;
+    }
+
+    public int getTimerHours(){
+        return  timerHours;
+    }
+
+    public void setTimerName(String timerName){
+        this.timerName = timerName;
+    }
+
+    public String getTimerName(){
+        return  timerName;
     }
 }

@@ -17,11 +17,12 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 
 public class SetTimerDialog extends AppCompatDialogFragment {
-    private TimerDialogInterface listener;
+
     public EditText editTextTimerName;
     public EditText editTextSeconds;
     public EditText editTextMinutes;
     public EditText editTextHour;
+    public setTimerInterface listener;
 
     public int seconds;
     public int minutes;
@@ -35,7 +36,7 @@ public class SetTimerDialog extends AppCompatDialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.set_timer, null);
         editTextTimerName = view.findViewById(R.id.edittTextTimerName);
         editTextSeconds = view.findViewById(R.id.edittextSecond);
@@ -45,33 +46,21 @@ public class SetTimerDialog extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // make a string and past the text from edittext
-                valueSeconds= editTextSeconds.getText().toString();
-                valueMinutes = editTextMinutes.getText().toString();
-                valueHour = editTextHour.getText().toString();
+
                 // convertiere the string in a int
-                if (!(editTextSeconds.getText().length() == 00))
-                {
-                    seconds =Integer.parseInt(valueSeconds);
-                    Log.d("SetTimerDialog" , "seconds " + seconds);
-                } else {
-                    seconds =0;
-                }
 
-                if ( editTextMinutes.length() == 0){
-                    minutes =0;
-                } else {
-                    minutes = Integer.parseInt(valueMinutes);
-                    Log.d("SetTimerDialog" , "minutes " + minutes);
-                }
-
-                if (editTextHour.length() == 0){
-                    hour = 0;
-                } else {
-                    hour = Integer.parseInt(valueHour);
-                    Log.d("SetTimerDialog" , "hour " + hour);
-                }
-
+                seconds = Integer.parseInt(editTextSeconds.getText().toString());
+                Log.d("SetTimerDialog", "seconds " + seconds);
+                minutes =Integer.parseInt(editTextMinutes.getText().toString());
+                Log.d("SetTimerDialog", "minutes " + minutes);
+                hour = Integer.parseInt(editTextHour.getText().toString());
+                Log.d("SetTimerDialog", "hour " +hour);
+                listener.setTimerSettings(seconds,minutes, hour, editTextTimerName.getText().toString());
             }
+
+
+
+
         });
         builder.setNegativeButton(getString(R.string.NegativeButton), new DialogInterface.OnClickListener() {
             @Override
@@ -81,12 +70,29 @@ public class SetTimerDialog extends AppCompatDialogFragment {
         });
         builder.setView(view);
 
+
+
         return builder.create();
+
+
     }
 
-    public interface  TimerDialogInterface{
-        void setTimer(int seconds, int minutes, int hour);
+    public interface setTimerInterface{
+        void setTimerSettings(int seconds,int minutes, int hour, String TimerName);
     }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            listener = (setTimerInterface) context;
+        } catch (ClassCastException e) {
+            throw  new ClassCastException(context.toString()+ "  must implement Dialog");
+        }
+    }
+
+
+
 
 
 }

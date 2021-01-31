@@ -20,7 +20,7 @@
             android:id="@+id/edittextHour"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="time"
+            android:inputType="number"
             android:layout_marginRight="10dp"
             android:hint="00"
             android:maxLength="2"/>
@@ -30,7 +30,7 @@
             android:id="@+id/edittextMinute"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="time"
+            android:inputType="number"
             android:layout_marginRight="10dp"
             android:hint="00"
             android:maxLength="2"/>
@@ -40,7 +40,7 @@
             android:id="@+id/edittextSecond"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="time"
+            android:inputType="number"
             android:hint="00"
             android:maxLength="2"/>
 
