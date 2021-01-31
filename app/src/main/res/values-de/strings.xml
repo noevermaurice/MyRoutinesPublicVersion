@@ -14,5 +14,6 @@
     <string name="SpeakerVolumeVibration">Lautsträke Vibration</string>
     <string name="runApp">starte App</string>
     <string name="runTimer">starte Timer</string>
+    <string name="NegativeButton">Abbrechen</string>
 
 </resources>

@@ -459,7 +459,7 @@ public class RoutineActionManager {
         }else if (routine.getRoutineSlot10() == 8){
 
         } else if (routine.getRoutineSlot10() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
             context.startActivity(intent);
         }
     }

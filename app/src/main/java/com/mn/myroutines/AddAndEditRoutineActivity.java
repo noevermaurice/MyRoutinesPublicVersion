@@ -65,7 +65,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_routine);
         context = getApplicationContext();
 
-        initViews();
+       initViews();
         initManagers();
         initClickListener();
         setDefaultSlots();
@@ -128,6 +128,12 @@ public class AddAndEditRoutineActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 routineSlotManager.setRoutineSlots(which);
+
+                if (which == 9){
+                    // if Action = 9 than show timer Dialog
+                    SetTimerDialog setTimerDialog = new SetTimerDialog();
+                    setTimerDialog.show(getSupportFragmentManager(), "dialog");
+                }
 
             }
         });

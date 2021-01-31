@@ -19,6 +19,7 @@
     <string name="SpeakerVolumeMax">Volume Max +</string>
     <string name="runApp"> run app</string>
     <string name="runTimer"> run timer</string>
+    <string name="NegativeButton">Cancel</string>
 
 
 
