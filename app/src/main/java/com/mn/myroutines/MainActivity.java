@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends  AppCompatActivity {
     // Objects Deklartation
    RecyclerView recyclerView;
     FloatingActionButton addNewRoutine;
@@ -39,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(routineListAdapter);
         routineListAdapter.notifyDataSetChanged();
+
+        routineListAdapter.SetOnItemclickListener(new RoutineListAdapter.onitemclickListener() {
+            @Override
+            public void onitemclick(int position,Routine routine) {
+                Intent intent = new Intent(MainActivity.this, AddAndEditRoutineActivity.class);
+                intent.putExtra("routine", routine);
+                intent.putExtra("position", position);
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
     private void initClickListener() {
@@ -56,5 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 }

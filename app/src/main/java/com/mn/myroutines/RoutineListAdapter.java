@@ -18,13 +18,13 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
         this.context = context;
 
     }
-
+    private onitemclickListener listener;
 
     @NonNull
     @Override
     public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // inflate Layout
-        return new RoutineViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.routine_row, parent, false));
+        return new RoutineViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.routine_row, parent, false),listener);
     }
 
     @Override
@@ -60,15 +60,15 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
 
     }
 
+    protected interface onitemclickListener {
 
+        void onitemclick(int position, Routine routine);
+    }
 
+    protected void SetOnItemclickListener(onitemclickListener listener) {
+        this.listener = listener;
 
-
-
-
-
-
-
+    }
 
 
     @Override

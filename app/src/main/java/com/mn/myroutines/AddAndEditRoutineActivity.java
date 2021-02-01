@@ -71,11 +71,19 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         context = getApplicationContext();
 
        initViews();
+
         initManagers();
         initClickListener();
         setDefaultSlots();
 
+        if (getIntent().hasExtra("routine")){
+            Routine oldroutine = (Routine) getIntent().getSerializableExtra("routine");
+           routineSlotManager.getRoutineSlotActions(oldroutine);
+        }
+
     }
+
+
 
     private void initViews() {
         // serach for Views with id
@@ -114,6 +122,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             public void onClick(View v) {
                 Routine routine = new Routine();
                 routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
+
                 onBackPressed();
             }
         });
@@ -135,11 +144,13 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                 routineSlotManager.setRoutineSlots(which);
 
                 if (which == 9){
+
                     // if Action = 9 than show timer Dialog
                     SetTimerDialog setTimerDialog = new SetTimerDialog();
                     setTimerDialog.show(getSupportFragmentManager(), "dialog");
-                    // set timer settings in slotmanager
                     routineSlotManager.getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
+                    // set timer settings in slotmanager
+
                 }
 
             }
@@ -167,7 +178,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition);
+        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName);
     }
 
     public void setDefaultSlots(){

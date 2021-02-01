@@ -27,9 +27,7 @@ public class SetTimerDialog extends AppCompatDialogFragment {
     public int seconds;
     public int minutes;
     public int hour;
-    String valueSeconds;
-    String valueMinutes;
-    String valueHour;
+
 
 
     @NonNull
@@ -56,6 +54,7 @@ public class SetTimerDialog extends AppCompatDialogFragment {
                 hour = Integer.parseInt(editTextHour.getText().toString());
                 Log.d("SetTimerDialog", "hour " +hour);
                 listener.setTimerSettings(seconds,minutes, hour, editTextTimerName.getText().toString());
+
             }
 
 

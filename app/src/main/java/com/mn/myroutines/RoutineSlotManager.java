@@ -48,7 +48,7 @@ public class RoutineSlotManager  {
     Activity activity = (Activity) context;
 
 
-    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString,String noActionString, String bluetoothOffString,String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString,String speakerVolumeMute, String speakerVolumeVibration,String speakerVolumeMax, String runApp, String runTimer,int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4,int routinelistPositionSlot5,int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8,int routinelistPositionSlot9,int routinelistPositionSlot10, int whichSlotPosition) {
+    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString,String noActionString, String bluetoothOffString,String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString,String speakerVolumeMute, String speakerVolumeVibration,String speakerVolumeMax, String runApp, String runTimer,int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4,int routinelistPositionSlot5,int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8,int routinelistPositionSlot9,int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds,int timerMinutes, int timerHours, String timerName) {
         //
         this.context = context;
         this.listView = listView;
@@ -77,6 +77,10 @@ public class RoutineSlotManager  {
         this.routinelistPositionSlot9 = routinelistPositionSlot9;
         this.routinelistPositionSlot10 = routinelistPositionSlot10;
         this.whichSlotPosition = whichSlotPosition;
+        this.timerSeconds = timerSeconds;
+        this.timerMinutes = timerMinutes;
+        this.timerHours = timerHours;
+        this.timerName = timerName;
 
     }
 
@@ -93,6 +97,15 @@ public class RoutineSlotManager  {
         listviewAdapterRoutine.arrayListSlots.add(ArrayListSlotDefault);
         listviewAdapterRoutine.arrayListSlots.add(ArrayListSlotDefault);
         listView.setAdapter(listviewAdapterRoutine);
+    }
+
+    public void getRoutineSlotActions(Routine oldRoutine){
+
+        switch (oldRoutine.getRoutineSlot1()){
+            case 0:
+
+        }
+
     }
 
     public void setRoutineSlots(int selectActionPosition) {
@@ -875,7 +888,7 @@ public class RoutineSlotManager  {
     }
 
     public void createRoutine(Routine routine, EditText editText, RoutineManager routineManager){
-
+                getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
 
         String newRoutineName = editText.getText().toString();
         if (newRoutineName.length() >0){
@@ -910,15 +923,15 @@ public class RoutineSlotManager  {
             // set Slot position nummer9
             routine.setRoutineSlot10(routinelistPositionSlot10);
             Log.d("AddRoutineActivity", "Solt 10 hat den wert =" + routine.getRoutineSlot10());
-            routine.setTimerSeconds(timerSeconds);
-            Log.d("AddRoutineActivity", "Seconds  =" + routine.getTimerSeconds());
-            routine.setTimerMinutes(timerMinutes);
-            Log.d("AddRoutineActivity", "Minutes  =" + routine.getTimerName());
-            routine.setTimerHours(timerHours);
-            Log.d("AddRoutineActivity", " Hour  =" + routine.getTimerHours());
+            //set Timer Name
             routine.setTimerName(timerName);
-            Log.d("AddRoutineActivity", "Seconds  =" + routine.getTimerName());
-            // add the routine to the list
+            Log.d("AddRoutineActivity", "Timer Name  =" + routine.getTimerName());
+            routine.setTimerSeconds(timerSeconds);
+            Log.d("AddRoutineActivity", "Timer Seconds  =" + routine.getTimerSeconds());
+            routine.setTimerMinutes(timerMinutes);
+            Log.d("AddRoutineActivity", "Timer Minutes  =" + routine.getTimerMinutes());
+            routine.setTimerHours(timerHours);
+            Log.d("AddRoutineActivity", "Timer Hour  =" + routine.getTimerHours());
             routineManager.addRoutine(routine);
             // save changes into the list
             routineManager.saveRoutineList();
@@ -930,10 +943,12 @@ public class RoutineSlotManager  {
 
     public void getTimerSettings(int timerSeconds, int timerMinutes, int timerHours,String timerName){
         this.timerSeconds = timerSeconds;
+        Log.d("t", "s =" + timerSeconds);
         this.timerMinutes = timerMinutes;
         this.timerHours = timerHours;
-        this.timerName = timerName;
+        this.timerName= timerName;
     }
+
 
 
 
