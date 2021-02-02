@@ -178,7 +178,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName);
+        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName, editTextRoutineName);
     }
 
     public void setDefaultSlots(){

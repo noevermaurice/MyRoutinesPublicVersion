@@ -45,10 +45,11 @@ public class RoutineSlotManager  {
     int timerSeconds;
     int timerMinutes;
     int timerHours;
+    EditText editText;
     Activity activity = (Activity) context;
 
 
-    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString,String noActionString, String bluetoothOffString,String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString,String speakerVolumeMute, String speakerVolumeVibration,String speakerVolumeMax, String runApp, String runTimer,int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4,int routinelistPositionSlot5,int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8,int routinelistPositionSlot9,int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds,int timerMinutes, int timerHours, String timerName) {
+    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString,String noActionString, String bluetoothOffString,String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString,String speakerVolumeMute, String speakerVolumeVibration,String speakerVolumeMax, String runApp, String runTimer,int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4,int routinelistPositionSlot5,int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8,int routinelistPositionSlot9,int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds,int timerMinutes, int timerHours, String timerName, EditText editText) {
         //
         this.context = context;
         this.listView = listView;
@@ -81,6 +82,7 @@ public class RoutineSlotManager  {
         this.timerMinutes = timerMinutes;
         this.timerHours = timerHours;
         this.timerName = timerName;
+        this.editText = editText;
 
     }
 
@@ -99,10 +101,60 @@ public class RoutineSlotManager  {
         listView.setAdapter(listviewAdapterRoutine);
     }
 
-    public void getRoutineSlotActions(Routine oldRoutine){
+    public void getRoutineSlotActions(Routine oldRoutine) {
+        editText.setText(oldRoutine.getRoutineName());
+// with swich check with number has oldroutine Slot and list update
 
-        switch (oldRoutine.getRoutineSlot1()){
+        switch (oldRoutine.getRoutineSlot1()) {
             case 0:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+            case 1:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 2:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 3:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 4:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 5:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 6:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 7:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 8:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
+            case 9:
+                setRoutineSlots(oldRoutine.getRoutineSlot1());
+                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
+                break;
+
 
         }
 
