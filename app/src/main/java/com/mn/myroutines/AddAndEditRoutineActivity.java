@@ -61,6 +61,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     int timerSeconds;
     int timerMinutes;
     int timerHours;
+    int routineListPosition;
 
 
 
@@ -80,6 +81,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             Routine oldroutine = (Routine) getIntent().getSerializableExtra("routine");
            routineSlotManager.getRoutineSlotActions(oldroutine);
         }
+
+        routineListPosition = getIntent().getIntExtra("routinePosition",0);
+
 
     }
 
@@ -121,7 +125,12 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             @Override
             public void onClick(View v) {
                 Routine routine = new Routine();
-                routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
+                if (getIntent().hasExtra("routine")){
+                   routineSlotManager.updateRoutine(routine, editTextRoutineName, routineManager, routineListPosition);
+                } else {
+                    routineSlotManager.createRoutine(routine, editTextRoutineName,routineManager );
+                }
+
 
                 onBackPressed();
             }

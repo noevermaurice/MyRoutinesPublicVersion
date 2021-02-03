@@ -45,7 +45,7 @@ public class MainActivity extends  AppCompatActivity {
             public void onitemclick(int position,Routine routine) {
                 Intent intent = new Intent(MainActivity.this, AddAndEditRoutineActivity.class);
                 intent.putExtra("routine", routine);
-                intent.putExtra("position", position);
+                intent.putExtra("routinePosition", position);
                 finish();
                 startActivity(intent);
             }

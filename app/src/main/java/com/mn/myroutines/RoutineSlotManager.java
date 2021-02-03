@@ -3,6 +3,7 @@ package com.mn.myroutines;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListPopupWindow;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class RoutineSlotManager  {
+public class RoutineSlotManager {
     // Objects Deklartation
     ListView listView;
     Context context;
@@ -49,7 +50,7 @@ public class RoutineSlotManager  {
     Activity activity = (Activity) context;
 
 
-    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString,String noActionString, String bluetoothOffString,String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString,String speakerVolumeMute, String speakerVolumeVibration,String speakerVolumeMax, String runApp, String runTimer,int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4,int routinelistPositionSlot5,int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8,int routinelistPositionSlot9,int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds,int timerMinutes, int timerHours, String timerName, EditText editText) {
+    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer, int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds, int timerMinutes, int timerHours, String timerName, EditText editText) {
         //
         this.context = context;
         this.listView = listView;
@@ -104,745 +105,737 @@ public class RoutineSlotManager  {
     public void getRoutineSlotActions(Routine oldRoutine) {
         editText.setText(oldRoutine.getRoutineName());
 // with swich check with number has oldroutine Slot and list update
+        // for loop for oldRoutine1
+        for (int casesSlot1 = 0; casesSlot1 < 10; casesSlot1++) {
 
-        switch (oldRoutine.getRoutineSlot1()) {
-            case 0:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-            case 1:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 2:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 3:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 4:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 5:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 6:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 7:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 8:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-            case 9:
-                setRoutineSlots(oldRoutine.getRoutineSlot1());
-                Log.d("RoutineSlotManager", "old routine slot 1 wurde neu gesetzt");
-                break;
-
-
+            setWhichSlotPosition(oldRoutine.routineSlotEins);
+            setRoutineSlots(oldRoutine.getRoutineSlot1());
         }
+        // for loop for oldRoutine1
+        for (int casesSlot2 = 0; casesSlot2 < 10; casesSlot2++) {
+            setWhichSlotPosition(oldRoutine.routineSlotZwei);
+            setRoutineSlots(oldRoutine.getRoutineSlot2());
+        }
+
+        // for loop for oldRoutine3
+        for (int casesSlot3 = 0; casesSlot3 < 10; casesSlot3++) {
+            setWhichSlotPosition(oldRoutine.routineSlotDrei);
+            setRoutineSlots(oldRoutine.getRoutineSlot3());
+        }
+
+        // for loop for oldRoutine4
+        for (int casesSlot4 = 0; casesSlot4 < 10; casesSlot4++) {
+            setWhichSlotPosition(oldRoutine.routineSlotVier);
+            setRoutineSlots(oldRoutine.getRoutineSlot4());
+        }
+        // for loop for oldRoutine5
+        for (int casesSlot5 = 0; casesSlot5 < 10; casesSlot5++) {
+            setWhichSlotPosition(oldRoutine.routineSlotFünf);
+            setRoutineSlots(oldRoutine.getRoutineSlot5());
+        }
+        // for loop for oldRoutine6
+        for (int casesSlot6 = 0; casesSlot6 < 10; casesSlot6++) {
+            setWhichSlotPosition(oldRoutine.routineSlotSechs);
+            setRoutineSlots(oldRoutine.getRoutineSlot6());
+        }
+        // for loop for oldRoutine7
+        for (int casesSlot7 = 0; casesSlot7 < 10; casesSlot7++) {
+            setWhichSlotPosition(oldRoutine.routineSlotSieben);
+            setRoutineSlots(oldRoutine.getRoutineSlot7());
+        }
+        // for loop for oldRoutine8
+        for (int casesSlot8 = 0; casesSlot8 < 10; casesSlot8++) {
+            setWhichSlotPosition(oldRoutine.routineSlotAcht);
+            setRoutineSlots(oldRoutine.getRoutineSlot8());
+        }
+        // for loop for oldRoutine9
+        for (int casesSlot9 = 0; casesSlot9 < 10; casesSlot9++) {
+            setWhichSlotPosition(oldRoutine.routineSlotNeun);
+            setRoutineSlots(oldRoutine.getRoutineSlot9());
+        }
+        // for loop for oldRoutine10
+        for (int casesSlot10 = 0; casesSlot10 < 10; casesSlot10++) {
+            setWhichSlotPosition(oldRoutine.routineSlotZehn);
+            setRoutineSlots(oldRoutine.getRoutineSlot10());
+        }
+
 
     }
 
     public void setRoutineSlots(int selectActionPosition) {
         // check with selectActionPosition witch action was clicked
-    switch (selectActionPosition){
-        case 0:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
+        switch (selectActionPosition) {
+            case 0:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
 
-            break;
+                break;
 
-        case 1:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
+            case 1:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
 
-            break;
+                break;
 
-        case 2:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
+            case 2:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
 
-            break;
+                break;
 
-        case 3:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
+            case 3:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
 
-            break;
-
-
-        case 4:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
-
-        case 5:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
-
-        case 6:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
-
-        case 7:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
-
-        case 8:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
-
-        case 9:
-            // check with whichSlotposition witch slot was clicked
-            if (whichSlotPosition == 0){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot1 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 1){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot2 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 2){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot3 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 3){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot4 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 4){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot5 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 5){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot6 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 6){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot7 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition ==7 ){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot8 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 8){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot9 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            } else if (whichSlotPosition == 9){
-                listviewItemPosition = selectActionPosition;
-                routinelistPositionSlot10 = selectActionPosition;
-                setNewAction();
-                Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
-                Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
-            }
-
-            break;
+                break;
 
 
+            case 4:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 5:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 6:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 7:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 8:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 9:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
 
 
-
-
-
-
+        }
 
 
     }
 
-
-
-    }
-
-    public void setWhichSlotPosition(int position){
+    public void setWhichSlotPosition(int position) {
 
         // check  with swich which slot was click
-        switch (position){
+        switch (position) {
             case 0:
                 whichSlotPosition = position;
                 Log.d("RoutineSlotManager", "Slot  " + whichSlotPosition + "  wurde gerdückt");
@@ -877,7 +870,8 @@ public class RoutineSlotManager  {
                 whichSlotPosition = position;
                 Log.d("RoutineSlotManager", "Slot " + whichSlotPosition + "wurde gerdückt");
                 break;
-            case 7:whichSlotPosition = position;
+            case 7:
+                whichSlotPosition = position;
                 Log.d("RoutineSlotManager", "Slot " + whichSlotPosition + "wurde gerdückt");
                 break;
 
@@ -896,8 +890,8 @@ public class RoutineSlotManager  {
 
     }
 
-    public void setNewAction(){
-        switch (listviewItemPosition){
+    public void setNewAction() {
+        switch (listviewItemPosition) {
             case 0:
                 newActionString = noActionString;
                 break;
@@ -911,7 +905,7 @@ public class RoutineSlotManager  {
                 break;
 
             case 3:
-               newActionString = mediaVolumeMuteString;
+                newActionString = mediaVolumeMuteString;
                 break;
 
             case 4:
@@ -928,6 +922,7 @@ public class RoutineSlotManager  {
                 newActionString = speakerVolumeMax;
                 break;
             case 8:
+                newActionString = runApp;
                 break;
             case 9:
                 newActionString = runTimer;
@@ -936,16 +931,16 @@ public class RoutineSlotManager  {
         }
 
         listView.setAdapter(listviewAdapterRoutine);
-        listviewAdapterRoutine.arrayListSlots.set(whichSlotPosition,newActionString);
+        listviewAdapterRoutine.arrayListSlots.set(whichSlotPosition, newActionString);
     }
 
-    public void createRoutine(Routine routine, EditText editText, RoutineManager routineManager){
-                getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
+    public void createRoutine(Routine routine, EditText editText, RoutineManager routineManager) {
+
 
         String newRoutineName = editText.getText().toString();
-        if (newRoutineName.length() >0){
+        if (newRoutineName.length() > 0) {
             routine.setRoutineName(newRoutineName);
-            Log.d("AddRoutineActivity", "Routine Name"  + routine.getRoutineName());
+            Log.d("AddRoutineActivity", "Routine Name" + routine.getRoutineName());
             routine.setRoutineSlot1(routinelistPositionSlot1);
             Log.d("AddRoutineActivity", "Solt 1 hat den wert = " + routine.getRoutineSlot1());
             // set Slot position nummer2
@@ -989,21 +984,68 @@ public class RoutineSlotManager  {
             routineManager.saveRoutineList();
         }
 
+    }
+
+    public void updateRoutine(Routine routine, EditText editText, RoutineManager routineManager, int position) {
+        String newRoutineName = editText.getText().toString();
+        if (newRoutineName.length() > 0) {
+            routine.setRoutineName(newRoutineName);
+            Log.d("AddRoutineActivity", "Routine Name" + routine.getRoutineName());
+            routine.setRoutineSlot1(routinelistPositionSlot1);
+            Log.d("AddRoutineActivity", "Solt 1 hat den wert = " + routine.getRoutineSlot1());
+            // set Slot position nummer2
+            routine.setRoutineSlot2(routinelistPositionSlot2);
+            Log.d("AddRoutineActivity", "Solt 2 hat den wert = " + routine.getRoutineSlot2());
+            // set Slot position nummer3
+            routine.setRoutineSlot3(routinelistPositionSlot3);
+            Log.d("AddRoutineActivity", "Solt 3 hat den wert =" + routine.getRoutineSlot3());
+            // set Slot position nummer4
+            routine.setRoutineSlot4(routinelistPositionSlot4);
+            Log.d("AddRoutineActivity", "Solt 4 hat den wert =" + routine.getRoutineSlot4());
+            // set Slot position nummer5
+            routine.setRoutineSlot5(routinelistPositionSlot5);
+            Log.d("AddRoutineActivity", "Solt 5 hat den wert =" + routine.getRoutineSlot5());
+            // set Slot position nummer6
+            routine.setRoutineSlot6(routinelistPositionSlot6);
+            Log.d("AddRoutineActivity", "Solt 6 hat den wert =" + routine.getRoutineSlot6());
+            // set Slot position nummer7
+            routine.setRoutineSlot7(routinelistPositionSlot7);
+            Log.d("AddRoutineActivity", "Solt 7 hat den wert =" + routine.getRoutineSlot7());
+            // set Slot position nummer8
+            routine.setRoutineSlot8(routinelistPositionSlot8);
+            Log.d("AddRoutineActivity", "Solt 8 hat den wert =" + routine.getRoutineSlot8());
+            // set Slot position nummer9
+            routine.setRoutineSlot9(routinelistPositionSlot9);
+            Log.d("AddRoutineActivity", "Solt 9 hat den wert =" + routine.getRoutineSlot9());
+            // set Slot position nummer9
+            routine.setRoutineSlot10(routinelistPositionSlot10);
+            Log.d("AddRoutineActivity", "Solt 10 hat den wert =" + routine.getRoutineSlot10());
+            //set Timer Name
+            routine.setTimerName(timerName);
+            Log.d("AddRoutineActivity", "Timer Name  =" + routine.getTimerName());
+            routine.setTimerSeconds(timerSeconds);
+            Log.d("AddRoutineActivity", "Timer Seconds  =" + routine.getTimerSeconds());
+            routine.setTimerMinutes(timerMinutes);
+            Log.d("AddRoutineActivity", "Timer Minutes  =" + routine.getTimerMinutes());
+            routine.setTimerHours(timerHours);
+            Log.d("AddRoutineActivity", "Timer Hour  =" + routine.getTimerHours());
+            // save changes into the list
+            routineManager.routineList.set(position, routine);
+            routineManager.saveRoutineList();
+
+        }
+    }
+
+
+        public void getTimerSettings ( int timerSeconds, int timerMinutes, int timerHours, String
+        timerName){
+            this.timerSeconds = timerSeconds;
+            Log.d("t", "s =" + timerSeconds);
+            this.timerMinutes = timerMinutes;
+            this.timerHours = timerHours;
+            this.timerName = timerName;
+        }
 
 
     }
 
-    public void getTimerSettings(int timerSeconds, int timerMinutes, int timerHours,String timerName){
-        this.timerSeconds = timerSeconds;
-        Log.d("t", "s =" + timerSeconds);
-        this.timerMinutes = timerMinutes;
-        this.timerHours = timerHours;
-        this.timerName= timerName;
-    }
-
-
-
-
-
-
-}

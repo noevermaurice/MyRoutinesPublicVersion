@@ -10,16 +10,26 @@ public class Routine implements Serializable {
 
     public String routineName;
     public String timerName;
+    public int routineSlotEins = 0;
     public int routineSlot1;
+    public int routineSlotZwei = 1;
     public int routineSlot2;
+    public int routineSlotDrei = 2;
     public int routineSlot3;
+    public  int routineSlotVier = 3;
     public int routineSlot4;
+    public  int routineSlotFünf = 4;
     public int routineSlot5;
+    public  int routineSlotSechs = 5;
     public int routineSlot6;
+    public int routineSlotSieben = 6;
     public int routineSlot7;
     public int routineSlot8;
+    public int routineSlotAcht = 7;
     public int routineSlot9;
+    public int routineSlotNeun = 8;
     public int routineSlot10;
+    public int routineSlotZehn = 9;
     public int timerSeconds;
     public int timerMinutes;
     public int timerHours;
