@@ -15,5 +15,6 @@
     <string name="runApp">starte App</string>
     <string name="runTimer">starte Timer</string>
     <string name="NegativeButton">Abbrechen</string>
+    <string name="RoutineRun">Routine wird ausgeführt</string>
 
 </resources>
