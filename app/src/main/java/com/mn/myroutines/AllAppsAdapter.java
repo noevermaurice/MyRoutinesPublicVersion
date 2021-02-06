@@ -1,0 +1,114 @@
+package com.mn.myroutines;
+
+import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Filter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
+
+    private List<ApplicationInfo> appsList;
+    private List<ApplicationInfo> originalList;
+    private AddAndEditRoutineActivity activity;
+    private PackageManager packageManager;
+
+
+    public AllAppsAdapter(AddAndEditRoutineActivity activity, int textViewResourceId, List<ApplicationInfo> appsList) {
+        super(activity, textViewResourceId, appsList);
+        this.activity = activity;
+        this.appsList = appsList;
+        this.originalList = appsList;
+        packageManager = activity.getPackageManager();
+    }
+
+
+    @Override
+    public int getCount() {
+        return appsList.size();
+    }
+
+    @Override
+    public ApplicationInfo getItem(int position) {
+        return appsList.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return appsList.indexOf(getItem(position));
+    }
+
+
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder holder;
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+        // If holder not exist then locate all view from UI file.
+        if (convertView == null) {
+            // inflate UI from XML file
+            convertView = inflater.inflate(R.layout.app_item_row, parent, false);
+            // get all UI view
+            holder = new ViewHolder(convertView);
+            // set tag for holder
+            convertView.setTag(holder);
+        } else {
+            // if holder created, get tag from view
+            holder = (ViewHolder) convertView.getTag();
+        }
+
+        //setting data to views
+        holder.appName.setText(getItem(position).loadLabel(packageManager)); //get app name
+        holder.appPackage.setText(getItem(position).packageName); //get app package
+        holder.icon.setImageDrawable(getItem(position).loadIcon(packageManager)); //get app icon
+
+        //set on click event for each item view
+        convertView.setOnClickListener(onClickListener(position));
+
+        return convertView;
+    }
+
+    private View.OnClickListener onClickListener(final int position) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApplicationInfo app = appsList.get(position);
+                try {
+                    Intent intent = packageManager.getLaunchIntentForPackage(app.packageName);
+                    activity.startActivity(intent);
+                    if (null != intent) {
+                        activity.startActivity(intent);
+                    }
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+    }
+
+    private class ViewHolder {
+        private ImageView icon;
+        private TextView appName;
+        private TextView appPackage;
+
+        public ViewHolder(View v) {
+            icon = (ImageView) v.findViewById(R.id.icon);
+            appName = (TextView) v.findViewById(R.id.name);
+            appPackage = (TextView) v.findViewById(R.id.app_package);
+        }
+    }
+
+
+
+}

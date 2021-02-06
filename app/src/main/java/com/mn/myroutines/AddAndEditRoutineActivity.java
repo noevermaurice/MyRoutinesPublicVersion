@@ -1,17 +1,22 @@
 package com.mn.myroutines;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.provider.AlarmClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -20,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddAndEditRoutineActivity extends AppCompatActivity implements SetTimerDialog.setTimerInterface {
 
@@ -36,6 +42,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String newActionString;
     public String noActionString;
     public String bluetoothOff;
+
+
+
     public String bluetoothOn;
     public String mediaVolumeMute;
     public String mediaVolumeMax;
@@ -65,28 +74,39 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
 
+
+
+    private ListView listViewForApps;
+    private TextView headerText;
+    private Toolbar toolbar;
+
+    private PackageManager packageManager;
+    private ArrayAdapter<ApplicationInfo> adapter;
+    private ArrayList<ApplicationInfo> applicationInfos;
+    private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_routine);
         context = getApplicationContext();
 
-       initViews();
+        initViews();
 
         initManagers();
         initClickListener();
         setDefaultSlots();
 
-        if (getIntent().hasExtra("routine")){
+        if (getIntent().hasExtra("routine")) {
             Routine oldroutine = (Routine) getIntent().getSerializableExtra("routine");
-           routineSlotManager.getRoutineSlotActions(oldroutine);
+            routineSlotManager.getRoutineSlotActions(oldroutine);
         }
 
-        routineListPosition = getIntent().getIntExtra("routinePosition",0);
+        routineListPosition = getIntent().getIntExtra("routinePosition", 0);
 
 
     }
-
 
 
     private void initViews() {
@@ -125,10 +145,10 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             @Override
             public void onClick(View v) {
                 Routine routine = new Routine();
-                if (getIntent().hasExtra("routine")){
-                   routineSlotManager.updateRoutine(routine, editTextRoutineName, routineManager, routineListPosition);
+                if (getIntent().hasExtra("routine")) {
+                    routineSlotManager.updateRoutine(routine, editTextRoutineName, routineManager, routineListPosition);
                 } else {
-                    routineSlotManager.createRoutine(routine, editTextRoutineName,routineManager );
+                    routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
                 }
 
 
@@ -140,19 +160,24 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     }
 
     private void ShowDialog() {
-            // create Alert Dialog
+        // create Alert Dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // set title
         builder.setTitle(getString(R.string.Action));
         // set String
-        String[] actions = {noActionString, bluetoothOff, bluetoothOn,mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer};
+        String[] actions = {noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer};
         // set on click listener
         builder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 routineSlotManager.setRoutineSlots(which);
 
-                if (which == 9){
+                if (which == 8) {
+                    // listView.setVisibility(View.INVISIBLE);
+                    ShowAllAppsDialog();
+                }
+
+                if (which == 9) {
 
                     // if Action = 9 than show timer Dialog
                     SetTimerDialog setTimerDialog = new SetTimerDialog();
@@ -164,17 +189,32 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
             }
         });
-         AlertDialog dialog = builder.create();
+        AlertDialog dialog = builder.create();
         dialog.show();
 
 
-        }
+    }
 
     private void ShowAllAppsDialog() {
+
+        List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
+        ApplicationInfo applicationInfo = new ApplicationInfo();
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
+        final PackageManager pm = getPackageManager();
+        AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList);
+        //get a list of installed apps.
+        // the getLaunchIntentForPackage returns an intent that you can use with startActivity()
+        builderApps.setAdapter(allAppsAdapter, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
 
         AlertDialog dialog = builderApps.create();
+
         dialog.show();
 
     }
@@ -187,13 +227,13 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context,listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute,mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer,listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName, editTextRoutineName);
+        routineSlotManager = new RoutineSlotManager(context, listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName, editTextRoutineName);
     }
 
-    public void setDefaultSlots(){
-            routineSlotManager.setDefaultSlots();
+    public void setDefaultSlots() {
+        routineSlotManager.setDefaultSlots();
 
-        }
+    }
 
 
     @Override
@@ -211,11 +251,47 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     @Override
     public void setTimerSettings(int seconds, int minutes, int hour, String TimerName) {
-       this.timerSeconds = seconds;
+        this.timerSeconds = seconds;
         Log.d("AddAcivity", "seconds in der Activity vom Interface " + timerSeconds);
 
-       this.timerMinutes = minutes;
-       this.timerHours = hour;
-       this.timerName = TimerName;
+        this.timerMinutes = minutes;
+        this.timerHours = hour;
+        this.timerName = TimerName;
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //invoke asynctask
+        new GetAllAppsTask(this, applicationInfos, packageManager).execute();
+    }
+
+
+    public void callBackDataFromAsynctask(List<ApplicationInfo> list) {
+        applicationInfos.clear();
+
+        for (int i = 0; i < list.size(); i++) {
+            applicationInfos.add(list.get(i));
+        }
+
+        headerText.setText("All Apps (" + applicationInfos.size() + ")");
+        adapter.notifyDataSetChanged();
+        progressDialog.dismiss();
+    }
+
+    public void updateUILayout(String content) {
+        headerText.setText(content);
+    }
+
+
+
 }
+
+
+
+
+
+
+
