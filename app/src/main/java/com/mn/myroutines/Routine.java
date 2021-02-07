@@ -10,6 +10,17 @@ public class Routine implements Serializable {
 
     public String routineName;
     public String timerName;
+    public String appNameSlot1;
+    public String appNameSlot2;
+    public String appNameSlot3;
+    public String appNameSlot4;
+    public String appNameSlot5;
+    public String appNameSlot6;
+    public String appNameSlot7;
+    public String appNameSlot8;
+    public String appNameSlot9;
+    public String appnameSlot10;
+
     public int routineSlotEins = 0;
     public int routineSlot1;
     public int routineSlotZwei = 1;
@@ -33,6 +44,7 @@ public class Routine implements Serializable {
     public int timerSeconds;
     public int timerMinutes;
     public int timerHours;
+
 
 
 

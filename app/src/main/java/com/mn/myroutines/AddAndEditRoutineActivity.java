@@ -73,6 +73,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
     private ListView listViewForApps;
+    public String appName;
+    public String appPackageName;
     private TextView headerText;
     private Toolbar toolbar;
 
@@ -112,7 +114,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         editTextRoutineName = findViewById(R.id.EditTextRoutineName);
         saveButton = findViewById(R.id.saveRoutineButton);
         listView = findViewById(R.id.listviewAddAction);
-        listViewForApps = findViewById(R.id.listViewForApps);
+
 
         listView.setAdapter(listviewAdapterRoutine);
         arrayList = new ArrayList<>();
@@ -197,19 +199,14 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     private void ShowAllAppsDialog() {
         // if normal listview Visible than it in
-        if (listView.getVisibility()== View.VISIBLE){
-            listView.setVisibility(View.INVISIBLE);
-            listViewForApps.setVisibility(View.VISIBLE);
-        } else {
-            listView.setVisibility(View.VISIBLE);
-            listViewForApps.setVisibility(View.VISIBLE);
-        }
+
         List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
-        ApplicationInfo applicationInfo = new ApplicationInfo();
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
-        final PackageManager pm = getPackageManager();
-        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList);
+        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList, appName, appPackageName);
+        appPackageName = allAppsAdapter.getAppPackageName();
+        appName = allAppsAdapter.getAppNameString();
+        Log.d("s", "Name =" +appName);
 
 
         //get a list of installed apps.
@@ -217,15 +214,17 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         builderApps.setAdapter(allAppsAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                allAppsAdapter.onClickListener(which);
+                appPackageName = allAppsAdapter.getAppPackageName();
+                Log.d("s", "app " + appPackageName);
             }
         });
 
-
-
-
         AlertDialog dialog = builderApps.create();
-
         dialog.show();
+
+
 
     }
 
