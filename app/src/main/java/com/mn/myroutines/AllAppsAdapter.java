@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
     private PackageManager packageManager;
     private AppsFilter filter;
     public String appNameString = new String();
+    public String appPackageName;
    ViewHolder holder;
 
     public AllAppsAdapter(AddAndEditRoutineActivity activity, int textViewResourceId, List<ApplicationInfo> appsList) {
@@ -93,11 +95,15 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
         return convertView;
     }
 
-    private View.OnClickListener onClickListener(final int position) {
+    public View.OnClickListener onClickListener(final int position) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ApplicationInfo app = appsList.get(position);
+                String myPackageName = app.packageName;
+                setAppPackageName(myPackageName);
+                String myAppName = (String) app.loadLabel(packageManager);
+                setAppNameString(myAppName);
                 try {
                     Intent intent = packageManager.getLaunchIntentForPackage(app.packageName);
                     activity.startActivity(intent);
@@ -109,6 +115,24 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
                 }
             }
         };
+    }
+
+    public void setAppNameString(String appNameString){
+        this.appNameString = appNameString;
+        Log.d("AllAppsAdapter", " App Name " + this.appNameString);
+    }
+
+    public String getAppNameString(){
+        return  appNameString;
+    }
+
+    public void setAppPackageName(String appPackageName){
+        this.appPackageName = appPackageName;
+        Log.d("AllAppsAdapter", " Package Name " + this.appPackageName);
+    }
+
+    public String getAppPackageName(){
+        return  appPackageName;
     }
 
     public class ViewHolder {

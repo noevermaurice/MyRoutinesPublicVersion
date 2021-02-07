@@ -209,7 +209,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
         final PackageManager pm = getPackageManager();
-        AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList);
+        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList);
 
 
         //get a list of installed apps.
@@ -217,7 +217,6 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         builderApps.setAdapter(allAppsAdapter, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
             }
         });
 
