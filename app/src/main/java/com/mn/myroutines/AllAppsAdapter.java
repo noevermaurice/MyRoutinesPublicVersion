@@ -13,17 +13,19 @@ import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
+
 
     private List<ApplicationInfo> appsList;
     private List<ApplicationInfo> originalList;
     private AddAndEditRoutineActivity activity;
     private PackageManager packageManager;
-
+    private AppsFilter filter;
+    public String appNameString = new String();
+   ViewHolder holder;
 
     public AllAppsAdapter(AddAndEditRoutineActivity activity, int textViewResourceId, List<ApplicationInfo> appsList) {
         super(activity, textViewResourceId, appsList);
@@ -32,6 +34,7 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
         this.originalList = appsList;
         packageManager = activity.getPackageManager();
     }
+
 
 
     @Override
@@ -49,11 +52,19 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
         return appsList.indexOf(getItem(position));
     }
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null) {
+            filter = new AppsFilter();
+        }
+        return filter;
+    }
+
 
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder holder;
+         ViewHolder holder;
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         // If holder not exist then locate all view from UI file.
         if (convertView == null) {
@@ -68,8 +79,11 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
 
+
         //setting data to views
         holder.appName.setText(getItem(position).loadLabel(packageManager)); //get app name
+
+
         holder.appPackage.setText(getItem(position).packageName); //get app package
         holder.icon.setImageDrawable(getItem(position).loadIcon(packageManager)); //get app icon
 
@@ -97,10 +111,10 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
         };
     }
 
-    private class ViewHolder {
-        private ImageView icon;
-        private TextView appName;
-        private TextView appPackage;
+    public class ViewHolder {
+        public ImageView icon;
+        public TextView appName;
+        public TextView appPackage;
 
         public ViewHolder(View v) {
             icon = (ImageView) v.findViewById(R.id.icon);
@@ -109,6 +123,47 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
         }
     }
 
+    private class AppsFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
 
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<ApplicationInfo> filterList = new ArrayList<ApplicationInfo>();
+                for (int i = 0; i < originalList.size(); i++) {
+                    if ((originalList.get(i).loadLabel(packageManager).toString().toUpperCase())
+                            .contains(constraint.toString().toUpperCase())) {
 
+                        ApplicationInfo applicationInfo = originalList.get(i);
+                        filterList.add(applicationInfo);
+                    }
+                }
+
+                results.count = filterList.size();
+                results.values = filterList;
+
+            } else {
+                results.count = originalList.size();
+                results.values = originalList;
+            }
+            return results;
+
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            appsList = (ArrayList<ApplicationInfo>) results.values;
+            notifyDataSetChanged();
+
+            if (appsList.size() == originalList.size()) {
+                activity.updateUILayout("All apps (" + appsList.size() + ")");
+            } else {
+                activity.updateUILayout("Filtered apps (" + appsList.size() + ")");
+            }
+        }
+    }
 }
+
+
+
+

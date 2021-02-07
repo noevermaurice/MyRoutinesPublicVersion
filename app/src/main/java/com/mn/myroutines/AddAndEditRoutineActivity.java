@@ -44,7 +44,6 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String bluetoothOff;
 
 
-
     public String bluetoothOn;
     public String mediaVolumeMute;
     public String mediaVolumeMax;
@@ -73,9 +72,6 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     int routineListPosition;
 
 
-
-
-
     private ListView listViewForApps;
     private TextView headerText;
     private Toolbar toolbar;
@@ -91,6 +87,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_routine);
         context = getApplicationContext();
+        applicationInfos = new ArrayList<>();
+
 
         initViews();
 
@@ -114,6 +112,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         editTextRoutineName = findViewById(R.id.EditTextRoutineName);
         saveButton = findViewById(R.id.saveRoutineButton);
         listView = findViewById(R.id.listviewAddAction);
+        listViewForApps = findViewById(R.id.listViewForApps);
+
         listView.setAdapter(listviewAdapterRoutine);
         arrayList = new ArrayList<>();
         ArrayListSlotDefault = getString(R.string.NoAction);
@@ -196,13 +196,22 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     }
 
     private void ShowAllAppsDialog() {
-
+        // if normal listview Visible than it in
+        if (listView.getVisibility()== View.VISIBLE){
+            listView.setVisibility(View.INVISIBLE);
+            listViewForApps.setVisibility(View.VISIBLE);
+        } else {
+            listView.setVisibility(View.VISIBLE);
+            listViewForApps.setVisibility(View.VISIBLE);
+        }
         List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         ApplicationInfo applicationInfo = new ApplicationInfo();
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
         final PackageManager pm = getPackageManager();
         AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList);
+
+
         //get a list of installed apps.
         // the getLaunchIntentForPackage returns an intent that you can use with startActivity()
         builderApps.setAdapter(allAppsAdapter, new DialogInterface.OnClickListener() {
@@ -211,6 +220,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
             }
         });
+
+
 
 
         AlertDialog dialog = builderApps.create();
@@ -260,34 +271,19 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        //invoke asynctask
-        new GetAllAppsTask(this, applicationInfos, packageManager).execute();
-    }
-
 
     public void callBackDataFromAsynctask(List<ApplicationInfo> list) {
-        applicationInfos.clear();
 
-        for (int i = 0; i < list.size(); i++) {
-            applicationInfos.add(list.get(i));
-        }
-
-        headerText.setText("All Apps (" + applicationInfos.size() + ")");
-        adapter.notifyDataSetChanged();
-        progressDialog.dismiss();
     }
 
     public void updateUILayout(String content) {
-        headerText.setText(content);
+
     }
-
-
-
 }
+
+
+
+
 
 
 
