@@ -31,6 +31,8 @@ public class RoutineSlotManager {
     private String runApp;
     private String runTimer;
     private String timerName;
+    public String appName;
+    public String appPackageName;
     int listviewItemPosition;
     int routinelistPositionSlot1;
     int routinelistPositionSlot2;
@@ -922,7 +924,14 @@ public class RoutineSlotManager {
                 newActionString = speakerVolumeMax;
                 break;
             case 8:
-                newActionString = runApp;
+                if (appName != null){
+                    newActionString = appName;
+                    Log.d("y","x" + appName);
+                } else {
+                    newActionString = runApp;
+                    Log.d("y","x" + appName);
+                }
+
                 break;
             case 9:
                 newActionString = runTimer;
@@ -1044,6 +1053,12 @@ public class RoutineSlotManager {
             this.timerMinutes = timerMinutes;
             this.timerHours = timerHours;
             this.timerName = timerName;
+        }
+
+        public void getAppNameAndPackage(String appName, String appPackageName){
+            this.appName = appName;
+            Log.d("w", "y" + this.appName);
+            this.appPackageName = appPackageName;
         }
 
 

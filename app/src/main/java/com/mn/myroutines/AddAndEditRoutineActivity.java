@@ -83,6 +83,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     private ArrayList<ApplicationInfo> applicationInfos;
     private ProgressDialog progressDialog;
 
+   public AlertDialog dialog;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -216,16 +218,26 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             public void onClick(DialogInterface dialog, int which) {
 
                 allAppsAdapter.onClickListener(which);
-                appPackageName = allAppsAdapter.getAppPackageName();
-                Log.d("s", "app " + appPackageName);
+
+                appName = allAppsAdapter.getAppNameString();
+
             }
         });
 
-        AlertDialog dialog = builderApps.create();
+        dialog = builderApps.create();
         dialog.show();
 
 
 
+    }
+
+    public void getAppName(){
+        // app Dialog invible
+        dialog.dismiss();
+        // put appNme and PackageName in RoutineSlotManager
+        routineSlotManager.getAppNameAndPackage(appName, appPackageName);
+        // set Slot Name
+        routineSlotManager.setNewAction();
     }
 
 

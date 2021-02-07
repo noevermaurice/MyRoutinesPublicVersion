@@ -108,6 +108,7 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
                 setAppPackageName(myPackageName);
                 String myAppName = (String) app.loadLabel(packageManager);
                 setAppNameString(myAppName);
+                activity.getAppName();
 
 
                /* try {
@@ -130,7 +131,7 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
 
     public void setAppNameString(String appNameString){
         this.appNameString = appNameString;
-        activity.appName = appPackageName;
+        activity.appName = appNameString;
         Log.d("AllAppsAdapter", " App Name " + activity.appName);
     }
 
