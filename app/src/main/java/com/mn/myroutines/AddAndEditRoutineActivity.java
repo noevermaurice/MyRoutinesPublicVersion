@@ -74,7 +74,27 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     private ListView listViewForApps;
     public String appName;
+    public String appName1;
+    public String appName2;
+    public String appName3;
+    public String appName4;
+    public String appName5;
+    public String appName6;
+    public String appName7;
+    public String appName8;
+    public String appName9;
+    public String appName10;
     public String appPackageName;
+    public String appPackageName1;
+    public String appPackageName2;
+    public String appPackageName3;
+    public String appPackageName4;
+    public String appPackageName5;
+    public String appPackageName6;
+    public String appPackageName7;
+    public String appPackageName8;
+    public String appPackageName9;
+    public String appPackageName10;
     private TextView headerText;
     private Toolbar toolbar;
 
@@ -235,9 +255,24 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // app Dialog invible
         dialog.dismiss();
         // put appNme and PackageName in RoutineSlotManager
-        routineSlotManager.getAppNameAndPackage(appName, appPackageName);
-        // set Slot Name
-        routineSlotManager.setNewAction();
+        if (routineSlotManager.whichSlotPosition == 0){
+            appName1 = appName;
+            appPackageName1 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName1, appPackageName1);
+            Log.d("s", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("s", "name1" +appName1);
+            routineSlotManager.setNewAction();
+
+        } else if (routineSlotManager.whichSlotPosition == 1){
+            appName2 = appName;
+            appPackageName2 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName2, appPackageName2);
+            Log.d("s", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("s", "name2" +appName2);
+            routineSlotManager.setNewAction();
+
+        }
+
     }
 
 

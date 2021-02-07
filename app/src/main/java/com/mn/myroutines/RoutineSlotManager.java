@@ -32,7 +32,27 @@ public class RoutineSlotManager {
     private String runTimer;
     private String timerName;
     public String appName;
+    public String appName1;
+    public String appName2;
+    public String appName3;
+    public String appName4;
+    public String appName5;
+    public String appName6;
+    public String appName7;
+    public String appName8;
+    public String appName9;
+    public String appName10;
     public String appPackageName;
+    public String appPackageName1;
+    public String appPackageName2;
+    public String appPackageName3;
+    public String appPackageName4;
+    public String appPackageName5;
+    public String appPackageName6;
+    public String appPackageName7;
+    public String appPackageName8;
+    public String appPackageName9;
+    public String appPackageName10;
     int listviewItemPosition;
     int routinelistPositionSlot1;
     int routinelistPositionSlot2;
@@ -44,7 +64,7 @@ public class RoutineSlotManager {
     int routinelistPositionSlot8;
     int routinelistPositionSlot9;
     int routinelistPositionSlot10;
-    int whichSlotPosition;
+    public int whichSlotPosition;
     int timerSeconds;
     int timerMinutes;
     int timerHours;
@@ -924,12 +944,14 @@ public class RoutineSlotManager {
                 newActionString = speakerVolumeMax;
                 break;
             case 8:
-                if (appName != null){
-                    newActionString = appName;
-                    Log.d("y","x" + appName);
-                } else {
-                    newActionString = runApp;
-                    Log.d("y","x" + appName);
+                if (appName1 != null){
+                    newActionString = appName1;
+                    Log.d("y","x" + appName1);
+                }
+
+                if (appName2 != null){
+                    newActionString = appName2;
+                    Log.d("y","x" + appName2);
                 }
 
                 break;
@@ -1056,9 +1078,17 @@ public class RoutineSlotManager {
         }
 
         public void getAppNameAndPackage(String appName, String appPackageName){
-            this.appName = appName;
-            Log.d("w", "y" + this.appName);
-            this.appPackageName = appPackageName;
+
+        if (whichSlotPosition == 0){
+            this.appName1 = appName;
+            Log.d("w", "y" + this.appName1);
+            this.appPackageName1 = appPackageName;
+        } else if (whichSlotPosition == 1){
+            this.appName2 = appName;
+            Log.d("w", "y" + this.appName2);
+            this.appPackageName2 = appPackageName;
+        }
+
         }
 
 
