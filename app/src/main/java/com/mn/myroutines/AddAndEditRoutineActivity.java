@@ -259,18 +259,67 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             appName1 = appName;
             appPackageName1 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName1, appPackageName1);
-            Log.d("s", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("s", "name1" +appName1);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name1" +appName1);
             routineSlotManager.setNewAction();
 
         } else if (routineSlotManager.whichSlotPosition == 1){
             appName2 = appName;
             appPackageName2 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName2, appPackageName2);
-            Log.d("s", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("s", "name2" +appName2);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name2" +appName2);
             routineSlotManager.setNewAction();
 
+        } else if (routineSlotManager.whichSlotPosition == 2){
+            appName3 = appName;
+            appPackageName3 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName3, appPackageName3);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name3" +appName3);
+
+        } else if (routineSlotManager.whichSlotPosition == 3){
+            appName4 = appName;
+            appPackageName4 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName4, appPackageName4);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name4" +appName4);
+        } else if (routineSlotManager.whichSlotPosition == 4){
+            appName5 = appName;
+            appPackageName5 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName5, appPackageName5);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name5" +appName5);
+        } else if (routineSlotManager.whichSlotPosition == 5){
+            appName6 = appName;
+            appPackageName6 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName6, appPackageName6);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name6" +appName6);
+        } else if (routineSlotManager.whichSlotPosition == 6){
+            appName7 = appName;
+            appPackageName7 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName7, appPackageName7);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name7" +appName7);
+        } else if (routineSlotManager.whichSlotPosition == 7){
+            appName8 = appName;
+            appPackageName8 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName8, appPackageName8);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name8" +appName8);
+        } else if (routineSlotManager.whichSlotPosition == 8){
+            appName9 = appName;
+            appPackageName9 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName9, appPackageName9);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name9" +appName9);
+        } else if (routineSlotManager.whichSlotPosition == 9){
+            appName4 = appName;
+            appPackageName10 = appPackageName;
+            routineSlotManager.getAppNameAndPackage(appName10, appPackageName10);
+            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("run App", "name10" +appName10);
         }
 
     }
