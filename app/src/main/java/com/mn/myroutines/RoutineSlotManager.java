@@ -957,44 +957,139 @@ public class RoutineSlotManager {
     }
 
     private void setAppSlotName() {
-        if (appName1 != null){
-            newActionString = appName1;
-            Log.d("runApp","Slot Name =" + appName1);
+
+
+        switch (whichSlotPosition){
+            case 0:
+                if (appName1 != null){
+                    newActionString = appName1;
+                    Log.d("runApp","Slot Name =" + appName1);
+                }
+                break;
+
+            case 1:
+                if (appName2 != null){
+                    newActionString = appName2;
+                    Log.d("runApp","Slot Name =" + appName2);
+                }
+                break;
+
+            case 2:
+                if (appName3!= null){
+                    newActionString = appName3;
+                    Log.d("runApp","Slot Name =" + appName3);
+                }
+                break;
+
+            case 3:
+                if (appName4!= null){
+                    newActionString = appName4;
+                    Log.d("runApp","Slot Name =" + appName4);
+                }
+                break;
+
+            case 4:
+                if (appName5!= null){
+                    newActionString = appName5;
+                    Log.d("runApp","Slot Name =" + appName5);
+                }
+                break;
+
+            case 5:
+                if (appName6!= null){
+                    newActionString = appName6;
+                    Log.d("runApp","Slot Name =" + appName6);
+                }
+                break;
+
+            case 6:
+                if (appName7!= null){
+                    newActionString = appName7;
+                    Log.d("runApp","Slot Name =" + appName7);
+                }
+                break;
+            case 7:
+                if (appName8!= null){
+                    newActionString = appName8;
+                    Log.d("runApp","Slot Name =" + appName8);
+                }
+                break;
+
+            case 8:
+                if (appName9!= null){
+                    newActionString = appName9;
+                    Log.d("runApp","Slot Name =" + appName9);
+                }
+                break;
+
+            case 9:
+                if (appName10!= null){
+                    newActionString = appName10;
+                    Log.d("runApp","Slot Name =" + appName10);
+                }
+                break;
+
         }
 
-        if (appName2 != null){
-            newActionString = appName2;
-            Log.d("runApp","Slot Name " + appName2);
-        }
-
-        if (appName3 != null){
-            newActionString = appName3;
-            Log.d("runApp", "Slot Name" + appName3);
-        }
-
-        if (appName4 != null){
-            Log.d("runApp","Slot Name" + appName4);
-        }
-        if (appName5 != null){
-            Log.d("runApp", "Slot Name" + appName5);
-        }
-
-        if (appName6 != null){
-            Log.d("runApp", "Slot Name" + appName6);
-        }
-        if (appName7 != null){
-            Log.d("runApp", "Slot Name" + appName7);
-        }
-        if (appName8 != null){
-            Log.d("runApp", "Slot Name" + appName8);
-        }
-        if (appName9 != null){
-            Log.d("runApp", "Slot Name" + appName9);
-        }
-        if (appName10 != null){
-            Log.d("runApp", "Slot Name" +appName10);
-        }
     }
+
+    public void getAppNameAndPackage(String appName, String appPackageName){
+
+        if (whichSlotPosition == 0){
+            this.appName1 = appName;
+            Log.d("runApp", "Name " + this.appName1);
+            this.appPackageName1 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName1);
+        } else if (whichSlotPosition == 1){
+            this.appName2 = appName;
+            Log.d("runApp", "Name" + this.appName2);
+            this.appPackageName2 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName2);
+        } else if (whichSlotPosition == 2){
+            this.appName3 = appName;
+            Log.d("runApp", "name" + this.appName3);
+            this.appPackageName3 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName3);
+        } else if (whichSlotPosition == 3){
+            this.appName4 = appName;
+            Log.d("runApp", "name" + this.appName4);
+            this.appPackageName4 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName4);
+        } else if (whichSlotPosition == 4){
+            this.appName5 = appName;
+            Log.d("runApp", "name" + this.appName5);
+            this.appPackageName5 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName5);
+        } else if (whichSlotPosition == 5){
+            this.appName6 = appName;
+            Log.d("runApp", "name" + this.appName6);
+            this.appPackageName6 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName6);
+        } else if (whichSlotPosition == 6){
+            this.appName7 = appName;
+            Log.d("runApp", "name" + this.appName7);
+            this.appPackageName7 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName7);
+        } else if (whichSlotPosition == 7) {
+            this.appName8 = appName;
+            Log.d("runApp", "name" + this.appName8);
+            this.appPackageName8 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName8);
+        } else if (whichSlotPosition == 8){
+            this.appName9 = appName;
+            Log.d("runApp", "name" + this.appName9);
+            this.appPackageName9 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName9);
+        } else if (whichSlotPosition == 9){
+            this.appName10 = appName;
+            Log.d("runApp", "name" + this.appName10);
+            this.appPackageName10 = appPackageName;
+            Log.d("runApp", "NP" + this.appPackageName10);
+
+        }
+
+    }
+
 
     public void createRoutine(Routine routine, EditText editText, RoutineManager routineManager) {
 
@@ -1108,61 +1203,6 @@ public class RoutineSlotManager {
             this.timerName = timerName;
         }
 
-        public void getAppNameAndPackage(String appName, String appPackageName){
-
-        if (whichSlotPosition == 0){
-            this.appName1 = appName;
-            Log.d("run App", "Name " + this.appName1);
-            this.appPackageName1 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName1);
-        } else if (whichSlotPosition == 1){
-            this.appName2 = appName;
-            Log.d("run App", "Name" + this.appName2);
-            this.appPackageName2 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName2);
-        } else if (whichSlotPosition == 2){
-            this.appName3 = appName;
-            Log.d("run App", "Name" + this.appName3);
-            this.appPackageName3 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName3);
-        } else if (whichSlotPosition == 3){
-            this.appName4 = appName;
-            Log.d("run App", "Name" + this.appName4);
-            this.appPackageName4 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName4);
-        } else if (whichSlotPosition == 4){
-            this.appName5 = appName;
-            Log.d("run App", "Name" + this.appName5);
-            this.appPackageName5 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName5);
-        } else if (whichSlotPosition == 5){
-            this.appName6 = appName;
-            Log.d("run App", "Name" + this.appName6);
-            this.appPackageName6 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName6);
-        } else if (whichSlotPosition == 6){
-            this.appName7 = appName;
-            Log.d("run App", "Name" + this.appName7);
-            this.appPackageName7 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName7);
-        } else if (whichSlotPosition == 7){
-            this.appName8 = appName;
-            Log.d("run App", "Name" + this.appName8);
-            this.appPackageName8 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName8);
-        } else if (whichSlotPosition == 8){
-            this.appName9 = appName;
-            Log.d("run App", "Name" + this.appName9);
-            this.appPackageName9 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName9);
-        } else if (whichSlotPosition == 9){
-            this.appName10 = appName;
-            Log.d("run App", "Name" + this.appName10);
-            this.appPackageName10 = appPackageName;
-            Log.d("run App", "NP" + this.appPackageName10);
-        }
-
-        }
 
 
     }

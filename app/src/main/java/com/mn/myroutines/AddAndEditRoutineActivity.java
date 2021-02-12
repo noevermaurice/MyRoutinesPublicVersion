@@ -259,68 +259,84 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             appName1 = appName;
             appPackageName1 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName1, appPackageName1);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name1" +appName1);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name1" +appName1);
             routineSlotManager.setNewAction();
 
-        } else if (routineSlotManager.whichSlotPosition == 1){
+        } else if (routineSlotManager.whichSlotPosition == 1) {
             appName2 = appName;
             appPackageName2 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName2, appPackageName2);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name2" +appName2);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name2" + appName2);
             routineSlotManager.setNewAction();
-
         } else if (routineSlotManager.whichSlotPosition == 2){
             appName3 = appName;
             appPackageName3 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName3, appPackageName3);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name3" +appName3);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name3" + appName3);
+            routineSlotManager.setNewAction();
 
         } else if (routineSlotManager.whichSlotPosition == 3){
             appName4 = appName;
             appPackageName4 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName4, appPackageName4);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name4" +appName4);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name4" +appName4);
+            routineSlotManager.setNewAction();
+
         } else if (routineSlotManager.whichSlotPosition == 4){
             appName5 = appName;
             appPackageName5 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName5, appPackageName5);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name5" +appName5);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name5" +appName5);
+            routineSlotManager.setNewAction();
         } else if (routineSlotManager.whichSlotPosition == 5){
             appName6 = appName;
             appPackageName6 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName6, appPackageName6);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name6" +appName6);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name6" +appName6);
+            routineSlotManager.setNewAction();
+
         } else if (routineSlotManager.whichSlotPosition == 6){
             appName7 = appName;
             appPackageName7 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName7, appPackageName7);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name7" +appName7);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name7" +appName7);
+            routineSlotManager.setNewAction();
+
         } else if (routineSlotManager.whichSlotPosition == 7){
             appName8 = appName;
             appPackageName8 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName8, appPackageName8);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name8" +appName8);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name8" +appName8);
+            routineSlotManager.setNewAction();
+
         } else if (routineSlotManager.whichSlotPosition == 8){
             appName9 = appName;
             appPackageName9 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName9, appPackageName9);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name9" +appName9);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name9" +appName9);
+            routineSlotManager.setNewAction();
+
         } else if (routineSlotManager.whichSlotPosition == 9){
-            appName4 = appName;
+            appName10 = appName;
             appPackageName10 = appPackageName;
             routineSlotManager.getAppNameAndPackage(appName10, appPackageName10);
-            Log.d("run App", "wich " + routineSlotManager.whichSlotPosition);
-            Log.d("run App", "name10" +appName10);
+            Log.d("runApp", "wich " + routineSlotManager.whichSlotPosition);
+            Log.d("runApp", "name10" +appName10);
+            routineSlotManager.setNewAction();
+
         }
+
+
+
 
     }
 
@@ -358,7 +374,6 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public void setTimerSettings(int seconds, int minutes, int hour, String TimerName) {
         this.timerSeconds = seconds;
         Log.d("AddAcivity", "seconds in der Activity vom Interface " + timerSeconds);
-
         this.timerMinutes = minutes;
         this.timerHours = hour;
         this.timerName = TimerName;
