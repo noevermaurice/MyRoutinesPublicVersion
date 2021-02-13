@@ -1,6 +1,7 @@
 package com.mn.myroutines;
 
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,17 +11,24 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.view.MenuItemCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -97,13 +105,24 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String appPackageName10;
     private TextView headerText;
     private Toolbar toolbar;
+    public SearchView searchView;
 
     private PackageManager packageManager;
     private ArrayAdapter<ApplicationInfo> adapter;
     private ArrayList<ApplicationInfo> applicationInfos;
     private ProgressDialog progressDialog;
 
+    public   List<ApplicationInfo> launchableInstalledApps;
+public     List<ApplicationInfo> installedApps;
+
    public AlertDialog dialog;
+
+   public List<ApplicationInfo> pkgAppsList;
+    public AllAppsAdapter allAppsAdapter;
+
+  public   MenuItem item1;
+
+
 
 
     @Override
@@ -112,7 +131,10 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         setContentView(R.layout.activity_add_routine);
         context = getApplicationContext();
         applicationInfos = new ArrayList<>();
+        launchableInstalledApps = new ArrayList<>();
+        installedApps = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
 
+       allAppsAdapter = new AllAppsAdapter(this, R.layout.app_item_row, installedApps, appName, appPackageName);
 
         initViews();
 
@@ -135,9 +157,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // serach for Views with id
         editTextRoutineName = findViewById(R.id.EditTextRoutineName);
         saveButton = findViewById(R.id.saveRoutineButton);
+        listViewForApps = findViewById(R.id.listViewForApps);
         listView = findViewById(R.id.listviewAddAction);
-
-
+        listViewForApps.setVisibility(View.INVISIBLE);
         listView.setAdapter(listviewAdapterRoutine);
         arrayList = new ArrayList<>();
         ArrayListSlotDefault = getString(R.string.NoAction);
@@ -151,6 +173,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         speakerVolumeMax = getString(R.string.MediaSpeakerVolumeMax);
         runApp = getString(R.string.runApp);
         runTimer = getString(R.string.runTimer);
+
 
 
     }
@@ -188,6 +211,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // set title
         builder.setTitle(getString(R.string.Action));
+
+
         // set String
         String[] actions = {noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer};
         // set on click listener
@@ -197,8 +222,16 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                 routineSlotManager.setRoutineSlots(which);
 
                 if (which == 8) {
-                    // listView.setVisibility(View.INVISIBLE);
-                    ShowAllAppsDialog();
+                    listView.setVisibility(View.INVISIBLE);
+                    //ShowAllAppsDialog();
+
+
+                    listViewForApps.setVisibility(View.VISIBLE);
+                    listViewForApps.setAdapter(allAppsAdapter);
+                    item1.setVisible(true);
+
+
+
                 }
 
                 if (which == 9) {
@@ -219,13 +252,63 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater infalter = getMenuInflater();
+        infalter.inflate(R.menu.menu_add_edit_activity,menu );
+      item1 = menu.findItem(R.id.serachForApps).setVisible(false);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item1);
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportActionBar().setDisplayShowTitleEnabled(false);
+            }
+        });
+
+
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //filter adapter and update ListView
+                allAppsAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+       return  true;
+
+
+    }
+
+
+
+    public List<ApplicationInfo> getAllInstalledApplications(Context context) {
+
+
+
+        for(int i =0; i<installedApps.size(); i++){
+            if(context.getPackageManager().getLaunchIntentForPackage(installedApps.get(i).packageName) != null){
+                //If you're here, then this is a launch-able app
+                launchableInstalledApps.add(installedApps.get(i));
+            }
+        }
+        return launchableInstalledApps;
+    }
+
     private void ShowAllAppsDialog() {
         // if normal listview Visible than it in
+
+
 
         List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
-        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, 0, pkgAppsList, appName, appPackageName);
+        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, R.layout.app_item_row, getAllInstalledApplications(context), appName, appPackageName);
         appPackageName = allAppsAdapter.getAppPackageName();
         appName = allAppsAdapter.getAppNameString();
         Log.d("s", "Name =" +appName);
@@ -253,7 +336,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     public void getAppName(){
         // app Dialog invible
-        dialog.dismiss();
+//        dialog.dismiss();
+        listViewForApps.setVisibility(View.INVISIBLE);
+        listView.setVisibility(View.VISIBLE);
         // put appNme and PackageName in RoutineSlotManager
         if (routineSlotManager.whichSlotPosition == 0){
             appName1 = appName;

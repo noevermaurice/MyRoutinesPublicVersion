@@ -34,6 +34,11 @@
        android:layout_below="@id/EditTextRoutineName"
        />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="chosse App"/>
+
     <ListView
         android:id="@+id/listviewAddAction"
         android:layout_width="match_parent"
@@ -44,8 +49,8 @@
         android:id="@+id/listViewForApps"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:layout_below="@id/EditTextRoutineName"/>
+
+        android:layout_below="@id/textViewAllRoutinesActions"/>
 
 
 
