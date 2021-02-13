@@ -27,6 +27,7 @@ public class Routine implements Serializable {
     public String appPackageNameSlot2;
     public String appPackageNameSlot3;
     public String appPackageNameSlot4;
+    public String appPackageNameSlot5;
     public String appPackageNameSlot6;
     public String appPackageNameSlot7;
     public String appPackageNameSlot8;
@@ -162,6 +163,14 @@ public class Routine implements Serializable {
 
     public void setAppPackageNameSlot4(String appPackageNameSlot4) {
         this.appPackageNameSlot4 = appPackageNameSlot4;
+    }
+
+    public void setAppPackageNameSlot5(String appPackageNameSlot5){
+        this.appPackageNameSlot5 = appPackageNameSlot5;
+    }
+
+    public String getAppPackageNameSlot5(){
+        return  appPackageNameSlot5;
     }
 
     public String getAppPackageNameSlot6() {

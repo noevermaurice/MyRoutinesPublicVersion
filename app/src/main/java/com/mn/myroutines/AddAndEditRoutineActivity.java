@@ -112,15 +112,12 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     private ArrayList<ApplicationInfo> applicationInfos;
     private ProgressDialog progressDialog;
 
-    public   List<ApplicationInfo> launchableInstalledApps;
-public     List<ApplicationInfo> installedApps;
+    public  List<ApplicationInfo> launchableInstalledApps;
+    public  List<ApplicationInfo> installedApps;
 
    public AlertDialog dialog;
-
-   public List<ApplicationInfo> pkgAppsList;
-    public AllAppsAdapter allAppsAdapter;
-
-  public   MenuItem item1;
+   public AllAppsAdapter allAppsAdapter;
+   public MenuItem item1;
 
 
 
@@ -224,14 +221,9 @@ public     List<ApplicationInfo> installedApps;
                 if (which == 8) {
                     listView.setVisibility(View.INVISIBLE);
                     //ShowAllAppsDialog();
-
-
                     listViewForApps.setVisibility(View.VISIBLE);
                     listViewForApps.setAdapter(allAppsAdapter);
                     item1.setVisible(true);
-
-
-
                 }
 
                 if (which == 9) {
@@ -339,6 +331,8 @@ public     List<ApplicationInfo> installedApps;
 //        dialog.dismiss();
         listViewForApps.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.VISIBLE);
+        item1.setVisible(false);
+
         // put appNme and PackageName in RoutineSlotManager
         if (routineSlotManager.whichSlotPosition == 0){
             appName1 = appName;
@@ -444,14 +438,27 @@ public     List<ApplicationInfo> installedApps;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        // start MainActivity and close these Acivity
-        // create new Intent
-        Intent intent = new Intent(AddAndEditRoutineActivity.this, MainActivity.class);
-        // finish Acivity
-        finish();
-        // start new Activity
-        startActivity(intent);
+        // if listview Apps Visble make the listview for Apps invisble
+
+        if (listViewForApps.getVisibility() == View.VISIBLE){
+            listViewForApps.setVisibility(View.INVISIBLE);
+            listviewAdapterRoutine.arrayListSlots.set(routineSlotManager.whichSlotPosition, noActionString);
+            listviewAdapterRoutine.notifyDataSetChanged();
+            listView.setVisibility(View.VISIBLE);
+            item1.setVisible(false);
+
+
+
+        } else if (listViewForApps.getVisibility() == View.INVISIBLE ){
+            // start MainActivity and close these Acivity
+            // create new Intent
+            Intent intent = new Intent(AddAndEditRoutineActivity.this, MainActivity.class);
+            // finish Acivity
+            finish();
+            // start new Activity
+            startActivity(intent);
+        }
+
     }
 
 

@@ -1136,6 +1136,49 @@ public class RoutineSlotManager {
             Log.d("AddRoutineActivity", "Timer Minutes  =" + routine.getTimerMinutes());
             routine.setTimerHours(timerHours);
             Log.d("AddRoutineActivity", "Timer Hour  =" + routine.getTimerHours());
+            routine.setAppNameSlot1(appName1);
+            Log.d("AddRoutineActivity", "App Name 1"+ routine.getAppNameSlot1());
+            routine.setAppPackageNameSlot1(appPackageName1);
+            Log.d("AddRoutineActivity", "App Package Name 1"+ routine.getAppPackageNameSlot1());
+            routine.setAppNameSlot2(appName2);
+            Log.d("AddRoutineActivity", "App Name 2"+ routine.getAppNameSlot2());
+            routine.setAppPackageNameSlot2(appPackageName2);
+            Log.d("AddRoutineActivity", "App Package  Name 2"+ routine.getAppPackageNameSlot2());
+            routine.setAppNameSlot3(appName3);
+            Log.d("AddRoutineActivity", "App Name 3"+ routine.getAppNameSlot3());
+            routine.setAppPackageNameSlot3(appPackageName3);
+            Log.d("AddRoutineActivity", "App Package Name"+ routine.getAppPackageNameSlot3());
+            routine.setAppNameSlot4(appName4);
+            Log.d("AddRoutineActivity", "App Name 4"+ routine.getAppNameSlot4());
+            routine.setAppPackageNameSlot4(appPackageName4);
+            Log.d("AddRoutineActivity", "App Package Name "+ routine.getAppPackageNameSlot4());
+            routine.setAppNameSlot5(appName5);
+            Log.d("AddRoutineActivity", "App Name 5"+ routine.getAppNameSlot5());
+            routine.setAppPackageNameSlot5(appPackageName5);
+            Log.d("AddRoutineActivity", "App  Package Name"+ routine.getAppPackageNameSlot5());
+            routine.setAppNameSlot6(appName6);
+            Log.d("AddRoutineActivity", "App Name 6"+ routine.getAppNameSlot6());
+            routine.setAppNameSlot6(appPackageName6);
+            Log.d("AddRoutineActivity", "App Package  Name 6"+ routine.getAppPackageNameSlot6());
+            routine.setAppNameSlot7(appName7);
+            Log.d("AddRoutineActivity", "App Name 7"+ routine.getAppNameSlot7());
+            routine.setAppNameSlot7(appPackageName7);
+            Log.d("AddRoutineActivity", "App Package Name 7"+ routine.getAppPackageNameSlot7());
+            routine.setAppNameSlot8(appName8);
+            Log.d("AddRoutineActivity", "App Name 8"+ routine.getAppNameSlot8());
+            routine.setAppPackageNameSlot8(appPackageName8);
+            Log.d("AddRoutineActivity", "App Package Name 8"+ routine.getAppPackageNameSlot8());
+            routine.setAppNameSlot9(appName9);
+            Log.d("AddRoutineActivity", "App Name 9"+ routine.getAppNameSlot9());
+            routine.setAppPackageNameSlot9(appPackageName9);
+            Log.d("AddRoutineActivity", "App Package Name 9"+ routine.getAppPackageNameSlot9());
+            routine.setAppnameSlot10(appName10);
+            Log.d("AddRoutineActivity", "App Name 10"+ routine.getAppnameSlot10());
+            routine.setAppPackageNameSlot10(appPackageName10);
+            Log.d("AddRoutineActivity", "App Package Name 10"+ routine.getAppPackageNameSlot10());
+
+
+
             routineManager.addRoutine(routine);
             // save changes into the list
             routineManager.saveRoutineList();
