@@ -13,10 +13,12 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
     // decalrtion of Object;
     RoutineManager routineManager;
     Context context;
+    MainActivity mainActivity;
 
-    public RoutineListAdapter(RoutineManager routineManager, Context context) {
+    public RoutineListAdapter(RoutineManager routineManager, Context context, MainActivity mainActivity) {
         this.routineManager = routineManager;
         this.context = context;
+        this.mainActivity = mainActivity;
 
     }
     private onitemclickListener listener;
@@ -39,7 +41,8 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
         holder.imageViewPlayRoutine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               RoutineActionManager routineActionManager = new RoutineActionManager(context);
+               RoutineActionManager routineActionManager = new RoutineActionManager(context, mainActivity);
+
                routineActionManager.startRoutine(routine);
                 Toast.makeText(context, context.getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
 

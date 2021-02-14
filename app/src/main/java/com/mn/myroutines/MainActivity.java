@@ -30,7 +30,7 @@ public class MainActivity extends  AppCompatActivity {
     private void initViews(){
         // serach views with id
         routineManager = new RoutineManager(this);
-        routineListAdapter = new RoutineListAdapter(routineManager, this);
+        routineListAdapter = new RoutineListAdapter(routineManager, this, MainActivity.this);
         recyclerView = findViewById(R.id.routinesList);
         addNewRoutine = findViewById(R.id.addRoutine);
 
@@ -67,6 +67,8 @@ public class MainActivity extends  AppCompatActivity {
             }
         });
     }
+
+
 
 
 }

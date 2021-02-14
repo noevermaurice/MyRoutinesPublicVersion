@@ -8,14 +8,17 @@ import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.provider.AlarmClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.time.Clock;
 
 public class RoutineActionManager {
     Context context;
+    MainActivity mainActivity;
 
-    public RoutineActionManager(Context context) {
+    public RoutineActionManager(Context context,MainActivity mainActivity ) {
         this.context = context;
+        this.mainActivity = mainActivity;
     }
 
     public void startRoutine(Routine routine) {
@@ -65,19 +68,13 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.STREAM_RING),
                     0);
         } else if (routine.getRoutineSlot1() == 8){
-            PackageManager packageManager = context.getPackageManager();
-            String m = "m";
             try {
-                Intent intent = context.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot1());
-                //Intent intent1 = new Intent (context, packageManager.getLaunchIntentForPackage(routine.getAppPackageNameSlot1()));
-                context.startActivity(intent);
-            } catch  (ActivityNotFoundException | NullPointerException e) {
-                Log.e("RoutineActionManager", e.getMessage());
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot1());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
             }
-
-
-
-
 
         } else if (routine.getRoutineSlot1() == 9){
             Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);

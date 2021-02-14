@@ -111,7 +111,7 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
                 activity.getAppName();
 
 
-               /* try {
+              /*  try {
                     Intent intent = packageManager.getLaunchIntentForPackage(app.packageName);
                     activity.startActivity(intent);
                     if (null != intent) {
@@ -121,7 +121,8 @@ public class AllAppsAdapter extends ArrayAdapter<ApplicationInfo> {
                     e.printStackTrace();
                 }
 
-                */
+               */
+
 
 
             }

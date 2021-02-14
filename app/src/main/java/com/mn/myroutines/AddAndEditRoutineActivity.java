@@ -131,7 +131,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         launchableInstalledApps = new ArrayList<>();
         installedApps = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
 
-       allAppsAdapter = new AllAppsAdapter(this, R.layout.app_item_row, installedApps, appName, appPackageName);
+       allAppsAdapter = new AllAppsAdapter(AddAndEditRoutineActivity.this, 0, installedApps, appName, appPackageName);
 
         initViews();
 
@@ -300,7 +300,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
-        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, R.layout.app_item_row, getAllInstalledApplications(context), appName, appPackageName);
+        final AllAppsAdapter allAppsAdapter = new AllAppsAdapter(this, R.layout.app_item_row, pkgAppsList, appName, appPackageName);
         appPackageName = allAppsAdapter.getAppPackageName();
         appName = allAppsAdapter.getAppNameString();
         Log.d("s", "Name =" +appName);
