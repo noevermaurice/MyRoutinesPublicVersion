@@ -77,7 +77,19 @@ public class RoutineActionManager {
             }
 
         } else if (routine.getRoutineSlot1() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
 
@@ -119,9 +131,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot2() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot2());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot2() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
 
@@ -163,9 +194,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot3() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot3());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot3() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
 
@@ -208,9 +258,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         } else if (routine.getRoutineSlot4() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot4());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot4() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
 
@@ -253,9 +322,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         } else if (routine.getRoutineSlot5() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot5());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot5() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
 
@@ -298,9 +386,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         } else if (routine.getRoutineSlot6() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot6());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot6() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
         if (routine.getRoutineSlot7() == 0) {
@@ -342,9 +449,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot7() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot7());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot7() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
         if (routine.getRoutineSlot8() == 0) {
@@ -386,9 +512,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot8() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot8());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot8() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
         if (routine.getRoutineSlot9() == 0) {
@@ -430,9 +575,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot9() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot9());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot9() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
         if (routine.getRoutineSlot10() == 0) {
@@ -470,9 +634,28 @@ public class RoutineActionManager {
                     am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
                     0);
         }else if (routine.getRoutineSlot10() == 8){
+            try {
+                Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot10());
+                mainActivity.startActivity(intent);
+
+            } catch (ActivityNotFoundException e) {
+                e.printStackTrace();
+            }
 
         } else if (routine.getRoutineSlot10() == 9){
-            Intent intent = new Intent(AlarmClock.ACTION_SHOW_TIMERS);
+            // start Timer and sert time
+            Intent intent = new Intent(AlarmClock.ACTION_SET_TIMER);
+            // set Timer Name with routine Timer name
+            intent.putExtra(AlarmClock.EXTRA_MESSAGE, routine.getTimerName());
+            // set seconds of the Timer
+            int seconds = routine.getTimerSeconds();
+            // set Minutes of the Timer
+            int minutes = routine.getTimerMinutes() * 60;
+            // set Hour of timer
+            int hour = routine.getTimerHours()*3600;
+            // all together is the real time
+            int allTime = seconds+minutes +hour;
+            intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
         }
     }

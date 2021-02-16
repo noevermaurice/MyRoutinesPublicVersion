@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import androidx.annotation.Nullable;
@@ -44,6 +45,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     RoutineManager routineManager;
     RoutineSlotManager routineSlotManager;
     ListviewAdapterRoutine listviewAdapterRoutine;
+    TextView chooseAppText;
+    TextView AllRoutinesActionText;
     Context context;
     ArrayList<String> arrayList;
     public String ArrayListSlotDefault;
@@ -168,9 +171,13 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         mediaVolumeMax = getString(R.string.MediaSpeakerVolumeMax);
         speakerVolumeMute = getString(R.string.SpeakerVolumeMute);
         speakerVolumeVibration = getString(R.string.SpeakerVolumeVibration);
-        speakerVolumeMax = getString(R.string.MediaSpeakerVolumeMax);
+        speakerVolumeMax = getString(R.string.SpeakerVolumeMax);
         runApp = getString(R.string.runApp);
         runTimer = getString(R.string.runTimer);
+        chooseAppText = findViewById(R.id.chooseAppText);
+        chooseAppText.setVisibility(View.INVISIBLE);
+        AllRoutinesActionText = findViewById(R.id.textViewAllRoutinesActions);
+
 
 
 
@@ -190,14 +197,17 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             @Override
             public void onClick(View v) {
                 Routine routine = new Routine();
-                if (getIntent().hasExtra("routine")) {
-                    routineSlotManager.updateRoutine(routine, editTextRoutineName, routineManager, routineListPosition);
+                if (editTextRoutineName.length() != 0){
+                    if (getIntent().hasExtra("routine")) {
+                        routineSlotManager.updateRoutine(routine, editTextRoutineName, routineManager, routineListPosition);
+                    } else {
+                        routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
+                    }
+                    onBackPressed();
                 } else {
-                    routineSlotManager.createRoutine(routine, editTextRoutineName, routineManager);
+                    Toast.makeText(context, R.string.RoutineNameIsEmpty, Toast.LENGTH_SHORT).show();
                 }
 
-
-                onBackPressed();
             }
         });
 
@@ -225,6 +235,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                     listViewForApps.setVisibility(View.VISIBLE);
                     listViewForApps.setAdapter(allAppsAdapter);
                     item1.setVisible(true);
+                    chooseAppText.setVisibility(View.VISIBLE);
+                    AllRoutinesActionText.setVisibility(View.INVISIBLE);
+
                 }
 
                 if (which == 9) {
@@ -232,7 +245,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                     // if Action = 9 than show timer Dialog
                     SetTimerDialog setTimerDialog = new SetTimerDialog();
                     setTimerDialog.show(getSupportFragmentManager(), "dialog");
-                    routineSlotManager.getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
+
                     // set timer settings in slotmanager
 
                 }
@@ -333,6 +346,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         listViewForApps.setVisibility(View.INVISIBLE);
         listView.setVisibility(View.VISIBLE);
         item1.setVisible(false);
+        chooseAppText.setVisibility(View.INVISIBLE);
+        AllRoutinesActionText.setVisibility(View.VISIBLE);
 
         // put appNme and PackageName in RoutineSlotManager
         if (routineSlotManager.whichSlotPosition == 0){
@@ -428,7 +443,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context, listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, timerSeconds, timerMinutes, timerHours, timerName, editTextRoutineName);
+        routineSlotManager = new RoutineSlotManager(context, listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, editTextRoutineName);
     }
 
     public void setDefaultSlots() {
@@ -439,7 +454,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     @Override
     public void onBackPressed() {
-        // if listview Apps Visble make the listview for Apps invisble
+        // if listview Apps Visble make the listview for Apps invisble and serachview invisble and texts
 
         if (listViewForApps.getVisibility() == View.VISIBLE){
             listViewForApps.setVisibility(View.INVISIBLE);
@@ -447,6 +462,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             listviewAdapterRoutine.notifyDataSetChanged();
             listView.setVisibility(View.VISIBLE);
             item1.setVisible(false);
+            chooseAppText.setVisibility(View.INVISIBLE);
+            AllRoutinesActionText.setVisibility(View.VISIBLE);
 
 
 
@@ -468,8 +485,13 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.timerSeconds = seconds;
         Log.d("AddAcivity", "seconds in der Activity vom Interface " + timerSeconds);
         this.timerMinutes = minutes;
+        Log.d("AddAcivity", "minutes in der Activity vom Interface " + timerMinutes);
         this.timerHours = hour;
+        Log.d("AddAcivity", "hour in der Activity vom Interface " + timerHours);
         this.timerName = TimerName;
+        Log.d("AddAcivity", "name in der Activity vom Interface " + timerName);
+
+        routineSlotManager.getTimerSettings(timerSeconds, timerMinutes, timerHours, timerName);
     }
 
 

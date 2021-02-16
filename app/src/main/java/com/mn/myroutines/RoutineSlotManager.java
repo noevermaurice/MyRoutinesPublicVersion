@@ -84,7 +84,7 @@ public class RoutineSlotManager {
     Routine oldRoutine;
 
 
-    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer, int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds, int timerMinutes, int timerHours, String timerName, EditText editText) {
+    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer, int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, EditText editText) {
         //
         this.context = context;
         this.listView = listView;
@@ -113,10 +113,7 @@ public class RoutineSlotManager {
         this.routinelistPositionSlot9 = routinelistPositionSlot9;
         this.routinelistPositionSlot10 = routinelistPositionSlot10;
         this.whichSlotPosition = whichSlotPosition;
-        this.timerSeconds = timerSeconds;
-        this.timerMinutes = timerMinutes;
-        this.timerHours = timerHours;
-        this.timerName = timerName;
+
         this.editText = editText;
 
     }
@@ -1704,16 +1701,17 @@ public class RoutineSlotManager {
     }
 
 
-        public void getTimerSettings ( int timerSeconds, int timerMinutes, int timerHours, String
-        timerName){
-            this.timerSeconds = timerSeconds;
-            Log.d("t", "s =" + timerSeconds);
-            this.timerMinutes = timerMinutes;
-            this.timerHours = timerHours;
-            this.timerName = timerName;
-        }
-
+    public void getTimerSettings(int timerSeconds, int timerMinutes, int timerHours, String timerName) {
+        this.timerSeconds = timerSeconds;
+        this.timerMinutes = timerMinutes;
+        this.timerHours = timerHours;
+        this.timerName  = timerName;
+        Log.d("AddAcivity", "seconds im RoutineSlotManger  " + this.timerSeconds);
+        Log.d("AddAcivity", "minutes  im RoutineSlotManger " + this. timerMinutes);
+        Log.d("AddAcivity", "hour in  RoutineSlotManger " + this. timerHours);
+        Log.d("AddAcivity", "name im RoutineSlotManger" + this. timerName);
 
 
     }
+}
 
