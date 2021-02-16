@@ -142,6 +142,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         if (getIntent().hasExtra("routine")) {
             Routine oldroutine = (Routine) getIntent().getSerializableExtra("routine");
             routineSlotManager.getRoutineSlotActions(oldroutine);
+
         }
 
         routineListPosition = getIntent().getIntExtra("routinePosition", 0);

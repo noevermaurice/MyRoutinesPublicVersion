@@ -21,7 +21,7 @@ public class RoutineViewHolder extends RecyclerView.ViewHolder{
             routineManager = new RoutineManager(itemView.getContext());
         // search for views with id
         textViewRoutineHeadline = itemView.findViewById(R.id.textViewRoutineHeadline);
-        //textViewRoutineDecsription = itemView.findViewById(R.id.textViewRoutineDecsription);
+        textViewRoutineDecsription = itemView.findViewById(R.id.textViewRoutineDecsription);
         imageViewPlayRoutine =itemView.findViewById(R.id.imageViewPlayRoutine);
         deleteRoutine = itemView.findViewById(R.id.delteRoutine);
 

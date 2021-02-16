@@ -53,6 +53,17 @@ public class RoutineSlotManager {
     public String appPackageName8;
     public String appPackageName9;
     public String appPackageName10;
+    public String  DescriptionText1;
+    public String DescriptionText2;
+    public String DescriptionText3;
+    public String DescriptionText4;
+    public String DescriptionText5;
+    public String  DescriptionText6;
+    public String DescriptionText7;
+    public String DescriptionText8;
+    public String DescriptionText9;
+    public String DescriptionText10;
+    public String DescriptionTextComplete;
     int listviewItemPosition;
     int routinelistPositionSlot1;
     int routinelistPositionSlot2;
@@ -70,6 +81,7 @@ public class RoutineSlotManager {
     int timerHours;
     EditText editText;
     Activity activity = (Activity) context;
+    Routine oldRoutine;
 
 
     public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer, int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, int timerSeconds, int timerMinutes, int timerHours, String timerName, EditText editText) {
@@ -125,6 +137,7 @@ public class RoutineSlotManager {
     }
 
     public void getRoutineSlotActions(Routine oldRoutine) {
+        this. oldRoutine = oldRoutine;
         editText.setText(oldRoutine.getRoutineName());
 // with swich check with number has oldroutine Slot and list update
         // for loop for oldRoutine1
@@ -132,6 +145,8 @@ public class RoutineSlotManager {
 
             setWhichSlotPosition(oldRoutine.routineSlotEins);
             setRoutineSlots(oldRoutine.getRoutineSlot1());
+
+
         }
         // for loop for oldRoutine1
         for (int casesSlot2 = 0; casesSlot2 < 10; casesSlot2++) {
@@ -945,6 +960,9 @@ public class RoutineSlotManager {
                 break;
             case 8:
                 setAppSlotName();
+                if (oldRoutine != null){
+                    getAppSlotName();
+                }
                 break;
             case 9:
                 newActionString = runTimer;
@@ -954,6 +972,72 @@ public class RoutineSlotManager {
 
         listView.setAdapter(listviewAdapterRoutine);
         listviewAdapterRoutine.arrayListSlots.set(whichSlotPosition, newActionString);
+    }
+
+    private void getAppSlotName() {
+        // get app name from routine and set the slot name
+        switch (whichSlotPosition) {
+            case 0:
+                if (oldRoutine.getAppNameSlot1() != null) {
+                    newActionString = oldRoutine.getAppNameSlot1();
+                    appName1 = oldRoutine.getAppNameSlot1();
+                }
+                break;
+            case 1:
+                if (oldRoutine.getAppNameSlot2() != null) {
+                    newActionString = oldRoutine.getAppNameSlot2();
+                    appName2 = oldRoutine.getAppNameSlot2();
+                }
+                break;
+            case 2:
+                if (oldRoutine.getAppNameSlot3() != null) {
+                    newActionString = oldRoutine.getAppNameSlot3();
+                    appName3 = oldRoutine.getAppNameSlot3();
+                }
+                break;
+            case 3:
+                if (oldRoutine.getAppNameSlot4() != null) {
+                    newActionString = oldRoutine.getAppNameSlot4();
+                    appName4 = oldRoutine.getAppNameSlot4();
+                }
+                break;
+            case 4:
+            if (oldRoutine.getAppNameSlot5() != null) {
+                newActionString = oldRoutine.getAppNameSlot5();
+                appName5 = oldRoutine.getAppNameSlot5();
+            }
+            break;
+            case 5:
+                if (oldRoutine.getAppNameSlot6() != null) {
+                    newActionString = oldRoutine.getAppNameSlot6();
+                    appName6 = oldRoutine.getAppNameSlot6();
+                }
+                break;
+            case 6:
+                if (oldRoutine.getAppNameSlot7() != null) {
+                    newActionString = oldRoutine.getAppNameSlot7();
+                    appName7 = oldRoutine.getAppNameSlot7();
+                }
+                break;
+            case 7:
+                if (oldRoutine.getAppNameSlot8() != null) {
+                    newActionString = oldRoutine.getAppNameSlot8();
+                    appName8 = oldRoutine.getAppNameSlot8();
+                }
+                break;
+            case 8:
+                if (oldRoutine.getAppNameSlot9() != null) {
+                    newActionString = oldRoutine.getAppNameSlot9();
+                    appName9 = oldRoutine.getAppNameSlot9();
+                }
+                break;
+            case 9:
+            if (oldRoutine.getAppnameSlot10() != null) {
+                newActionString = oldRoutine.getAppnameSlot10();
+                appName10 = oldRoutine.getAppnameSlot10();
+            }
+           break;
+        }
     }
 
     private void setAppSlotName() {
@@ -1176,13 +1260,351 @@ public class RoutineSlotManager {
             Log.d("AddRoutineActivity", "App Name 10"+ routine.getAppnameSlot10());
             routine.setAppPackageNameSlot10(appPackageName10);
             Log.d("AddRoutineActivity", "App Package Name 10"+ routine.getAppPackageNameSlot10());
-
+            setDescriptionsRoutineText(routine);
+            Log.d("AddRoutineActivity", "DescriptionText "+ routine.getDescriptionText());
 
 
             routineManager.addRoutine(routine);
             // save changes into the list
             routineManager.saveRoutineList();
         }
+
+    }
+
+    private void setDescriptionsRoutineText(Routine routine) {
+
+        // with the swichtes i set the Description text;
+        switch (routine.getRoutineSlot1()){
+            case 0:
+                DescriptionText1 = "";
+                break;
+            case 1:
+                DescriptionText1 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText1 = bluetothOnString;
+                break;
+            case 3:
+                DescriptionText1 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText1 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText1 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText1 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText1 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText1 = appName1;
+                break;
+            case 9:
+                DescriptionText1 = runTimer;
+                break;
+        }
+        switch (routine.getRoutineSlot2()){
+            case 0:
+                DescriptionText2 = "";
+                break;
+            case 1:
+                DescriptionText2 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText2 = bluetothOnString;
+                break;
+            case 3:
+                DescriptionText2 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText2 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText2 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText2 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText2 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText2 = appName2;
+                break;
+            case 9:
+                DescriptionText2 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot3()){
+            case 0:
+                DescriptionText3 = "";
+                break;
+            case 1:
+                DescriptionText3 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText3 = bluetothOnString;
+                break;
+            case 3:
+                DescriptionText3 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText3 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText3 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText3 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText3 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText3 = appName3;
+                break;
+            case 9:
+                DescriptionText3 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot4()){
+            case 0:
+                DescriptionText4 = "";
+                break;
+            case 1:
+                DescriptionText4 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText4 = bluetothOnString;
+                break;
+            case 3:
+                DescriptionText4 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText4 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText4 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText4 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText4 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText4 = appName4;
+                break;
+            case 9:
+                DescriptionText4 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot5()){
+            case 0:
+                DescriptionText5 = "";
+                break;
+            case 1:
+                DescriptionText5 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText5 = bluetothOnString;
+                break;
+            case 3:
+                DescriptionText5 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText5 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText5 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText5 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText5 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText5 = appName5;
+                break;
+            case 9:
+                DescriptionText5 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot6()){
+            case 0:
+                DescriptionText6 = "";
+                break;
+            case 1:
+                DescriptionText6 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText6= bluetothOnString;
+                break;
+            case 3:
+                DescriptionText6 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText6 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText6 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText6 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText6 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText6 = appName6;
+                break;
+            case 9:
+                DescriptionText6 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot7()){
+            case 0:
+                DescriptionText7 = "";
+                break;
+            case 1:
+                DescriptionText7 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText7= bluetothOnString;
+                break;
+            case 3:
+                DescriptionText7 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText7 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText7 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText7 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText7 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText7 = appName7;
+                break;
+            case 9:
+                DescriptionText7 = runTimer;
+                break;
+        }
+        switch (routine.getRoutineSlot8()){
+            case 0:
+                DescriptionText8 = "";
+                break;
+            case 1:
+                DescriptionText8 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText8= bluetothOnString;
+                break;
+            case 3:
+                DescriptionText8 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText8 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText8 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText8 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText8 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText8 = appName8;
+                break;
+            case 9:
+                DescriptionText8 = runTimer;
+                break;
+        }
+        switch (routine.getRoutineSlot9()){
+            case 0:
+                DescriptionText9 = "";
+                break;
+            case 1:
+                DescriptionText9 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText9= bluetothOnString;
+                break;
+            case 3:
+                DescriptionText9 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText9 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText9 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText9 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText9 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText9 = appName9;
+                break;
+            case 9:
+                DescriptionText9 = runTimer;
+                break;
+        }
+
+        switch (routine.getRoutineSlot10()){
+            case 0:
+                DescriptionText10 = "";
+                break;
+            case 1:
+                DescriptionText10 = bluetoothOffString;
+                break;
+            case 2:
+                DescriptionText10= bluetothOnString;
+                break;
+            case 3:
+                DescriptionText10 = mediaVolumeMuteString;
+                break;
+            case 4:
+                DescriptionText10 = mediaVolumeMaxString;
+                break;
+            case 5:
+                DescriptionText10 = speakerVolumeMute;
+                break;
+            case 6:
+                DescriptionText10 = speakerVolumeVibration;
+                break;
+            case 7:
+                DescriptionText10 = speakerVolumeMax;
+                break;
+            case 8:
+                DescriptionText10 = appName10;
+                break;
+            case 9:
+                DescriptionText10 = runTimer;
+                break;
+        }
+
+
+        DescriptionTextComplete = DescriptionText1 +" "+ DescriptionText2 +" "+ DescriptionText3 +""+ DescriptionText4 +" " + DescriptionText5+ "" + DescriptionText6 +" " + DescriptionText7+ " "+ DescriptionText8 +" "+ DescriptionText9 +" "+ DescriptionText10;
+        // set the Description text to the routine
+        routine.setDescriptionText(DescriptionTextComplete);
 
     }
 
@@ -1229,6 +1651,51 @@ public class RoutineSlotManager {
             Log.d("AddRoutineActivity", "Timer Minutes  =" + routine.getTimerMinutes());
             routine.setTimerHours(timerHours);
             Log.d("AddRoutineActivity", "Timer Hour  =" + routine.getTimerHours());
+
+            routine.setAppNameSlot1(appName1);
+            Log.d("AddRoutineActivity", "App Name 1"+ routine.getAppNameSlot1());
+            routine.setAppPackageNameSlot1(appPackageName1);
+            Log.d("AddRoutineActivity", "App Package Name 1"+ routine.getAppPackageNameSlot1());
+            routine.setAppNameSlot2(appName2);
+            Log.d("AddRoutineActivity", "App Name 2"+ routine.getAppNameSlot2());
+            routine.setAppPackageNameSlot2(appPackageName2);
+            Log.d("AddRoutineActivity", "App Package  Name 2"+ routine.getAppPackageNameSlot2());
+            routine.setAppNameSlot3(appName3);
+            Log.d("AddRoutineActivity", "App Name 3"+ routine.getAppNameSlot3());
+            routine.setAppPackageNameSlot3(appPackageName3);
+            Log.d("AddRoutineActivity", "App Package Name"+ routine.getAppPackageNameSlot3());
+            routine.setAppNameSlot4(appName4);
+            Log.d("AddRoutineActivity", "App Name 4"+ routine.getAppNameSlot4());
+            routine.setAppPackageNameSlot4(appPackageName4);
+            Log.d("AddRoutineActivity", "App Package Name "+ routine.getAppPackageNameSlot4());
+            routine.setAppNameSlot5(appName5);
+            Log.d("AddRoutineActivity", "App Name 5"+ routine.getAppNameSlot5());
+            routine.setAppPackageNameSlot5(appPackageName5);
+            Log.d("AddRoutineActivity", "App  Package Name"+ routine.getAppPackageNameSlot5());
+            routine.setAppNameSlot6(appName6);
+            Log.d("AddRoutineActivity", "App Name 6"+ routine.getAppNameSlot6());
+            routine.setAppNameSlot6(appPackageName6);
+            Log.d("AddRoutineActivity", "App Package  Name 6"+ routine.getAppPackageNameSlot6());
+            routine.setAppNameSlot7(appName7);
+            Log.d("AddRoutineActivity", "App Name 7"+ routine.getAppNameSlot7());
+            routine.setAppNameSlot7(appPackageName7);
+            Log.d("AddRoutineActivity", "App Package Name 7"+ routine.getAppPackageNameSlot7());
+            routine.setAppNameSlot8(appName8);
+            Log.d("AddRoutineActivity", "App Name 8"+ routine.getAppNameSlot8());
+            routine.setAppPackageNameSlot8(appPackageName8);
+            Log.d("AddRoutineActivity", "App Package Name 8"+ routine.getAppPackageNameSlot8());
+            routine.setAppNameSlot9(appName9);
+            Log.d("AddRoutineActivity", "App Name 9"+ routine.getAppNameSlot9());
+            routine.setAppPackageNameSlot9(appPackageName9);
+            Log.d("AddRoutineActivity", "App Package Name 9"+ routine.getAppPackageNameSlot9());
+            routine.setAppnameSlot10(appName10);
+            Log.d("AddRoutineActivity", "App Name 10"+ routine.getAppnameSlot10());
+            routine.setAppPackageNameSlot10(appPackageName10);
+            Log.d("AddRoutineActivity", "App Package Name 10"+ routine.getAppPackageNameSlot10());
+            setDescriptionsRoutineText(routine);
+            Log.d("AddRoutineActivity", "DescriptionText "+ routine.getDescriptionText());
+
+
             // save changes into the list
             routineManager.routineList.set(position, routine);
             routineManager.saveRoutineList();

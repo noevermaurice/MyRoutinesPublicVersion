@@ -10,6 +10,7 @@ public class Routine implements Serializable {
 
     public String routineName;
     public String timerName;
+    public String descriptionText;
     public String appNameSlot1;
     public String appNameSlot2;
     public String appNameSlot3;
@@ -67,6 +68,14 @@ public class Routine implements Serializable {
 
     public String getRoutineName() {
         return routineName;
+    }
+
+    public String getDescriptionText() {
+        return descriptionText;
+    }
+
+    public void setDescriptionText(String descriptionText) {
+        this.descriptionText = descriptionText;
     }
 
     public void setAppNameSlot1(String appNameSlot1){

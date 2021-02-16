@@ -37,6 +37,7 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
 
         // set name
         holder.textViewRoutineHeadline.setText(routine.getRoutineName());
+        holder.textViewRoutineDecsription.setText(routine.getDescriptionText());
 
         holder.imageViewPlayRoutine.setOnClickListener(new View.OnClickListener() {
             @Override
