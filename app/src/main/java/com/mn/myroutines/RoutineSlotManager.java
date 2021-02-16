@@ -1603,7 +1603,7 @@ public class RoutineSlotManager {
 
 
         DescriptionTextComplete = DescriptionText1 +" "+ DescriptionText2 +" "+ DescriptionText3 +""+ DescriptionText4 +" " + DescriptionText5+ "" + DescriptionText6 +" " + DescriptionText7+ " "+ DescriptionText8 +" "+ DescriptionText9 +" "+ DescriptionText10;
-        // set the Description text to the routine
+        // set the Description text to the routine t
         routine.setDescriptionText(DescriptionTextComplete);
 
     }
