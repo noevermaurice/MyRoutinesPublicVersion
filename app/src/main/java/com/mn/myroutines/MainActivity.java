@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -17,6 +18,7 @@ public class MainActivity extends  AppCompatActivity {
     FloatingActionButton addNewRoutine;
     RoutineListAdapter routineListAdapter;
     RoutineManager routineManager;
+    TextView textViewNoRoutinesAvabile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +26,10 @@ public class MainActivity extends  AppCompatActivity {
         setContentView(R.layout.activity_main);
         initViews();
         initClickListener();
+        NoRoutinesAvabilbe();
     }
+
+
 
 
     private void initViews(){
@@ -33,6 +38,7 @@ public class MainActivity extends  AppCompatActivity {
         routineListAdapter = new RoutineListAdapter(routineManager, this, MainActivity.this);
         recyclerView = findViewById(R.id.routinesList);
         addNewRoutine = findViewById(R.id.addRoutine);
+        textViewNoRoutinesAvabile = findViewById(R.id.noRoutinesAvabile);
 
         recyclerView = findViewById(R.id.routinesList);
 
@@ -50,6 +56,14 @@ public class MainActivity extends  AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void NoRoutinesAvabilbe() {
+       if (routineManager.routineList.isEmpty()){
+        textViewNoRoutinesAvabile.setVisibility(View.VISIBLE);
+       } else {
+           textViewNoRoutinesAvabile.setVisibility(View.INVISIBLE);
+       }
     }
 
     private void initClickListener() {

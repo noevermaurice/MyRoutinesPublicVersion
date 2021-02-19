@@ -19,10 +19,13 @@
     <string name="SpeakerVolumeMax">Volume Max +</string>
     <string name="runApp"> run app</string>
     <string name="runTimer"> run timer</string>
+    <string name="WifiOff">Wifi Off</string>
+    <string name="WifiOn">Wifi On</string>
     <string name="NegativeButton">Cancel</string>
     <string name="RoutineRun"> Routine is running</string>
     <string name="RoutineNameIsEmpty">the routine name is empty</string>
     <string name="chooseAppText">Choose App</string>
+    <string name="noRoutinesAvaible">No routines aviable</string>
 
 
 

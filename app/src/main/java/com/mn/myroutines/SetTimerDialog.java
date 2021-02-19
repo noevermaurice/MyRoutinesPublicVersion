@@ -47,6 +47,19 @@ public class SetTimerDialog extends AppCompatDialogFragment {
 
                 // convertiere the string in a int
 
+                if (editTextSeconds.length() == 0){
+                    editTextSeconds.setText("00");
+
+                }
+
+                if (editTextMinutes.length() == 0){
+                    editTextMinutes.setText("00");
+                }
+
+                if (editTextHour.length() == 00){
+                    editTextHour.setText("00");
+                }
+
                 seconds = Integer.parseInt(editTextSeconds.getText().toString());
                 Log.d("SetTimerDialog", "seconds " + seconds);
                 minutes =Integer.parseInt(editTextMinutes.getText().toString());

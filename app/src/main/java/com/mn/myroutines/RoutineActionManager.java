@@ -1,12 +1,16 @@
 package com.mn.myroutines;
 
+import android.app.PendingIntent;
 import android.bluetooth.BluetoothAdapter;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.provider.AlarmClock;
+import android.provider.Settings;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -91,6 +95,24 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        } else if (routine.getRoutineSlot1() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+              Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+              context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot1() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
 
         if (routine.getRoutineSlot2() == 0) {
@@ -154,7 +176,27 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        } else if (routine.getRoutineSlot2() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot2() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
+
+
 
         if (routine.getRoutineSlot3() == 0) {
             // do notthing
@@ -217,6 +259,24 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        }else if (routine.getRoutineSlot3() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot3() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
 
 
@@ -281,6 +341,24 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        }else if (routine.getRoutineSlot4() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot4() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
 
         if (routine.getRoutineSlot5() == 0) {
@@ -345,6 +423,24 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        }else if (routine.getRoutineSlot5() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot5() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
 
         if (routine.getRoutineSlot6() == 0) {
@@ -409,7 +505,27 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        }else if (routine.getRoutineSlot6() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot6() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
+
+
         if (routine.getRoutineSlot7() == 0) {
             // do notthing
 
@@ -472,7 +588,27 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        } else if (routine.getRoutineSlot6() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot6() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
+
+
         if (routine.getRoutineSlot8() == 0) {
             // do notthing
 
@@ -535,7 +671,26 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        } else if (routine.getRoutineSlot8() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot8() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
+
         if (routine.getRoutineSlot9() == 0) {
             // do notthing
 
@@ -598,7 +753,26 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        }else if (routine.getRoutineSlot9() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot9() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
+
         if (routine.getRoutineSlot10() == 0) {
             // do notthing
 
@@ -657,6 +831,24 @@ public class RoutineActionManager {
             int allTime = seconds+minutes +hour;
             intent.putExtra(AlarmClock.EXTRA_LENGTH, allTime);
             context.startActivity(intent);
+        } else if (routine.getRoutineSlot10() == 10){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(false);
+            }
+        } else if (routine.getRoutineSlot10() == 11){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Intent intent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                context.startActivity(intent);
+            } else {
+                WifiManager wifiManager = (WifiManager)this.context.getSystemService(Context.WIFI_SERVICE);
+                wifiManager.setWifiEnabled(true);
+            }
         }
     }
     }

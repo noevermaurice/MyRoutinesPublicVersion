@@ -18,6 +18,9 @@
     <string name="RoutineRun">Routine wird ausgeführt</string>
     <string name="RoutineNameIsEmpty">Der Routinen Name ist leer</string>
     <string name="chooseAppText">Wähle App aus</string>
+    <string name="noRoutinesAvaible">Keine Routinen vorhanden</string>
+    <string name="WifiOff">Wlan an</string>
+    <string name="WifiOn">Wlan aus</string>
 
 
 </resources>

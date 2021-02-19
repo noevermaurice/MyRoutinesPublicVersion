@@ -53,8 +53,6 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String newActionString;
     public String noActionString;
     public String bluetoothOff;
-
-
     public String bluetoothOn;
     public String mediaVolumeMute;
     public String mediaVolumeMax;
@@ -63,6 +61,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String speakerVolumeMax;
     public String runApp;
     public String runTimer;
+    public String wifiOff;
+    public String wifiOn;
     public String timerName;
 
     int listViewItemPosition;
@@ -174,6 +174,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         speakerVolumeMax = getString(R.string.SpeakerVolumeMax);
         runApp = getString(R.string.runApp);
         runTimer = getString(R.string.runTimer);
+        wifiOff = getString(R.string.WifiOff);
+        wifiOn = getString(R.string.WifiOn);
         chooseAppText = findViewById(R.id.chooseAppText);
         chooseAppText.setVisibility(View.INVISIBLE);
         AllRoutinesActionText = findViewById(R.id.textViewAllRoutinesActions);
@@ -222,7 +224,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
         // set String
-        String[] actions = {noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer};
+        String[] actions = {noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, wifiOff, wifiOn};
         // set on click listener
         builder.setItems(actions, new DialogInterface.OnClickListener() {
             @Override
@@ -290,27 +292,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
     }
-
-
-
-    public List<ApplicationInfo> getAllInstalledApplications(Context context) {
-
-
-
-        for(int i =0; i<installedApps.size(); i++){
-            if(context.getPackageManager().getLaunchIntentForPackage(installedApps.get(i).packageName) != null){
-                //If you're here, then this is a launch-able app
-                launchableInstalledApps.add(installedApps.get(i));
-            }
-        }
-        return launchableInstalledApps;
-    }
-
     private void ShowAllAppsDialog() {
         // if normal listview Visible than it in
-
-
-
         List<ApplicationInfo> pkgAppsList = context.getPackageManager().getInstalledApplications(PackageManager.GET_META_DATA);
         AlertDialog.Builder builderApps = new AlertDialog.Builder(this);
         builderApps.setTitle("choose App");
@@ -443,7 +426,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         // int listviewAdapterRoutine
         listviewAdapterRoutine = new ListviewAdapterRoutine(context, arrayList);
         //init RoutineSlotManger
-        routineSlotManager = new RoutineSlotManager(context, listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, editTextRoutineName);
+        routineSlotManager = new RoutineSlotManager(context, listView, listviewAdapterRoutine, ArrayListSlotDefault, newActionString, noActionString, bluetoothOff, bluetoothOn, mediaVolumeMute, mediaVolumeMax, speakerVolumeMute, speakerVolumeVibration, speakerVolumeMax, runApp, runTimer, wifiOff, wifiOn, listViewItemPosition, routinelistPositionSlot1, routinelistPositionSlot2, routinelistPositionSlot3, routinelistPositionSlot4, routinelistPositionSlot5, routinelistPositionSlot6, routinelistPositionSlot7, routinelistPositionSlot8, routinelistPositionSlot9, routinelistPositionSlot10, whichSlotPosition, editTextRoutineName);
     }
 
     public void setDefaultSlots() {

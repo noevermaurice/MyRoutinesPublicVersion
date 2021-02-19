@@ -31,6 +31,8 @@ public class RoutineSlotManager {
     private String runApp;
     private String runTimer;
     private String timerName;
+    private String wifiOff;
+    private String wifiOn;
     public String appName;
     public String appName1;
     public String appName2;
@@ -84,7 +86,7 @@ public class RoutineSlotManager {
     Routine oldRoutine;
 
 
-    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer, int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, EditText editText) {
+    public RoutineSlotManager(Context context, ListView listView, ListviewAdapterRoutine listviewAdapterRoutine, String ArrayListSlotDefault, String newActionString, String noActionString, String bluetoothOffString, String bluetothOnString, String mediaVolumeMuteString, String mediaVolumeMaxString, String speakerVolumeMute, String speakerVolumeVibration, String speakerVolumeMax, String runApp, String runTimer,String wifiOff, String wifiOn,  int listviewItemPosition, int routinelistPositionSlot1, int routinelistPositionSlot2, int routinelistPositionSlot3, int routinelistPositionSlot4, int routinelistPositionSlot5, int routinelistPositionSlot6, int routinelistPositionSlot7, int routinelistPositionSlot8, int routinelistPositionSlot9, int routinelistPositionSlot10, int whichSlotPosition, EditText editText) {
         //
         this.context = context;
         this.listView = listView;
@@ -101,6 +103,8 @@ public class RoutineSlotManager {
         this.speakerVolumeMax = speakerVolumeMax;
         this.runApp = runApp;
         this.runTimer = runTimer;
+        this.wifiOff = wifiOff;
+        this.wifiOn = wifiOn;
         this.listviewItemPosition = listviewItemPosition;
         this.routinelistPositionSlot1 = routinelistPositionSlot1;
         this.routinelistPositionSlot2 = routinelistPositionSlot2;
@@ -860,6 +864,138 @@ public class RoutineSlotManager {
 
                 break;
 
+            case 10:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
+            case 11:
+                // check with whichSlotposition witch slot was clicked
+                if (whichSlotPosition == 0) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot1 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot1  =" + routinelistPositionSlot1);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 1) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot2 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot2  =" + routinelistPositionSlot2);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 2) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot3 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot3  =" + routinelistPositionSlot3);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 3) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot4 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot4  =" + routinelistPositionSlot4);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 4) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot5 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot5  =" + routinelistPositionSlot5);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 5) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot6 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot6  =" + routinelistPositionSlot6);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 6) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot7 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot7  =" + routinelistPositionSlot7);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 7) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot8 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot8 =" + routinelistPositionSlot8);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 8) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot9 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot9  =" + routinelistPositionSlot9);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                } else if (whichSlotPosition == 9) {
+                    listviewItemPosition = selectActionPosition;
+                    routinelistPositionSlot10 = selectActionPosition;
+                    setNewAction();
+                    Log.d("AddRoutineActivity", "routinelist positionslot10  =" + routinelistPositionSlot10);
+                    Log.d("AddRoutineActivity", " listposition  =" + listviewItemPosition);
+                }
+
+                break;
+
 
         }
 
@@ -963,6 +1099,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 newActionString = runTimer;
+                break;
+            case 10:
+                newActionString = wifiOff;
+                break;
+            case 11:
+                newActionString = wifiOn;
                 break;
 
         }
@@ -1302,6 +1444,12 @@ public class RoutineSlotManager {
             case 9:
                 DescriptionText1 = runTimer;
                 break;
+            case 10:
+                DescriptionText1 = wifiOff;
+                break;
+            case 11:
+                DescriptionText1 = wifiOn;
+                break;
         }
         switch (routine.getRoutineSlot2()){
             case 0:
@@ -1333,6 +1481,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 DescriptionText2 = runTimer;
+                break;
+            case 10:
+                DescriptionText2 = wifiOff;
+                break;
+            case 11:
+                DescriptionText2 = wifiOn;
                 break;
         }
 
@@ -1367,6 +1521,12 @@ public class RoutineSlotManager {
             case 9:
                 DescriptionText3 = runTimer;
                 break;
+            case 10:
+                DescriptionText3 = wifiOff;
+                break;
+            case 11:
+                DescriptionText3 = wifiOn;
+                break;
         }
 
         switch (routine.getRoutineSlot4()){
@@ -1399,6 +1559,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 DescriptionText4 = runTimer;
+                break;
+            case 10:
+                DescriptionText4 = wifiOff;
+                break;
+            case 11:
+                DescriptionText4 = wifiOn;
                 break;
         }
 
@@ -1433,6 +1599,12 @@ public class RoutineSlotManager {
             case 9:
                 DescriptionText5 = runTimer;
                 break;
+            case 10:
+                DescriptionText5 = wifiOff;
+                break;
+            case 11:
+                DescriptionText5 = wifiOn;
+                break;
         }
 
         switch (routine.getRoutineSlot6()){
@@ -1465,6 +1637,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 DescriptionText6 = runTimer;
+                break;
+            case 10:
+                DescriptionText6 = wifiOff;
+                break;
+            case 11:
+                DescriptionText6 = wifiOn;
                 break;
         }
 
@@ -1499,6 +1677,12 @@ public class RoutineSlotManager {
             case 9:
                 DescriptionText7 = runTimer;
                 break;
+            case 10:
+                DescriptionText7 = wifiOff;
+                break;
+            case 11:
+                DescriptionText7 = wifiOn;
+                break;
         }
         switch (routine.getRoutineSlot8()){
             case 0:
@@ -1530,6 +1714,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 DescriptionText8 = runTimer;
+                break;
+            case 10:
+                DescriptionText8 = wifiOff;
+                break;
+            case 11:
+                DescriptionText8 = wifiOn;
                 break;
         }
         switch (routine.getRoutineSlot9()){
@@ -1563,6 +1753,12 @@ public class RoutineSlotManager {
             case 9:
                 DescriptionText9 = runTimer;
                 break;
+            case 10:
+                DescriptionText9 = wifiOff;
+                break;
+            case 11:
+                DescriptionText9 = wifiOn;
+                break;
         }
 
         switch (routine.getRoutineSlot10()){
@@ -1595,6 +1791,12 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 DescriptionText10 = runTimer;
+                break;
+            case 10:
+                DescriptionText10 = wifiOff;
+                break;
+            case 11:
+                DescriptionText10 = wifiOn;
                 break;
         }
 
