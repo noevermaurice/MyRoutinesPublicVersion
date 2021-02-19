@@ -46,31 +46,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot1() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot1() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
         } else if (routine.getRoutineSlot1() == 5) {
-            am.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
 
 
         }  else if (routine.getRoutineSlot1() == 6){
 
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.RINGER_MODE_VIBRATE, 0);
         }
 
 
         else if (routine.getRoutineSlot1() == 7) {
-            am.setStreamVolume(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_RING,
-                    am.getStreamMaxVolume(AudioManager.STREAM_RING),
-                    0);
+
+            }
+
         } else if (routine.getRoutineSlot1() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot1());
@@ -131,27 +154,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot2() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot2() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
         } else if (routine.getRoutineSlot2() == 5) {
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
-        } else if (routine.getRoutineSlot2() == 6) {
-            am.setStreamVolume(
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot2() == 6){
+
+        }
+
+
+        else if (routine.getRoutineSlot2() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         }else if (routine.getRoutineSlot2() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot2());
@@ -214,27 +264,55 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot3() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot3() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
         } else if (routine.getRoutineSlot3() == 5) {
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
-        } else if (routine.getRoutineSlot3() == 6) {
-            am.setStreamVolume(
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot3() == 6){
+
+        }
+
+
+        else if (routine.getRoutineSlot3() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
+
         }else if (routine.getRoutineSlot3() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot3());
@@ -296,27 +374,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot4() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot4() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
         } else if (routine.getRoutineSlot4() == 5) {
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
-        } else if (routine.getRoutineSlot4() == 6) {
-            am.setStreamVolume(
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot4() == 6){
+
+        }
+
+
+        else if (routine.getRoutineSlot4() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         } else if (routine.getRoutineSlot4() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot4());
@@ -374,31 +479,57 @@ public class RoutineActionManager {
                 bluetoothAdapter.enable();
             }
 
-        } else if (routine.getRoutineSlot5() == 3) {
+        }else if (routine.getRoutineSlot5() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot5() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
-        } else if (routine.getRoutineSlot5() == 5){
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+        } else if (routine.getRoutineSlot5() == 5) {
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot5() == 6){
+
         }
-        else if (routine.getRoutineSlot5() == 6){
-            am.setStreamVolume(
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+
+        else if (routine.getRoutineSlot5() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         } else if (routine.getRoutineSlot5() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot5());
@@ -459,28 +590,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot6() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot6() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
-        } else if (routine.getRoutineSlot6() == 5){
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+        } else if (routine.getRoutineSlot6() == 5) {
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot6() == 6){
+
         }
-        else if (routine.getRoutineSlot6() == 6){
-            am.setStreamVolume(
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+
+        else if (routine.getRoutineSlot6() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         } else if (routine.getRoutineSlot6() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot6());
@@ -542,28 +699,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot7() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot7() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
-        } else if (routine.getRoutineSlot7() == 5){
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+        } else if (routine.getRoutineSlot7() == 5) {
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot7() == 6){
+
         }
-        else if (routine.getRoutineSlot7() == 6){
-            am.setStreamVolume(
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+
+        else if (routine.getRoutineSlot7() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         }else if (routine.getRoutineSlot7() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot7());
@@ -622,31 +805,57 @@ public class RoutineActionManager {
                 bluetoothAdapter.enable();
             }
 
-        } else if (routine.getRoutineSlot8() == 3) {
+        }else if (routine.getRoutineSlot8() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot8() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
-        } else if (routine.getRoutineSlot8() == 5){
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+        } else if (routine.getRoutineSlot8() == 5) {
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot8() == 6){
+
         }
-        else if (routine.getRoutineSlot8() == 6){
-            am.setStreamVolume(
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+
+        else if (routine.getRoutineSlot8() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         }else if (routine.getRoutineSlot8() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot8());
@@ -707,28 +916,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot9() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot9() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
         } else if (routine.getRoutineSlot9() == 5) {
-            am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_RING, AudioManager.ADJUST_MUTE, 0);
-            am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
-        }
-        else if (routine.getRoutineSlot9() == 6){
-            am.setStreamVolume(
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot9() == 6){
+
+        }
+
+
+        else if (routine.getRoutineSlot9() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         }else if (routine.getRoutineSlot9() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot9());
@@ -789,24 +1024,54 @@ public class RoutineActionManager {
         } else if (routine.getRoutineSlot10() == 3) {
 
 
-            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_TOGGLE_MUTE, 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
+            }
 
         } else if (routine.getRoutineSlot10() == 4) {
 
-            am.setStreamVolume(
+            am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
 
-                    AudioManager.STREAM_MUSIC,
-                    am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                    0);
-        } else if (routine.getRoutineSlot10() == 5){
+        } else if (routine.getRoutineSlot10() == 5) {
+            // ADJUST_Mute = Mutes the device, FLAG_SHOW_UI = show changes made to volume bar
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMinVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMinVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMinVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMinVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_SYSTEM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_MUTE, 0);
+                am.adjustStreamVolume(AudioManager.STREAM_NOTIFICATION, AudioManager.ADJUST_MUTE, 0);
+
+
+            }
+
+
+        }  else if (routine.getRoutineSlot10() == 6){
 
         }
-        else if (routine.getRoutineSlot10() == 6){
-            am.setStreamVolume(
 
-                    AudioManager.USE_DEFAULT_STREAM_TYPE,
-                    am.getStreamMaxVolume(AudioManager.USE_DEFAULT_STREAM_TYPE),
-                    0);
+
+        else if (routine.getRoutineSlot10() == 7) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_SYSTEM,  am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_ALARM, am.getStreamMaxVolume(AudioManager.STREAM_ALARM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+            } else {
+                am.setStreamVolume(AudioManager.STREAM_MUSIC, am.getStreamMaxVolume( AudioManager.STREAM_MUSIC), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume( AudioManager.STREAM_MUSIC, am.getStreamMaxVolume(AudioManager.STREAM_MUSIC),AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_SYSTEM, am.getStreamMaxVolume(AudioManager.STREAM_SYSTEM), AudioManager.FLAG_SHOW_UI);
+                am.setStreamVolume(AudioManager.STREAM_NOTIFICATION, am.getStreamMaxVolume(AudioManager.STREAM_NOTIFICATION), AudioManager.FLAG_SHOW_UI);
+
+
+            }
+
         }else if (routine.getRoutineSlot10() == 8){
             try {
                 Intent intent = mainActivity.getPackageManager().getLaunchIntentForPackage(routine.getAppPackageNameSlot10());
