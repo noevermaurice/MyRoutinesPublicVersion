@@ -1120,60 +1120,70 @@ public class RoutineSlotManager {
                 if (oldRoutine.getAppNameSlot1() != null) {
                     newActionString = oldRoutine.getAppNameSlot1();
                     appName1 = oldRoutine.getAppNameSlot1();
+                    appPackageName1 = oldRoutine.getAppPackageNameSlot1();
                 }
                 break;
             case 1:
                 if (oldRoutine.getAppNameSlot2() != null) {
                     newActionString = oldRoutine.getAppNameSlot2();
                     appName2 = oldRoutine.getAppNameSlot2();
+                    appPackageName2 = oldRoutine.getAppPackageNameSlot2();
                 }
                 break;
             case 2:
                 if (oldRoutine.getAppNameSlot3() != null) {
                     newActionString = oldRoutine.getAppNameSlot3();
                     appName3 = oldRoutine.getAppNameSlot3();
+                    appPackageName3 = oldRoutine.getAppPackageNameSlot3();
                 }
                 break;
             case 3:
                 if (oldRoutine.getAppNameSlot4() != null) {
                     newActionString = oldRoutine.getAppNameSlot4();
                     appName4 = oldRoutine.getAppNameSlot4();
+                    appPackageName4 = oldRoutine.getAppPackageNameSlot4();
                 }
                 break;
             case 4:
             if (oldRoutine.getAppNameSlot5() != null) {
                 newActionString = oldRoutine.getAppNameSlot5();
                 appName5 = oldRoutine.getAppNameSlot5();
+                appPackageName5 = oldRoutine.getAppPackageNameSlot5();
             }
             break;
             case 5:
                 if (oldRoutine.getAppNameSlot6() != null) {
                     newActionString = oldRoutine.getAppNameSlot6();
                     appName6 = oldRoutine.getAppNameSlot6();
+                    appPackageName6 = oldRoutine.getAppPackageNameSlot6();
                 }
                 break;
             case 6:
                 if (oldRoutine.getAppNameSlot7() != null) {
                     newActionString = oldRoutine.getAppNameSlot7();
                     appName7 = oldRoutine.getAppNameSlot7();
+                    appPackageName7 = oldRoutine.getAppPackageNameSlot7();
                 }
                 break;
             case 7:
                 if (oldRoutine.getAppNameSlot8() != null) {
                     newActionString = oldRoutine.getAppNameSlot8();
                     appName8 = oldRoutine.getAppNameSlot8();
+                    appPackageName8 = oldRoutine.getAppPackageNameSlot8();
                 }
                 break;
             case 8:
                 if (oldRoutine.getAppNameSlot9() != null) {
                     newActionString = oldRoutine.getAppNameSlot9();
                     appName9 = oldRoutine.getAppNameSlot9();
+                    appPackageName9 = oldRoutine.getAppPackageNameSlot9();
                 }
                 break;
             case 9:
             if (oldRoutine.getAppnameSlot10() != null) {
                 newActionString = oldRoutine.getAppnameSlot10();
                 appName10 = oldRoutine.getAppnameSlot10();
+                appPackageName10 = oldRoutine.getAppPackageNameSlot10();
             }
            break;
         }
