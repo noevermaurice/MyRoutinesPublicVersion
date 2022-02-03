@@ -3,108 +3,96 @@ package com.mn.myroutines;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-
 public class SetTimerDialog extends AppCompatDialogFragment {
-
-    public EditText editTextTimerName;
-    public EditText editTextSeconds;
-    public EditText editTextMinutes;
+    public String TimerName;
     public EditText editTextHour;
-    public setTimerInterface listener;
-
-    public int seconds;
-    public int minutes;
+    public EditText editTextMinutes;
+    public EditText editTextSeconds;
+    public EditText editTextTimerName;
     public int hour;
+    public setTimerInterface listener;
+    public int minutes;
+    public int seconds;
 
+    public interface setTimerInterface {
+        void setTimerSettings(int i, int i2, int i3, String str);
+    }
 
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        final LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.set_timer, null);
-        editTextTimerName = view.findViewById(R.id.edittTextTimerName);
-        editTextSeconds = view.findViewById(R.id.edittextSecond);
-        editTextMinutes = view.findViewById(R.id.edittextMinute);
-        editTextHour = view.findViewById(R.id.edittextHour);
+    @Override // androidx.appcompat.app.AppCompatDialogFragment, androidx.fragment.app.DialogFragment
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.AlertDialogPrefercesOrange);
+        View view = getActivity().getLayoutInflater().inflate(R.layout.set_timer, (ViewGroup) null);
+        this.editTextTimerName = (EditText) view.findViewById(R.id.edittTextTimerName);
+        this.editTextSeconds = (EditText) view.findViewById(R.id.edittextSecond);
+        this.editTextMinutes = (EditText) view.findViewById(R.id.edittextMinute);
+        this.editTextHour = (EditText) view.findViewById(R.id.edittextHour);
+        Bundle args = getArguments();
+        String timerName = args.getString("timerName");
+        int seconds2 = args.getInt("timerSeconds");
+        int minutes2 = args.getInt("timerMinutes");
+        int hours2 = args.getInt("timerHours");
+        String MinutesString = String.valueOf(minutes2);
+        String SecondsString = String.valueOf(seconds2);
+        String HourString = String.valueOf(hours2);
+        Log.d("TimerDialog", "args " + timerName);
+        if (timerName != null) {
+            this.editTextTimerName.setText(timerName);
+        }
+        this.editTextSeconds.setText(SecondsString);
+        this.editTextMinutes.setText(MinutesString);
+        this.editTextHour.setText(HourString);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
+            /* class com.mn.myroutines.SetTimerDialog.AnonymousClass1 */
+
             public void onClick(DialogInterface dialog, int which) {
-                // make a string and past the text from edittext
-
-                // convertiere the string in a int
-
-                if (editTextSeconds.length() == 0){
-                    editTextSeconds.setText("00");
-
-                }
-
-                if (editTextMinutes.length() == 0){
-                    editTextMinutes.setText("00");
-                }
-
-                if (editTextHour.length() == 00){
-                    editTextHour.setText("00");
-                }
-
-                seconds = Integer.parseInt(editTextSeconds.getText().toString());
-                Log.d("SetTimerDialog", "seconds " + seconds);
-                minutes =Integer.parseInt(editTextMinutes.getText().toString());
-                Log.d("SetTimerDialog", "minutes " + minutes);
-                hour = Integer.parseInt(editTextHour.getText().toString());
-                Log.d("SetTimerDialog", "hour " +hour);
-                listener.setTimerSettings(seconds,minutes, hour, editTextTimerName.getText().toString());
-
+                SetTimerDialog.this.setTimerTime();
             }
-
-
-
-
         });
         builder.setNegativeButton(getString(R.string.NegativeButton), new DialogInterface.OnClickListener() {
-            @Override
+            /* class com.mn.myroutines.SetTimerDialog.AnonymousClass2 */
+
             public void onClick(DialogInterface dialog, int which) {
-                dismiss();
+                SetTimerDialog.this.dismiss();
             }
         });
         builder.setView(view);
-
-
-
         return builder.create();
-
-
     }
 
-    public interface setTimerInterface{
-        void setTimerSettings(int seconds,int minutes, int hour, String TimerName);
-    }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
+    @Override // androidx.fragment.app.Fragment, androidx.fragment.app.DialogFragment
+    public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            listener = (setTimerInterface) context;
+            this.listener = (setTimerInterface) context;
         } catch (ClassCastException e) {
-            throw  new ClassCastException(context.toString()+ "  must implement Dialog");
+            throw new ClassCastException(context.toString() + "  must implement Dialog");
         }
     }
 
-
-
-
-
+    public void setTimerTime() {
+        if (this.editTextSeconds.length() == 0) {
+            this.editTextSeconds.setText("00");
+        }
+        if (this.editTextMinutes.length() == 0) {
+            this.editTextMinutes.setText("00");
+        }
+        if (this.editTextHour.length() == 0) {
+            this.editTextHour.setText("00");
+        }
+        this.seconds = Integer.parseInt(this.editTextSeconds.getText().toString());
+        Log.d("SetTimerDialog", "seconds " + this.seconds);
+        this.minutes = Integer.parseInt(this.editTextMinutes.getText().toString());
+        Log.d("SetTimerDialog", "minutes " + this.minutes);
+        this.hour = Integer.parseInt(this.editTextHour.getText().toString());
+        Log.d("SetTimerDialog", "hour " + this.hour);
+        this.listener.setTimerSettings(this.seconds, this.minutes, this.hour, this.editTextTimerName.getText().toString());
+    }
 }

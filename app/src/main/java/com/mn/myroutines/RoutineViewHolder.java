@@ -1,44 +1,37 @@
 package com.mn.myroutines;
 
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.mn.myroutines.RoutineListAdapter;
 
-public class RoutineViewHolder extends RecyclerView.ViewHolder{
-        // decaltration of Objects
-    TextView textViewRoutineHeadline;
-    TextView textViewRoutineDecsription;
-    ImageView imageViewPlayRoutine;
+public class RoutineViewHolder extends RecyclerView.ViewHolder {
     ImageView deleteRoutine;
+    ImageView imageViewNotification;
+    ImageView imageViewPlayRoutine;
     RoutineManager routineManager;
+    TextView textViewAlarmDate;
+    TextView textViewRoutineDecsription;
+    TextView textViewRoutineHeadline;
 
-    public RoutineViewHolder(@NonNull View itemView, final RoutineListAdapter.onitemclickListener listener) {
+    public RoutineViewHolder(View itemView, final RoutineListAdapter.onitemclickListener listener) {
         super(itemView);
-            routineManager = new RoutineManager(itemView.getContext());
-        // search for views with id
-        textViewRoutineHeadline = itemView.findViewById(R.id.textViewRoutineHeadline);
-        textViewRoutineDecsription = itemView.findViewById(R.id.textViewRoutineDecsription);
-        imageViewPlayRoutine =itemView.findViewById(R.id.imageViewPlayRoutine);
-        deleteRoutine = itemView.findViewById(R.id.delteRoutine);
+        this.routineManager = new RoutineManager(itemView.getContext());
+        this.textViewRoutineHeadline = (TextView) itemView.findViewById(R.id.textViewRoutineHeadline);
+        this.textViewRoutineDecsription = (TextView) itemView.findViewById(R.id.textViewRoutineDecsription);
+        this.textViewAlarmDate = (TextView) itemView.findViewById(R.id.textViewAarmDate);
+        this.imageViewPlayRoutine = (ImageView) itemView.findViewById(R.id.imageViewPlayRoutine);
+        this.deleteRoutine = (ImageView) itemView.findViewById(R.id.delteRoutine);
+        this.imageViewNotification = (ImageView) itemView.findViewById(R.id.notifactionIcon);
+        this.textViewRoutineHeadline.setOnClickListener(new View.OnClickListener() {
+            /* class com.mn.myroutines.RoutineViewHolder.AnonymousClass1 */
 
-        textViewRoutineHeadline.setOnClickListener(new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
-                if (listener !=null){
-                    if (getAdapterPosition()!= RecyclerView.NO_POSITION){
-                        listener.onitemclick(routineManager.routineList.indexOf(routineManager.getRoutineList().get(getAdapterPosition())), routineManager.getRoutineList().get(getAdapterPosition()));
-                    }
+                if (listener != null && RoutineViewHolder.this.getAdapterPosition() != -1) {
+                    listener.onitemclick(RoutineViewHolder.this.routineManager.routineList.indexOf(RoutineViewHolder.this.routineManager.getRoutineList().get(RoutineViewHolder.this.getAdapterPosition())), RoutineViewHolder.this.routineManager.getRoutineList().get(RoutineViewHolder.this.getAdapterPosition()));
                 }
-
             }
-
         });
-
-
-
     }
 }

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item
-        android:id="@+id/serachForApps"
-        android:icon="@drawable/ic_baseline_add_24"
-        app:showAsAction="always"
-        android:title="j"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"/>
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:icon="@drawable/ic_baseline_add_24" android:id="@+id/serachForApps" android:title="j" app:actionViewClass="androidx.appcompat.widget.SearchView" app:showAsAction="always"/>
+    <item android:icon="@drawable/ic_baseline_notifications_24" android:id="@+id/notification_icon" android:title="notification" app:showAsAction="always"/>
+    <item android:id="@+id/notificationSwitchItem" android:title="switch" app:actionViewClass="android.widget.Switch" app:showAsAction="always"/>
+    <item android:icon="@drawable/ic_baseline_add_to_home_screen_24" android:id="@+id/addRoutineToHomeScreen" android:title="add to Home Screnn" app:showAsAction="always"/>
 </menu>

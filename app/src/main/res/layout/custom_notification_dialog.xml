@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="horizontal" android:paddingTop="20dp" android:paddingBottom="50dp" android:layout_width="match_parent" android:layout_height="wrap_content">
+    <TextView android:textColor="@color/black_white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="5dp" android:text="@string/notification_vibration"/>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxNonVibtation" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_vibration_no"/>
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxVibrationShort" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_vibration_short"/>
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxVirbrationMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_vibration_medium"/>
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxVibrationLong" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_vibration_long"/>
+    </LinearLayout>
+    <TextView android:textColor="@color/black_white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="90dp" android:text="@string/notification_dialog_Notification_retries"/>
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="100dp">
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxEveryDay" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_everyDay"/>
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxEveryWeek" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_everyWeek"/>
+        <CheckBox android:textSize="10sp" android:textColor="@color/black_white" android:id="@+id/CheckboxEveryMonth" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp" android:layout_marginTop="30dp" android:text="@string/notification_everyMonth"/>
+    </LinearLayout>
+</RelativeLayout>

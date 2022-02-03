@@ -1,48 +1,40 @@
 package com.mn.myroutines;
 
 import android.content.Context;
-
 import com.orhanobut.hawk.Hawk;
-
 import java.util.ArrayList;
 
 public class RoutineManager {
-
     ArrayList<Routine> routineList;
 
-    public RoutineManager(Context context){
+    public RoutineManager(Context context) {
         Hawk.init(context).build();
         loadRoutineList();
     }
 
-    public void addRoutine(Routine routine){
-        // add new Routine to RoutineArraylist
-        routineList.add(routine);
-        // save changes of routineList
+    public void addRoutine(Routine routine) {
+        this.routineList.add(routine);
         saveRoutineList();
     }
 
-    public void removeRoutine(Routine routine){
-        // remove the Routine from the list
-        routineList.remove(routine);
-        // save changes of routineList
+    public void removeRoutine(Routine routine) {
+        this.routineList.remove(routine);
         saveRoutineList();
     }
 
-    public ArrayList<Routine> getRoutineList(){
-        return routineList;
-
+    public ArrayList<Routine> getRoutineList() {
+        return this.routineList;
     }
 
-    public void saveRoutineList(){
-        // save aray list
-        Hawk.put("routineList", routineList);
+    public void saveRoutineList() {
+        Hawk.put("routineList", this.routineList);
     }
 
-    public void loadRoutineList(){
-        // load arraylist
-        routineList = Hawk.get("routineList", new ArrayList<Routine>());
+    public void loadRoutineList() {
+        this.routineList = (ArrayList) Hawk.get("routineList", new ArrayList());
     }
 
-
+    public int getRoutineCount() {
+        return this.routineList.size();
+    }
 }

@@ -6,39 +6,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 
 public class ListviewAdapterRoutine extends ArrayAdapter<String> {
+    ArrayList<String> arrayListSlots = new ArrayList<>();
     Context context;
-   ArrayList<String> arrayListSlots = new ArrayList<>();
+    DarkModeManager darkModeManager;
 
-
-    ListviewAdapterRoutine(Context context, ArrayList<String> arrayListSlots ){
-        super(context, R.layout.listview_action_row, R.id.listViewTitle, arrayListSlots);
-        this.context = context;
-      this.arrayListSlots = arrayListSlots;
-
-
+    ListviewAdapterRoutine(Context context2, ArrayList<String> arrayListSlots2, DarkModeManager darkModeManager2) {
+        super(context2, (int) R.layout.listview_action_row, (int) R.id.textViewAction, arrayListSlots2);
+        this.context = context2;
+        this.darkModeManager = darkModeManager2;
+        this.arrayListSlots = arrayListSlots2;
     }
 
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View row = layoutInflater.inflate(R.layout.listview_action_row, parent, false);
-
-        TextView textView = row.findViewById(R.id.listViewTitle);
-        textView.setText(arrayListSlots.get(position));
-
-
-
-
+    public View getView(int position, View convertView, ViewGroup parent) {
+        this.darkModeManager = new DarkModeManager(getContext());
+        View row = ((LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.listview_action_row, parent, false);
+        TextView textView = (TextView) row.findViewById(R.id.textViewAction);
+        textView.setText(this.arrayListSlots.get(position));
+        if (this.darkModeManager.getMode() == 1) {
+            textView.setTextColor(getContext().getResources().getColor(R.color.black_white));
+            notifyDataSetChanged();
+        } else if (this.darkModeManager.getMode() == 2) {
+            textView.setTextColor(getContext().getResources().getColor(R.color.white_black));
+            notifyDataSetChanged();
+        }
         return row;
     }
-
-
 }

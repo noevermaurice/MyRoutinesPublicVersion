@@ -1,16 +1,8 @@
 package com.mn.myroutines;
 
-import com.google.gson.internal.$Gson$Preconditions;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class Routine implements Serializable {
-
-
-    public String routineName;
-    public String timerName;
-    public String descriptionText;
     public String appNameSlot1;
     public String appNameSlot2;
     public String appNameSlot3;
@@ -20,11 +12,8 @@ public class Routine implements Serializable {
     public String appNameSlot7;
     public String appNameSlot8;
     public String appNameSlot9;
-    public String appnameSlot10;
-
-
-
     public String appPackageNameSlot1;
+    public String appPackageNameSlot10;
     public String appPackageNameSlot2;
     public String appPackageNameSlot3;
     public String appPackageNameSlot4;
@@ -33,308 +22,502 @@ public class Routine implements Serializable {
     public String appPackageNameSlot7;
     public String appPackageNameSlot8;
     public String appPackageNameSlot9;
-    public String appPackageNameSlot10;
-
-    public int routineSlotEins = 0;
+    public String appnameSlot10;
+    public String descriptionText;
+    boolean isCancel;
+    boolean isEveryDay;
+    boolean isEveryMonth;
+    boolean isEveryWeek;
+    boolean isNotfaction;
+    boolean isVibrationLong;
+    boolean isVibrationMedium;
+    boolean isVibrationNo;
+    boolean isVibrationShort;
+    int rendemReqestCodeint;
+    public String routineAlarmDate;
+    public int routineDay;
+    public int routineHour;
+    public boolean routineIsShortcut;
+    public long routineMills;
+    public int routineMinute;
+    public int routineMonth;
+    public String routineName;
+    public int routineNext;
+    public int routinePosition;
     public int routineSlot1;
-    public int routineSlotZwei = 1;
+    public int routineSlot10;
     public int routineSlot2;
-    public int routineSlotDrei = 2;
     public int routineSlot3;
-    public  int routineSlotVier = 3;
     public int routineSlot4;
-    public  int routineSlotFünf = 4;
     public int routineSlot5;
-    public  int routineSlotSechs = 5;
     public int routineSlot6;
-    public int routineSlotSieben = 6;
     public int routineSlot7;
     public int routineSlot8;
-    public int routineSlotAcht = 7;
     public int routineSlot9;
+    public int routineSlotAcht = 7;
+    public int routineSlotDrei = 2;
+    public int routineSlotEins = 0;
+
+    /* renamed from: routineSlotFünf  reason: contains not printable characters */
+    public int f0routineSlotFnf = 4;
     public int routineSlotNeun = 8;
-    public int routineSlot10;
+    public int routineSlotSechs = 5;
+    public int routineSlotSieben = 6;
+    public int routineSlotVier = 3;
     public int routineSlotZehn = 9;
-    public int timerSeconds;
-    public int timerMinutes;
+    public int routineSlotZwei = 1;
+    public int routineWeek;
+    public int routineYear;
     public int timerHours;
+    public int timerMinutes;
+    public String timerName;
+    public int timerSeconds;
 
-
-
-
-    public void setRoutineName(String routineName) {
-        this.routineName = routineName;
+    public void setRoutineName(String routineName2) {
+        this.routineName = routineName2;
     }
 
     public String getRoutineName() {
-        return routineName;
+        return this.routineName;
     }
 
     public String getDescriptionText() {
-        return descriptionText;
+        return this.descriptionText;
     }
 
-    public void setDescriptionText(String descriptionText) {
-        this.descriptionText = descriptionText;
+    public void setDescriptionText(String descriptionText2) {
+        this.descriptionText = descriptionText2;
     }
 
-    public void setAppNameSlot1(String appNameSlot1){
-        this.appNameSlot1 = appNameSlot1;
-    }
-    public String getAppNameSlot1(){
-        return  appNameSlot1;
-    }
-    public void setAppNameSlot2(String appNameSlot2){
-        this.appNameSlot2 = appNameSlot2;
-    }
-    public String getAppNameSlot2(){
-        return  appNameSlot2;
-    }
-    public void setAppNameSlot3 (String appNameSlot3){
-        this.appNameSlot3 = appNameSlot3;
-    }
-    public String getAppNameSlot3(){
-        return  appNameSlot3;
-    }
-    public void setAppNameSlot4(String appNameSlot4){
-        this.appNameSlot4 = appNameSlot4;
-    }
-    public String getAppNameSlot4(){
-        return appNameSlot4;
-    }
-    public void setAppNameSlot5(String appNameSlot5){
-        this.appNameSlot5 = appNameSlot5;
-    }
-    public String getAppNameSlot5(){
-        return  appNameSlot5;
-    }
-    public void setAppNameSlot6(String appNameSlot6){
-        this.appNameSlot6 = appNameSlot6;
+    public void setAppNameSlot1(String appNameSlot12) {
+        this.appNameSlot1 = appNameSlot12;
     }
 
-    public String getAppNameSlot6(){
-        return  appNameSlot6;
+    public String getAppNameSlot1() {
+        return this.appNameSlot1;
     }
 
-    public void setAppNameSlot7(String appNameSlot7){
-        this.appNameSlot7 = appNameSlot7;
-    }
-    public String getAppNameSlot7(){
-        return  appNameSlot7;
-    }
-    public void setAppNameSlot8(String appNameSlot8){
-        this.appNameSlot8 = appNameSlot8;
-    }
-    public String getAppNameSlot8(){
-        return appNameSlot8;
-    }
-    public void setAppNameSlot9(String appNameSlot9){
-        this.appNameSlot9 = appNameSlot9;
-    }
-    public String getAppNameSlot9(){
-        return  appNameSlot9;
+    public void setAppNameSlot2(String appNameSlot22) {
+        this.appNameSlot2 = appNameSlot22;
     }
 
-    public void setAppnameSlot10(String appnameSlot10){
-        this.appnameSlot10 = appnameSlot10;
+    public String getAppNameSlot2() {
+        return this.appNameSlot2;
     }
-    public String getAppnameSlot10(){
-        return  appnameSlot10;
+
+    public void setAppNameSlot3(String appNameSlot32) {
+        this.appNameSlot3 = appNameSlot32;
+    }
+
+    public String getAppNameSlot3() {
+        return this.appNameSlot3;
+    }
+
+    public void setAppNameSlot4(String appNameSlot42) {
+        this.appNameSlot4 = appNameSlot42;
+    }
+
+    public String getAppNameSlot4() {
+        return this.appNameSlot4;
+    }
+
+    public void setAppNameSlot5(String appNameSlot52) {
+        this.appNameSlot5 = appNameSlot52;
+    }
+
+    public String getAppNameSlot5() {
+        return this.appNameSlot5;
+    }
+
+    public void setAppNameSlot6(String appNameSlot62) {
+        this.appNameSlot6 = appNameSlot62;
+    }
+
+    public String getAppNameSlot6() {
+        return this.appNameSlot6;
+    }
+
+    public void setAppNameSlot7(String appNameSlot72) {
+        this.appNameSlot7 = appNameSlot72;
+    }
+
+    public String getAppNameSlot7() {
+        return this.appNameSlot7;
+    }
+
+    public void setAppNameSlot8(String appNameSlot82) {
+        this.appNameSlot8 = appNameSlot82;
+    }
+
+    public String getAppNameSlot8() {
+        return this.appNameSlot8;
+    }
+
+    public void setAppNameSlot9(String appNameSlot92) {
+        this.appNameSlot9 = appNameSlot92;
+    }
+
+    public String getAppNameSlot9() {
+        return this.appNameSlot9;
+    }
+
+    public void setAppnameSlot10(String appnameSlot102) {
+        this.appnameSlot10 = appnameSlot102;
+    }
+
+    public String getAppnameSlot10() {
+        return this.appnameSlot10;
     }
 
     public String getAppPackageNameSlot1() {
-        return appPackageNameSlot1;
+        return this.appPackageNameSlot1;
     }
 
-    public void setAppPackageNameSlot1(String appPackageNameSlot1) {
-        this.appPackageNameSlot1 = appPackageNameSlot1;
+    public void setAppPackageNameSlot1(String appPackageNameSlot12) {
+        this.appPackageNameSlot1 = appPackageNameSlot12;
     }
 
     public String getAppPackageNameSlot2() {
-        return appPackageNameSlot2;
+        return this.appPackageNameSlot2;
     }
 
-    public void setAppPackageNameSlot2(String appPackageNameSlot2) {
-        this.appPackageNameSlot2 = appPackageNameSlot2;
+    public void setAppPackageNameSlot2(String appPackageNameSlot22) {
+        this.appPackageNameSlot2 = appPackageNameSlot22;
     }
 
     public String getAppPackageNameSlot3() {
-        return appPackageNameSlot3;
+        return this.appPackageNameSlot3;
     }
 
-    public void setAppPackageNameSlot3(String appPackageNameSlot3) {
-        this.appPackageNameSlot3 = appPackageNameSlot3;
+    public void setAppPackageNameSlot3(String appPackageNameSlot32) {
+        this.appPackageNameSlot3 = appPackageNameSlot32;
     }
 
     public String getAppPackageNameSlot4() {
-        return appPackageNameSlot4;
+        return this.appPackageNameSlot4;
     }
 
-    public void setAppPackageNameSlot4(String appPackageNameSlot4) {
-        this.appPackageNameSlot4 = appPackageNameSlot4;
+    public void setAppPackageNameSlot4(String appPackageNameSlot42) {
+        this.appPackageNameSlot4 = appPackageNameSlot42;
     }
 
-    public void setAppPackageNameSlot5(String appPackageNameSlot5){
-        this.appPackageNameSlot5 = appPackageNameSlot5;
+    public void setAppPackageNameSlot5(String appPackageNameSlot52) {
+        this.appPackageNameSlot5 = appPackageNameSlot52;
     }
 
-    public String getAppPackageNameSlot5(){
-        return  appPackageNameSlot5;
+    public String getAppPackageNameSlot5() {
+        return this.appPackageNameSlot5;
     }
 
     public String getAppPackageNameSlot6() {
-        return appPackageNameSlot6;
+        return this.appPackageNameSlot6;
     }
 
-    public void setAppPackageNameSlot6(String appPackageNameSlot6) {
-        this.appPackageNameSlot6 = appPackageNameSlot6;
+    public void setAppPackageNameSlot6(String appPackageNameSlot62) {
+        this.appPackageNameSlot6 = appPackageNameSlot62;
     }
 
     public String getAppPackageNameSlot7() {
-        return appPackageNameSlot7;
+        return this.appPackageNameSlot7;
     }
 
-    public void setAppPackageNameSlot7(String appPackageNameSlot7) {
-        this.appPackageNameSlot7 = appPackageNameSlot7;
+    public void setAppPackageNameSlot7(String appPackageNameSlot72) {
+        this.appPackageNameSlot7 = appPackageNameSlot72;
     }
 
     public String getAppPackageNameSlot8() {
-        return appPackageNameSlot8;
+        return this.appPackageNameSlot8;
     }
 
-    public void setAppPackageNameSlot8(String appPackageNameSlot8) {
-        this.appPackageNameSlot8 = appPackageNameSlot8;
+    public void setAppPackageNameSlot8(String appPackageNameSlot82) {
+        this.appPackageNameSlot8 = appPackageNameSlot82;
     }
 
     public String getAppPackageNameSlot9() {
-        return appPackageNameSlot9;
+        return this.appPackageNameSlot9;
     }
 
-    public void setAppPackageNameSlot9(String appPackageNameSlot9) {
-        this.appPackageNameSlot9 = appPackageNameSlot9;
+    public void setAppPackageNameSlot9(String appPackageNameSlot92) {
+        this.appPackageNameSlot9 = appPackageNameSlot92;
     }
 
     public String getAppPackageNameSlot10() {
-        return appPackageNameSlot10;
+        return this.appPackageNameSlot10;
     }
 
-    public void setAppPackageNameSlot10(String appPackageNameSlot10) {
-        this.appPackageNameSlot10 = appPackageNameSlot10;
+    public void setAppPackageNameSlot10(String appPackageNameSlot102) {
+        this.appPackageNameSlot10 = appPackageNameSlot102;
     }
 
-
-
-    public void setRoutineSlot1(int routineSlot1) {
-        this.routineSlot1 = routineSlot1;
+    public void setRoutineSlot1(int routineSlot12) {
+        this.routineSlot1 = routineSlot12;
     }
 
     public int getRoutineSlot1() {
-        return routineSlot1;
+        return this.routineSlot1;
     }
 
-    public void setRoutineSlot2(int routineSlot2) {
-        this.routineSlot2 = routineSlot2;
+    public void setRoutineSlot2(int routineSlot22) {
+        this.routineSlot2 = routineSlot22;
     }
 
     public int getRoutineSlot2() {
-        return routineSlot2;
+        return this.routineSlot2;
     }
 
-    public void setRoutineSlot3(int routineSlot3) {
-        this.routineSlot3 = routineSlot3;
+    public void setRoutineSlot3(int routineSlot32) {
+        this.routineSlot3 = routineSlot32;
     }
 
     public int getRoutineSlot3() {
-        return routineSlot3;
+        return this.routineSlot3;
     }
 
-    public void setRoutineSlot4(int routineSlot4) {
-        this.routineSlot4 = routineSlot4;
+    public void setRoutineSlot4(int routineSlot42) {
+        this.routineSlot4 = routineSlot42;
     }
 
     public int getRoutineSlot4() {
-        return routineSlot4;
+        return this.routineSlot4;
     }
 
-    public void setRoutineSlot5(int routineSlot5) {
-        this.routineSlot5 = routineSlot5;
+    public void setRoutineSlot5(int routineSlot52) {
+        this.routineSlot5 = routineSlot52;
     }
 
     public int getRoutineSlot5() {
-        return routineSlot5;
+        return this.routineSlot5;
     }
 
-
-    public void setRoutineSlot6(int routineSlot6) {
-        this.routineSlot6 = routineSlot6;
+    public void setRoutineSlot6(int routineSlot62) {
+        this.routineSlot6 = routineSlot62;
     }
 
     public int getRoutineSlot6() {
-        return routineSlot6;
+        return this.routineSlot6;
     }
 
-    public void setRoutineSlot7(int routineSlot7) {
-        this.routineSlot7 = routineSlot7;
+    public void setRoutineSlot7(int routineSlot72) {
+        this.routineSlot7 = routineSlot72;
     }
 
     public int getRoutineSlot7() {
-        return routineSlot7;
+        return this.routineSlot7;
     }
 
-    public void setRoutineSlot8(int routineSlot8) {
-        this.routineSlot8 = routineSlot8;
+    public void setRoutineSlot8(int routineSlot82) {
+        this.routineSlot8 = routineSlot82;
     }
 
     public int getRoutineSlot8() {
-        return routineSlot8;
+        return this.routineSlot8;
     }
 
-    public void setRoutineSlot9(int routineSlot9) {
-        this.routineSlot9 = routineSlot9;
+    public void setRoutineSlot9(int routineSlot92) {
+        this.routineSlot9 = routineSlot92;
     }
 
     public int getRoutineSlot9() {
-        return routineSlot9;
-
+        return this.routineSlot9;
     }
 
-    public void setRoutineSlot10(int routineSlot10){
-        this.routineSlot10 = routineSlot10;
+    public void setRoutineSlot10(int routineSlot102) {
+        this.routineSlot10 = routineSlot102;
     }
 
     public int getRoutineSlot10() {
-        return routineSlot10;
+        return this.routineSlot10;
     }
 
-    public void setTimerSeconds(int timerSeconds){
-        this.timerSeconds = timerSeconds;
-
-    }
-    public int getTimerSeconds(){
-        return  timerSeconds;
+    public void setTimerSeconds(int timerSeconds2) {
+        this.timerSeconds = timerSeconds2;
     }
 
-    public void setTimerMinutes(int timerMinutes){
-        this.timerMinutes = timerMinutes;
+    public int getTimerSeconds() {
+        return this.timerSeconds;
     }
 
-    public int getTimerMinutes(){
-        return  timerMinutes;
+    public void setTimerMinutes(int timerMinutes2) {
+        this.timerMinutes = timerMinutes2;
     }
 
-    public void setTimerHours(int hours){
+    public int getTimerMinutes() {
+        return this.timerMinutes;
+    }
+
+    public void setTimerHours(int hours) {
         this.timerHours = hours;
     }
 
-    public int getTimerHours(){
-        return  timerHours;
+    public int getTimerHours() {
+        return this.timerHours;
     }
 
-    public void setTimerName(String timerName){
-        this.timerName = timerName;
+    public void setTimerName(String timerName2) {
+        this.timerName = timerName2;
     }
 
-    public String getTimerName(){
-        return  timerName;
+    public String getTimerName() {
+        return this.timerName;
+    }
+
+    public void setRoutinePosition(int routinePosition2) {
+        this.routinePosition = routinePosition2;
+    }
+
+    public int getRoutinePosition() {
+        return this.routinePosition;
+    }
+
+    public void setRoutineIsShortcut(boolean isShortcut) {
+        this.routineIsShortcut = isShortcut;
+    }
+
+    public boolean getRoutineIsShortcut() {
+        return this.routineIsShortcut;
+    }
+
+    public void setRoutineDay(int routineDay2) {
+        this.routineDay = routineDay2;
+    }
+
+    public int getRoutineDay() {
+        return this.routineDay;
+    }
+
+    public void setRoutineNext(int next) {
+        this.routineNext = next;
+    }
+
+    public int getRoutineNext() {
+        return this.routineNext;
+    }
+
+    public void setRoutineYear(int year) {
+        this.routineYear = year;
+    }
+
+    public int getRoutineYear() {
+        return this.routineYear;
+    }
+
+    public void setRoutineWeek(int week) {
+        this.routineWeek = week;
+    }
+
+    public int getRoutineWeek() {
+        return this.routineWeek;
+    }
+
+    public void setRoutineMonth(int month) {
+        this.routineMonth = month;
+    }
+
+    public int getRoutineMonth() {
+        return this.routineMonth;
+    }
+
+    public void setRoutineMinute(int minute) {
+        this.routineMinute = minute;
+    }
+
+    public int getRoutineMinute() {
+        return this.routineMinute;
+    }
+
+    public void setRoutineHour(int hour) {
+        this.routineHour = hour;
+    }
+
+    public int getRoutineHour() {
+        return this.routineHour;
+    }
+
+    public void setRoutineMills(long mills) {
+        this.routineMills = mills;
+    }
+
+    public long getRoutineMills() {
+        return this.routineMills;
+    }
+
+    public void setRendemReqestCodeint(int codeint) {
+        this.rendemReqestCodeint = codeint;
+    }
+
+    public int getroutineRendemRequestCode() {
+        return this.rendemReqestCodeint;
+    }
+
+    public void setNotfaction(boolean notifiaction) {
+        this.isNotfaction = notifiaction;
+    }
+
+    public boolean getIsNotification() {
+        return this.isNotfaction;
+    }
+
+    public void setIsEveryDay(boolean isEveryDay2) {
+        this.isEveryDay = isEveryDay2;
+    }
+
+    public boolean getIsEveryDay() {
+        return this.isEveryDay;
+    }
+
+    public void setIsEveryWeek(boolean isEveryWeek2) {
+        this.isEveryWeek = isEveryWeek2;
+    }
+
+    public boolean getIsEveryWeek() {
+        return this.isEveryWeek;
+    }
+
+    public void setIsEveryMonth(boolean isEveryMonth2) {
+        this.isEveryMonth = isEveryMonth2;
+    }
+
+    public boolean getIsEveryMonth() {
+        return this.isEveryMonth;
+    }
+
+    public boolean getIsVibrationNo() {
+        return this.isVibrationNo;
+    }
+
+    public void setVibrationNo(boolean vibrationNo) {
+        this.isVibrationNo = vibrationNo;
+    }
+
+    public boolean getIsVibrationShort() {
+        return this.isVibrationShort;
+    }
+
+    public void setVibrationShort(boolean vibrationShort) {
+        this.isVibrationShort = vibrationShort;
+    }
+
+    public boolean getIsVibrationMedium() {
+        return this.isVibrationMedium;
+    }
+
+    public void setVibrationMedium(boolean vibrationMedium) {
+        this.isVibrationMedium = vibrationMedium;
+    }
+
+    public boolean getIsVibrationLong() {
+        return this.isVibrationLong;
+    }
+
+    public void setVibrationLong(boolean isVibrationLong2) {
+        this.isVibrationLong = isVibrationLong2;
+    }
+
+    public void setRoutineAlarmDate(String s) {
+        this.routineAlarmDate = s;
+    }
+
+    public String getRoutineAlarmDate() {
+        return this.routineAlarmDate;
     }
 }
