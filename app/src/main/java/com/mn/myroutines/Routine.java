@@ -27,7 +27,7 @@ public class Routine implements Serializable {
     boolean isCancel;
     boolean isEveryDay;
     boolean isEveryMonth;
-    boolean isEveryWeek;
+    boolean getIsEveryWeek;
     boolean isNotfaction;
     boolean isVibrationLong;
     boolean isVibrationMedium;
@@ -466,11 +466,11 @@ public class Routine implements Serializable {
     }
 
     public void setIsEveryWeek(boolean isEveryWeek2) {
-        this.isEveryWeek = isEveryWeek2;
+        this.getIsEveryWeek = isEveryWeek2;
     }
 
     public boolean getIsEveryWeek() {
-        return this.isEveryWeek;
+        return this.getIsEveryWeek;
     }
 
     public void setIsEveryMonth(boolean isEveryMonth2) {
@@ -521,3 +521,5 @@ public class Routine implements Serializable {
         return this.routineAlarmDate;
     }
 }
+
+

@@ -7,7 +7,15 @@ import android.content.Intent;
 import android.os.Build;
 import android.text.format.DateFormat;
 import android.util.Log;
-import androidx.core.app.NotificationCompat;
+import android.widget.Toast;
+
+import com.mn.myroutines.AlertReceiver;
+import com.mn.myroutines.R;
+import com.mn.myroutines.Routine;
+import com.mn.myroutines.RoutineManager;
+import com.mn.myroutines.RoutineSettingsManager;
+
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -16,332 +24,3526 @@ import java.util.Random;
 
 public class NotificationManager {
     Context context;
-    Intent intent;
-    private String monthly;
-    public int monthplus1;
-    public int monthplus10;
-    public int monthplus11;
-    public int monthplus12;
-    public int monthplus13;
-    public int monthplus14;
-    public int monthplus15;
-    public int monthplus16;
-    public int monthplus17;
-    public int monthplus18;
-    public int monthplus19;
-    public int monthplus2;
-    public int monthplus20;
-    public int monthplus21;
-    public int monthplus22;
-    public int monthplus23;
-    public int monthplus24;
-    public int monthplus25;
-    public int monthplus26;
-    public int monthplus27;
-    public int monthplus28;
-    public int monthplus29;
-    public int monthplus3;
-    public int monthplus30;
-    public int monthplus4;
-    public int monthplus5;
-    public int monthplus6;
-    public int monthplus7;
-    public int monthplus8;
-    public int monthplus9;
-    public int myDay;
-    public int myHour;
-    public int myMinute;
-    public int myMonth;
-    public int myYear;
-    public int position;
-    int randomReqestCode;
-    public Routine routine;
     RoutineManager routineManager;
+    public int myYear, myMonth, myDay, myHour, myMinute, taskbiggerThanMonth, monthplus1, monthplus2, monthplus3, monthplus4, monthplus5, monthplus6, monthplus7, monthplus8, monthplus9, monthplus10, monthplus11, monthplus12, monthplus13, monthplus14, monthplus15, monthplus16, monthplus17, monthplus18, monthplus19, monthplus20, monthplus21, monthplus22, monthplus23, monthplus24, monthplus25, monthplus26, monthplus27, monthplus28, monthplus29, monthplus30;
+    int randomReqestCode;
     public String taskAlarmDate;
+    private String monthly;
+    public Routine routine;
+    public  int position;
     public int taskPosition;
-    public int taskbiggerThanMonth;
 
-    public NotificationManager(Context context2, RoutineManager routineManager2, Intent intent2) {
-        this.context = context2;
-        this.routineManager = routineManager2;
+    Intent intent;
+
+    public NotificationManager(Context context, RoutineManager routineManager, Intent intent) {
+        this.context = context;
+        this.routineManager = routineManager;
+
+
     }
 
-    public void cancelAlarm(Routine routine2) {
-        AlarmManager alarmManager = (AlarmManager) this.context.getSystemService(NotificationCompat.CATEGORY_ALARM);
-        Intent intent2 = new Intent(this.context, AlertReceiver.class);
-        int reqestcodeint = routine2.getroutineRendemRequestCode();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, reqestcodeint, intent2, 0);
+    public void cancelAlarm(Routine routine) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlertReceiver.class);
+        int reqestcodeint = routine.getroutineRendemRequestCode();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, reqestcodeint, intent, 0);
         Log.d("cal", "die zahl ist " + reqestcodeint);
-        if (!routine2.isCancel) {
+
+
+        if (!routine) {
             alarmManager.cancel(pendingIntent);
-            this.routineManager.saveRoutineList();
+            routineManager.saveRoutineList();
+
+
         }
     }
 
-    public void startAlarm(Routine routine2, int randomReqestCode2, int myYear2, int myMonth2, int myDay2, int myHour2, int myMinute2, String routineAlarmDate) {
-        String routineAlarmDate2;
-        AlarmManager alarmManager;
-        String routineAlarmDate3;
-        Intent intent2;
-        String routineAlarmDate4;
-        int randomReqestCode3;
-        String routineAlarmDate5;
-        AlarmManager alarmManager2;
-        int i;
-        int i2;
-        int i3;
+    public void startAlarm(Routine routine, int randomReqestCode, int myYear, int myMonth, int myDay, int myHour, int myMinute, String routineAlarmDate) {
         Random random = new Random();
-        this.routineManager.saveRoutineList();
-        String daily = this.context.getString(R.string.notification_daily);
-        String monthly2 = this.context.getString(R.string.notification_montly);
-        String weekly = this.context.getString(R.string.notification_weekly);
+        routineManager.saveRoutineList();;
+        String daily = context.getString(R.string.notification_daily);
+        String monthly = context.getString(R.string.notification_montly);
+        String weekly = context.getString(R.string.notification_weekly);
+
+
         Calendar cal = Calendar.getInstance();
-        cal.set(1, myYear2);
-        cal.set(2, myMonth2);
-        cal.set(5, myDay2);
-        cal.set(11, myHour2);
-        cal.set(12, myMinute2);
-        cal.set(13, 0);
-        cal.set(14, 0);
-        cal.get(2);
-        routine2.setRoutineMills(cal.getTimeInMillis());
-        routine2.setRoutineDay(myDay2);
-        routine2.setRoutineNext(myDay2);
-        routine2.setRoutineHour(myHour2);
-        routine2.setRoutineMinute(myMinute2);
-        Log.d("cal", "das datum ist " + routine2.getRoutineMills());
-        int randomReqestCode4 = random.nextInt(this.routineManager.getRoutineCount() + 7759);
-        AlarmManager alarmManager3 = (AlarmManager) this.context.getSystemService(NotificationCompat.CATEGORY_ALARM);
-        Intent intent3 = new Intent(this.context, AlertReceiver.class);
-        intent3.putExtra("taskgetName", routine2.getRoutineName());
-        intent3.putExtra("routinePosition", routine2.getRoutinePosition());
-        intent3.putExtra("taskgetIsNoVibration", routine2.getIsVibrationNo());
-        intent3.putExtra("taskgetIsShortVibration", routine2.getIsVibrationShort());
-        intent3.putExtra("taskgetIsMediumVibration", routine2.getIsVibrationMedium());
-        intent3.putExtra("taskgetIsLongVibration", routine2.getIsVibrationLong());
-        intent3.putExtra("randemAlarmReqest", randomReqestCode4);
-        intent3.putExtra("taskisEveryDay", routine2.isEveryDay);
-        intent3.putExtra("myYear", myYear2);
-        intent3.putExtra("myMinute", myMinute2);
-        intent3.putExtra("myDay", myDay2);
-        intent3.putExtra("myHour", myHour2);
-        intent3.putExtra("myMonth", myMonth2);
-        intent3.putExtra("taskAlarmDate", routineAlarmDate);
-        if (!DateFormat.is24HourFormat(this.context) && !routine2.getIsEveryDay() && !routine2.isEveryMonth && !routine2.isEveryWeek) {
-            routineAlarmDate2 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy").format(cal.getTime());
-            Log.d("Notification", "test ist aus");
-            Log.d("Notification", "Alarm datum" + routineAlarmDate2);
-        } else if (Locale.getDefault().getISO3Language().equals("de") || routine2.isEveryDay || routine2.isEveryMonth || routine2.isEveryWeek) {
-            routineAlarmDate2 = routineAlarmDate;
-        } else {
-            routineAlarmDate2 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy").format(cal.getTime());
-            Log.d("Notification", "test ist aus");
-            Log.d("Notification", "Alarm datum" + routineAlarmDate2);
-        }
-        if (!DateFormat.is24HourFormat(this.context) || routine2.isEveryDay || routine2.isEveryMonth || routine2.isEveryWeek) {
-            alarmManager = alarmManager3;
-            routineAlarmDate3 = routineAlarmDate2;
-        } else {
-            alarmManager = alarmManager3;
-            routineAlarmDate3 = new SimpleDateFormat("EEE dd MMM HH:mm yyyy").format(cal.getTime());
-            Log.d("Notification", "test ist aus");
-            Log.d("Notification", "Alarm datum" + routineAlarmDate3);
-        }
-        if (DateFormat.is24HourFormat(this.context) || !routine2.isEveryDay) {
-            intent2 = intent3;
-            if (Locale.getDefault().getISO3Language().equals("de") || !routine2.isEveryDay) {
-                routineAlarmDate4 = routineAlarmDate3;
-            } else {
-                routineAlarmDate4 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy").format(cal.getTime());
-                Log.d("Notification", "test ist daily");
-            }
-        } else {
+        cal.set(Calendar.YEAR, myYear);
+        cal.set(Calendar.MONTH, myMonth);
+        cal.set(Calendar.DAY_OF_MONTH, myDay);
+        cal.set(Calendar.HOUR_OF_DAY, myHour);
+        cal.set(Calendar.MINUTE, myMinute);
+        cal.set(Calendar.SECOND, 000);
+        cal.set(Calendar.MILLISECOND, 000);
+        int currentMonth = cal.get(Calendar.MONTH);
+        long mills = cal.getTimeInMillis();
+        routine.setRoutineMills(mills);
+        Log.d("cal", "das datum ist " + routine.getRoutineMills());
+
+        randomReqestCode = random.nextInt(routineManager.getRoutineCount() + 7759);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(context, AlertReceiver.class);
+        intent.putExtra("routineGetName", routine.getRoutineName());
+        intent.putExtra("outineGetIsNoVibration", routine.getIsVibrationNo());
+        intent.putExtra("routineGetIsShortVibration", routine.getIsVibrationShort());
+        intent.putExtra("routineGetIsMediumVibration", routine.getIsVibrationMedium());
+        intent.putExtra("routineGetIsLongVibration", routine.getIsVibrationLong());
+        intent.putExtra("randemAlarmReqest", randomReqestCode);
+        intent.putExtra("routineisEveryDay", routine.getIsEveryDay());
+        intent.putExtra("routine", routine);
+        intent.putExtra("myYear", myYear);
+        intent.putExtra("myMinute", myMinute);
+        intent.putExtra("myDay", myDay);
+        intent.putExtra("myHour", myHour);
+        intent.putExtra("myMonth", myMonth);
+        intent.putExtra("routineAlarmDate", routineAlarmDate);
+
+
+
+        if (!DateFormat.is24HourFormat(context) && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
-            StringBuilder sb = new StringBuilder();
-            intent2 = intent3;
-            sb.append(format.format(cal.getTime()));
-            sb.append(", ");
-            sb.append(daily);
-            routineAlarmDate4 = sb.toString();
-            Log.d("Notification", "test ist daily");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
         }
-        if (!DateFormat.is24HourFormat(this.context) || !routine2.isEveryDay) {
-            randomReqestCode3 = randomReqestCode4;
-            routineAlarmDate5 = routineAlarmDate4;
-        } else {
-            SimpleDateFormat format2 = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
-            StringBuilder sb2 = new StringBuilder();
-            randomReqestCode3 = randomReqestCode4;
-            sb2.append(format2.format(cal.getTime()));
-            sb2.append(", ");
-            sb2.append(daily);
-            routineAlarmDate5 = sb2.toString();
-            Log.d("Notification", "test ist daily");
+
+        if (DateFormat.is24HourFormat(context) && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
         }
-        if (!DateFormat.is24HourFormat(this.context) && routine2.isEveryMonth) {
-            SimpleDateFormat format3 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
-            routineAlarmDate5 = format3.format(cal.getTime()) + ", " + monthly2;
-            Log.d("Notification", "test ist montly");
-        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine2.isEveryMonth) {
-            routineAlarmDate5 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy").format(cal.getTime());
-            Log.d("Notification", "test ist mothly");
+
+        if (!DateFormat.is24HourFormat(context) && routine.getIsEveryDay()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
+            Log.d("t", "test ist daily");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryDay()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist daily");
         }
-        if (DateFormat.is24HourFormat(this.context) && routine2.isEveryMonth) {
-            SimpleDateFormat format4 = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
-            routineAlarmDate5 = format4.format(cal.getTime()) + ", " + monthly2;
-            Log.d("Notification", "test ist montly");
+
+        if (DateFormat.is24HourFormat(context) && routine.getIsEveryDay()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
+            Log.d("t", "test ist daily");
         }
-        if (!DateFormat.is24HourFormat(this.context) && routine2.isEveryWeek) {
-            SimpleDateFormat format5 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
-            routineAlarmDate5 = format5.format(cal.getTime()) + ", " + weekly;
-            Log.d("Notification", "test ist weekly");
-        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine2.isEveryWeek) {
-            routineAlarmDate5 = new SimpleDateFormat("EEE MMM dd hh:mm yyyy").format(cal.getTime());
-            Log.d("Notification", "test ist weekly");
+
+        if (!DateFormat.is24HourFormat(context) && routine.getIsEveryMonth()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
+            Log.d("t", "test ist montly");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryMonth()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist mothly");
         }
-        if (DateFormat.is24HourFormat(this.context) && routine2.isEveryWeek) {
-            SimpleDateFormat format6 = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
-            routineAlarmDate5 = format6.format(cal.getTime()) + ", " + weekly;
-            Log.d("Notification", "test ist weekly");
+        if (DateFormat.is24HourFormat(context) && routine.getIsEveryMonth()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
+            Log.d("t", "test ist montly");
         }
-        routine2.setRoutineAlarmDate(routineAlarmDate5);
-        routine2.setRendemReqestCodeint(randomReqestCode3);
-        this.routineManager.saveRoutineList();
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, randomReqestCode3, intent2, 0);
-        if (routine2.isEveryDay) {
-            if (Build.VERSION.SDK_INT >= 23) {
-                alarmManager2 = alarmManager;
-                i3 = 0;
-                alarmManager2.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
-            } else {
-                alarmManager2 = alarmManager;
-                i3 = 0;
+
+        if (!DateFormat.is24HourFormat(context) && routine.getIsEveryWeek()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
+            Log.d("t", "test ist weekly");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryWeek()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist weekly");
+        }
+        if (DateFormat.is24HourFormat(context) && routine.getIsEveryWeek()) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
+            Log.d("t", "test ist weekly");
+        }
+
+
+        routine.setRoutineAlarmDate(taskAlarmDate);
+        routine.setRendemReqestCodeint(randomReqestCode);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, randomReqestCode, intent, 0);
+
+        RoutineSettingsManager routineSettingsManager = new RoutineSettingsManager(context);
+
+
+
+        if (routine.getIsEveryDay()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+
             }
-            alarmManager2.setExact(i3, routine2.getRoutineMills(), pendingIntent);
-            alarmManager2.setRepeating(0, routine2.getRoutineMills(), 86400000, pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), AlarmManager.INTERVAL_DAY, pendingIntent);
             Log.d("t", "wiederhlung ist jede Tag");
-        } else {
-            alarmManager2 = alarmManager;
-            if (routine2.getIsEveryWeek()) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    i2 = 0;
-                    alarmManager2.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
-                } else {
-                    i2 = 0;
-                }
-                alarmManager2.setExact(i2, routine2.getRoutineMills(), pendingIntent);
-                alarmManager2.setRepeating(0, routine2.getRoutineMills(), 604800000, pendingIntent);
-                Log.d("t", "wiederhlung ist jede Woche");
-            } else {
-                boolean z = routine2.isEveryMonth;
+        } else if (routine.getIsEveryWeek()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
             }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+            Log.d("t", "wiederhlung ist jede Woche");
+        } else if (routine.getIsEveryMonth()) {
+            setMyMonth(routine, currentMonth, alarmManager, routine.getRoutineMills(), pendingIntent, cal);
         }
-        if (!routine2.isEveryDay && !routine2.isEveryWeek && !routine2.isEveryMonth) {
-            if (Build.VERSION.SDK_INT >= 23) {
-                i = 0;
-                alarmManager2.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
-            } else {
-                i = 0;
+
+
+
+        if (!routine.getIsEveryDay() && !routine.getIsEveryWeek() && !routine.getIsEveryMonth()){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
             }
-            alarmManager2.setExact(i, routine2.getRoutineMills(), pendingIntent);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
             Log.d("t", "wiederhlung ist jede Tag");
         }
-        this.routineManager.saveRoutineList();
+
+
+
     }
 
-    /* JADX INFO: Multiple debug info for r8v4 int: [D('weeklyPlus5' int), D('weekly' java.lang.String)] */
-    /* JADX INFO: Multiple debug info for r7v4 int: [D('monthly' java.lang.String), D('weeklyPlus6' int)] */
-    /* JADX INFO: Multiple debug info for r6v442 int: [D('monthplus12' int), D('taskbiggerThanMonth' int)] */
-    /* JADX INFO: Multiple debug info for r6v542 'taskbiggerThanMonth'  int: [D('monthplus11' int), D('taskbiggerThanMonth' int)] */
-    /* JADX INFO: Multiple debug info for r6v685 int: [D('monthplus6' int), D('taskbiggerThanMonth' int)] */
-    /* JADX INFO: Multiple debug info for r6v785 'taskbiggerThanMonth'  int: [D('monthplus5' int), D('taskbiggerThanMonth' int)] */
-    /* JADX INFO: Multiple debug info for r6v907 int: [D('monthplus1' int), D('taskbiggerThanMonth' int)] */
-    /* JADX INFO: Multiple debug info for r6v1682 int: [D('currentMonth' int), D('mills' long)] */
-    /* JADX INFO: Multiple debug info for r6v1851 int: [D('currentMonth' int), D('taskbiggerThanMonth' int)] */
-    /* JADX WARNING: Code restructure failed: missing block: B:2321:0x3f71, code lost:
-        if (r10 == 1) goto L_0x3f73;
-     */
-    /* JADX WARNING: Removed duplicated region for block: B:2414:0x41ce  */
-    /* JADX WARNING: Removed duplicated region for block: B:2415:0x41dd  */
-    /* JADX WARNING: Removed duplicated region for block: B:2418:0x41ee  */
-    /* JADX WARNING: Removed duplicated region for block: B:2658:0x4723  */
-    /* JADX WARNING: Removed duplicated region for block: B:2813:0x49d4  */
-    /* JADX WARNING: Removed duplicated region for block: B:2968:0x4c85  */
-    /* JADX WARNING: Removed duplicated region for block: B:3122:0x4f30  */
-    /* JADX WARNING: Removed duplicated region for block: B:3242:0x507f  */
-    /* JADX WARNING: Removed duplicated region for block: B:3278:0x51e9  */
-    /* JADX WARNING: Removed duplicated region for block: B:3398:0x5338  */
-    /* JADX WARNING: Removed duplicated region for block: B:3435:0x54a8  */
-    /* JADX WARNING: Removed duplicated region for block: B:3590:0x575f  */
-    /* JADX WARNING: Removed duplicated region for block: B:3745:0x5a10  */
-    /* JADX WARNING: Removed duplicated region for block: B:3900:0x5cc2  */
-    /* JADX WARNING: Removed duplicated region for block: B:4054:0x5f6e  */
-    /* JADX WARNING: Removed duplicated region for block: B:4174:0x60bd  */
-    /* JADX WARNING: Removed duplicated region for block: B:4210:0x6228  */
-    /* JADX WARNING: Removed duplicated region for block: B:4330:0x6377  */
-    /* JADX WARNING: Removed duplicated region for block: B:4367:0x64e8  */
-    /* JADX WARNING: Removed duplicated region for block: B:4522:0x679a  */
-    /* JADX WARNING: Removed duplicated region for block: B:4677:0x6a4b  */
-    /* JADX WARNING: Removed duplicated region for block: B:4832:0x6cfc  */
-    /* JADX WARNING: Removed duplicated region for block: B:4987:0x6fad  */
-    /* JADX WARNING: Removed duplicated region for block: B:5142:0x725e  */
-    /* JADX WARNING: Removed duplicated region for block: B:5297:0x750f  */
-    /* JADX WARNING: Removed duplicated region for block: B:5452:0x77c0  */
-    /* JADX WARNING: Removed duplicated region for block: B:5607:0x7a71  */
-    /* JADX WARNING: Removed duplicated region for block: B:5762:0x7d22  */
-    /* JADX WARNING: Removed duplicated region for block: B:5917:0x7fd3  */
-    /* JADX WARNING: Removed duplicated region for block: B:6072:0x8285  */
-    /* JADX WARNING: Removed duplicated region for block: B:6227:0x8536  */
-    /* JADX WARNING: Removed duplicated region for block: B:6382:0x87e7  */
-    /* JADX WARNING: Removed duplicated region for block: B:6537:0x8a98  */
-    /* JADX WARNING: Removed duplicated region for block: B:6692:0x8d49  */
-    /* JADX WARNING: Removed duplicated region for block: B:6847:0x8ffb  */
-    /* JADX WARNING: Removed duplicated region for block: B:7002:0x92ad  */
-    /* JADX WARNING: Removed duplicated region for block: B:7156:0x95d2  */
-    /* JADX WARNING: Removed duplicated region for block: B:7165:0x961d  */
-    /* JADX WARNING: Removed duplicated region for block: B:7184:0x96a0  */
-    /* JADX WARNING: Removed duplicated region for block: B:7199:0x973b  */
-    /* JADX WARNING: Removed duplicated region for block: B:7214:0x97d6  */
-    /* JADX WARNING: Removed duplicated region for block: B:7229:0x989d  */
-    /* JADX WARNING: Removed duplicated region for block: B:7234:0x98d5  */
-    /* JADX WARNING: Removed duplicated region for block: B:7252:0x993c  */
-    /* JADX WARNING: Removed duplicated region for block: B:7253:0x9945  */
-    /* Code decompiled incorrectly, please refer to instructions dump. */
-    public void updateStartAlarm(java.lang.String r47, int r48, com.mn.myroutines.Routine r49, int r50, int r51, int r52, int r53, int r54, int r55, int r56, int r57, int r58, int r59, int r60, int r61, int r62, int r63, int r64, int r65, int r66, int r67, int r68, int r69, int r70, int r71, int r72, int r73, int r74, int r75, int r76, int r77, int r78, int r79, int r80, int r81, int r82, int r83, int r84, int r85) {
-        /*
-        // Method dump skipped, instructions count: 39305
-        */
-        throw new UnsupportedOperationException("Method not decompiled: com.mn.myroutines.NotificationManager.updateStartAlarm(java.lang.String, int, com.mn.myroutines.Routine, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int, int):void");
+
+
+
+    public void updateStartAlarm(int taskPosition, Routine routine, int myYear, int  myMonth, int myDay, int myHour, int myMinute, int taskbiggerThanMonth, int monthplus1, int  monthplus2, int monthplus3, int monthplus4, int monthplus5, int  monthplus6, int  monthplus7, int monthplus8, int monthplus9, int  monthplus10, int  monthplus11, int  monthplus12, int monthplus13, int  monthplus14, int monthplus15, int  monthplus16, int  monthplus17, int  monthplus18, int  monthplus19, int monthplus20, int  monthplus21, int  monthplus22, int monthplus23, int  monthplus24, int monthplus25, int monthplus26, int monthplus27, int monthplus28, int  monthplus29, int  monthplus30) {
+        this.myYear = myYear;
+        this.routine = routine;
+        this.taskPosition = taskPosition;
+        this.myMonth = myMonth;
+        this.myDay = myDay;
+        this.myHour = myHour;
+        this.myMinute = myMinute;
+        this.taskbiggerThanMonth = taskbiggerThanMonth;
+        this.monthplus1 = monthplus1;
+        this.monthplus2 = monthplus2;
+        this.monthplus3 = monthplus3;
+        this.monthplus4 = monthplus4;
+        this.monthplus5 = monthplus5;
+        this.monthplus6 = monthplus6;
+        this.monthplus7 = monthplus7;
+        this.monthplus8 = monthplus8;
+        this.monthplus9 = monthplus9;
+        this.monthplus10 = monthplus10;
+        this.monthplus11 = monthplus11;
+        this.monthplus12 = monthplus12;
+        this.monthplus13 = monthplus13;
+        this.monthplus14 = monthplus14;
+        this.monthplus15 = monthplus15;
+        this.monthplus16 = monthplus16;
+        this.monthplus17 = monthplus17;
+        this.monthplus18 = monthplus18;
+        this.monthplus19 = monthplus19;
+        this.monthplus20 = monthplus20;
+        this.monthplus21 = monthplus21;
+        this.monthplus22 = monthplus22;
+        this.monthplus23 = monthplus23;
+        this.monthplus24 = monthplus24;
+        this.monthplus25 = monthplus25;
+        this.monthplus26 = monthplus26;
+        this.monthplus27 = monthplus27;
+        this.monthplus28 = monthplus28;
+        this.monthplus29 = monthplus29;
+        this.monthplus30 = monthplus30;
+
+
+        String daily = context.getString(R.string.notification_daily);
+        String monthly = context.getString(R.string.notification_montly);
+        String weekly = context.getString(R.string.notification_weekly);
+
+        Calendar cal = Calendar.getInstance();
+
+
+        int weeklyPlus0 = routine.getRoutineNext();
+        int weeklyPlus1 = routine.getRoutineNext() + 1;
+        int weeklyPlus2 = routine.getRoutineNext() + 2;
+        int weeklyPlus3 = routine.getRoutineNext() + 3;
+        int weeklyPlus4 = routine.getRoutineNext() + 4;
+        int weeklyPlus5 = routine.getRoutineNext() + 5;
+        int weeklyPlus6 = routine.getRoutineNext() + 6;
+
+
+
+
+        // calender system zeit kleiner
+        if (cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth()  || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryDay() && ! routine.getIsEveryWeek() && !routine.getIsEveryMonth() || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()  && !routine.getIsEveryDay() && ! routine.getIsEveryWeek() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && !routine.getIsEveryDay() && !routine.getIsEveryWeek() && !routine.getIsEveryMonth()) {
+            Log.d("hallo", "System zeit ist kleiner no");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth() ){
+                cal.set(Calendar.DAY_OF_MONTH, myDay);
+            } else {
+                cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            }
+
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+            int currentMonth = cal.get(Calendar.MONTH);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth()  ){
+                routine.setRoutineDay(myDay);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth);
+            } else {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(routine.getRoutineDay());
+                routine.setRoutineMonth(routine.getRoutineMonth());
+            }
+
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+
+
+        }
+
+
+        //
+
+        // calender kleiner 2
+
+        if (cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && !routine.isEveryDay && !routine.getIsEveryWeek && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist kleiner 2 no");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            routine.setRoutineDay(routine.getRoutineDay());
+            routine.setRoutineWeek(routine.getRoutineDay());
+            routine.setRoutineMonth(routine.getRoutineMonth());
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+        }
+
+
+
+
+        // calender größer
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer no");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+            if (myDay == 29 && myMonth ==1){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay == 28 && myMonth == 1){
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+            }
+
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 1);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            if (myDay == 28 && myMonth >= 1){
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay == 30){
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay == 31){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+                if (myMonth ==11){
+                    routine.setRoutineMonth(1);
+                } else if (myMonth < 11){
+                    routine.setRoutineMonth(myMonth+1);
+                }
+
+            }
+
+
+
+            if (myDay == 29 && myMonth ==1){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+            } else {
+                routine.setRoutineDay(myDay +1);
+                routine.setRoutineWeek(myDay +1);
+            }
+
+
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+
+
+        }
+
+        // calender Daily system zeit kleiner
+        if (cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.isEveryDay &&!routine.getIsEveryWeek && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()&& !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay()&& routine.isEveryDay && !routine.getIsEveryWeek && !routine.isEveryMonth ) {
+            Log.d("hallo", "System zeit ist kleiner daily");
+
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth() ){
+                cal.set(Calendar.DAY_OF_MONTH, myDay);
+            } else {
+                cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            }
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+            int currentMonth = cal.get(Calendar.MONTH);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth() ){
+                routine.setRoutineDay(myDay);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth);
+            } else {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(routine.getRoutineDay());
+                routine.setRoutineMonth(routine.getRoutineMonth());
+            }
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+
+        }
+
+
+
+
+
+        //
+
+        // calender kleiner 2 daily
+
+        if (cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.MONTH) < routine.getRoutineMonth() && routine.isEveryDay && !routine.getIsEveryWeek && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist kleiner 2 daily");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            routine.setRoutineDay(routine.getRoutineDay());
+            routine.setRoutineWeek(routine.getRoutineDay());
+            routine.setRoutineMonth(routine.getRoutineMonth());
+
+
+            Log.d("hallo", "month =" + routine.getRoutineMonth());
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+        }
+
+
+
+
+        // calender größer daily
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer daily");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+            if (myDay == 29 && myMonth ==1){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay == 28 && myMonth == 1){
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+            }
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 1);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+
+
+            if (myDay == 31) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29 && myMonth ==1){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay < 30){
+                routine.setRoutineDay(myDay +1);
+                routine.setRoutineWeek(myDay +1);
+            }
+
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+
+
+        }
+
+
+        //
+        int dailyplus0 = routine.getRoutineNext();
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) >= dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) >= dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) >= dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.isEveryDay && ! routine.getIsEveryWeek && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour()  && routine.isEveryDay && ! routine.getIsEveryWeek && !routine.isEveryMonth) {
+
+            Log.d("hallo", "System zeit ist größer daily plus 0 oder noch größer ");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+            if (myDay == 29 && myMonth ==1){
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(1);
+            }
+
+            if (myDay == 28 && myMonth == 1){
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+            }
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 1);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 1;
+            if (myDay == 31) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay < 30) {
+                routine.setRoutineDay(myDay + 1);
+                routine.setRoutineWeek(myDay + 1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+        }
+
+        // calder month größer
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.isEveryDay &&!routine.getIsEveryWeek && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) < dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()&& !routine.getIsEveryWeek && routine.isEveryDay && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) > dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > dailyplus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute()&& routine.isEveryDay &&!routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < dailyplus0 && routine.isEveryDay && !routine.getIsEveryWeek && !routine.isEveryMonth){
+
+            Log.d("hallo", "System zeit ist kleiner daily plus 0 oder noch größer ");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+
+            cal.set(Calendar.DAY_OF_MONTH, myDay);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            if (myDay == 31) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(31);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay < 30) {
+                routine.setRoutineDay(myDay);
+                routine.setRoutineWeek(myDay);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+        }
+
+        // calender weekly system zeit kleiner
+        if (cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.isEveryDay && routine.getIsEveryWeek && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()&& routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute()&& !routine.isEveryDay && routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& !routine.isEveryDay && routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute()&& !routine.isEveryDay && routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute()&& !routine.isEveryDay && routine.getIsEveryWeek &&!routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay()&& !routine.isEveryDay && routine.getIsEveryWeek && !routine.isEveryMonth ) {
+            Log.d("hallo", "System zeit ist kleiner weekly");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth()  ){
+                cal.set(Calendar.DAY_OF_MONTH, myDay);
+            } else {
+                cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            }
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+            int currentMonth = cal.get(Calendar.MONTH);
+
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+
+            if (taskbiggerThanMonth >= 24) {
+                routine.setRoutineDay(myDay);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth);
+            } else {
+                routine.setRoutineWeek(routine.getRoutineDay());
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineMonth(routine.getRoutineMonth());
+            }
+
+            if (myDay < routine.getRoutineDay() && myMonth > routine.getRoutineMonth() ||myDay < routine.getRoutineDay() && myMonth < routine.getRoutineMonth() || myDay > routine.getRoutineDay() && myMonth == routine.getRoutineMonth()  ){
+                routine.setRoutineDay(myDay);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth);
+            } else {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(routine.getRoutineDay());
+                routine.setRoutineMonth(routine.getRoutineMonth());
+            }
+
+
+
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month = "+ routine.getRoutineMonth());
+        }
+
+        //
+        // calender kleiner 2 weekly
+
+        if (cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineNext() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineNext() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineNext() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineNext() || cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && cal.get(Calendar.MONTH) < routine.getRoutineMonth() && !routine.isEveryDay && routine.getIsEveryWeek && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit  2 weekly");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay() + 7);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            routine.setRoutineWeek(routine.getRoutineNext() + 7);
+            routine.setRoutineDay(routine.getRoutineDay() + 7);
+            routine.setRoutineMonth( routine.getRoutineMonth());
+
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "month =" + routine.getRoutineMonth());
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) >= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer und weekly plus 0 ist beides zusammen");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 7);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 24) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 24) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 25) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 26) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 26) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 28) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(6);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 29) {
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 30) {
+                routine.setRoutineDay(6);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(6);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 7);
+                routine.setRoutineWeek(myDay + 7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+
+
+
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) >= weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) >= weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) >= weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.isEveryDay &&  routine.getIsEveryWeek && !routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < weeklyPlus0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()  && !routine.isEveryDay &&  routine.getIsEveryWeek && !routine.isEveryMonth) {
+
+            Log.d("hallo", "System zeit ist kleiner weekly plus 0 oder noch größer ");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth);
+
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 7);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            if (myDay == 31) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(31);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay < 30) {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(routine.getRoutineDay());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+        }
+
+
+
+        // calnder 1größer wie nextweek weekly
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus1 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus1 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus1 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus1 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer next plus 1 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            if (myDay == 1){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 6);
+            } else if (myDay == 2){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 5);
+            } else if (myDay == 3){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 4);
+            } else if (myDay == 4){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 3);
+            } else if (myDay == 5){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 2);
+            } else if (myDay == 6){
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 1);
+            } else if (myDay == 7){
+                cal.set(Calendar.DAY_OF_MONTH, myDay);
+            }
+            else {
+                cal.set(Calendar.DAY_OF_MONTH, myDay + 6);
+            }
+
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 1){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 2){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 3){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 4){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 5){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 6){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 7){
+                routine.setRoutineDay(7);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+
+
+
+
+
+            if (myDay == 24) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 24) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 25) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 26) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 26) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 27) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 28) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 29) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 29) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(6);
+                routine.setRoutineWeek(7);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 6);
+                routine.setRoutineWeek(myDay + 6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus2 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus2 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus2 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus2 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth ) {
+            Log.d("hallo", "System zeit ist größer next plus 2 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 5);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 24) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (currentMonth == Calendar.FEBRUARY && myDay == 24) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 25) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 26) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 26) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 28) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 29) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(5);
+                routine.setRoutineWeek(6);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 5);
+                routine.setRoutineWeek(myDay + 5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus3 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus3 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus3 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus3 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer next plus 3 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 4);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 24) {
+                routine.setRoutineDay(28);
+                routine.setRoutineWeek(28);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+
+            if (myDay == 25) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 25) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 26) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 26) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 28) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(4);
+                routine.setRoutineWeek(5);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 4);
+                routine.setRoutineWeek(myDay + 4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus4 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus4 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus4 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus4 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer next plus 4 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 3);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 24) {
+                routine.setRoutineDay(27);
+                routine.setRoutineWeek(27);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(28);
+                routine.setRoutineWeek(28);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 26) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 26) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 28) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(3);
+                routine.setRoutineWeek(4);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 3);
+                routine.setRoutineWeek(myDay + 3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+
+
+        }
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus5 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus5 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus5 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus5 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer next plus 5 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 2);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 24) {
+                routine.setRoutineDay(26);
+                routine.setRoutineWeek(26);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(27);
+                routine.setRoutineWeek(27);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 26) {
+                routine.setRoutineDay(28);
+                routine.setRoutineWeek(28);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 27) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 28) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(2);
+                routine.setRoutineWeek(3);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 2);
+                routine.setRoutineWeek(myDay + 2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus6 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) <= routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus6 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus6 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth || cal.get(Calendar.DAY_OF_MONTH) == weeklyPlus6 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && routine.getIsEveryWeek && !routine.isEveryDay && !routine.isEveryMonth) {
+            Log.d("hallo", "System zeit ist größer next plus 6 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, myDay + 1);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 7;
+            int currentMonth = cal.get(Calendar.MONTH) - 1;
+
+            if (myDay == 24) {
+                routine.setRoutineDay(25);
+                routine.setRoutineWeek(25);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 25) {
+                routine.setRoutineDay(26);
+                routine.setRoutineWeek(26);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 26) {
+                routine.setRoutineDay(27);
+                routine.setRoutineWeek(27);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (myDay == 27) {
+                routine.setRoutineDay(28);
+                routine.setRoutineWeek(28);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 28) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(29);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (currentMonth == Calendar.FEBRUARY && myDay == 28) {
+                routine.setRoutineDay(29);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 29) {
+                routine.setRoutineDay(30);
+                routine.setRoutineWeek(30);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 30) {
+                routine.setRoutineDay(31);
+                routine.setRoutineWeek(1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+            if (myDay == 31) {
+                routine.setRoutineDay(1);
+                routine.setRoutineWeek(2);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+            }
+
+            if (taskbiggerThanMonth < 24 || myDay < 24) {
+                routine.setRoutineDay(myDay + 1);
+                routine.setRoutineWeek(myDay + 1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+        }
+
+        //
+        int currentMonth = cal.get(Calendar.MONTH);
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && currentMonth == Calendar.JANUARY || currentMonth == Calendar.MARCH && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.MAY && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.JULY && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.AUGUST && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || currentMonth == Calendar.DECEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.MARCH && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.MAY && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.JULY || currentMonth == Calendar.AUGUST && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() || currentMonth == Calendar.OCTOBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.DECEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay()) {
+            Log.d("hallo", "System zeit ist größer monthy 31");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, myDay);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(0);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+            } else {
+                routine.setRoutineWeek(myDay + 31);
+                routine.setRoutineDay(myDay + 31);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+            }
+
+            int nextmonth = myMonth + 1;
+
+            if (routine.getRoutineDay() >= 30 && monthplus1 == 31) {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(0);
+                routine.setRoutineWeek(myDay);
+
+                monthplus1 = routine.getRoutineNext();
+                Log.d("hallo", "tag = " + monthplus1);
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+
+            }
+
+
+            if (nextmonth == Calendar.APRIL && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && routine.getRoutineDay() >= 30 || nextmonth == Calendar.JUNE && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && routine.getRoutineDay() >= 30 || nextmonth == Calendar.SEPTEMBER && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && routine.getRoutineDay() >= 30 || nextmonth == Calendar.NOVEMBER && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && routine.getRoutineDay() >= 30) {
+
+                routine.setRoutineWeek(1);
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+
+                Log.d("hallo", "tag ist größer 30");
+
+
+            } else {
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineDay(routine.getRoutineDay());
+            }
+
+
+        }
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && currentMonth == Calendar.APRIL || currentMonth == Calendar.JUNE && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.SEPTEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.NOVEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.NOVEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.APRIL || currentMonth == Calendar.JUNE && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.SEPTEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.NOVEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.APRIL || currentMonth == Calendar.JUNE && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() || currentMonth == Calendar.SEPTEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() || currentMonth == Calendar.NOVEMBER && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.HOUR_OF_DAY) >= routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay()) {
+            Log.d("hallo", "System zeit ist größer monthy 30");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, myDay);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 30;
+
+            if (taskbiggerThanMonth >= 24) {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(0);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+            } else {
+                routine.setRoutineWeek(myDay + 30);
+                routine.setRoutineDay(myDay + 30);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+
+            }
+
+
+        }
+
+
+        if (cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && routine.isEveryMonth && !routine.isEveryDay && !routine.getIsEveryWeek && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY) {
+            Log.d("hallo", "System zeit ist größer monthy 28");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, myDay);
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 28;
+            if (taskbiggerThanMonth >= 24) {
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(0);
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+            } else {
+                routine.setRoutineWeek(myDay + 30);
+                routine.setRoutineDay(myDay + 30);
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "monthy " + routine.getRoutineMonth());
+
+            }
+
+        }
+
+
+        // calender monthly system zeit kleiner
+        if (cal.get(Calendar.MONTH) == routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth || cal.get(Calendar.MONTH) == routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth ||cal.get(Calendar.DAY_OF_MONTH) > routine.getRoutineDay() && !routine.isEveryDay &&!routine.getIsEveryWeek && routine.isEveryMonth  ) {
+            Log.d("hallo", "System zeit ist kleiner monthly");
+            cal.set(Calendar.YEAR, myYear);
+            cal.set(Calendar.MONTH, routine.getRoutineMonth());
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+
+            if (myMonth == Calendar.JANUARY || myMonth == Calendar.MARCH || myMonth == Calendar.MAY || myMonth == Calendar.JULY || myMonth == Calendar.AUGUST || myMonth == Calendar.DECEMBER) {
+                taskbiggerThanMonth = routine.getRoutineDay() + 31;
+            } else if (myMonth == Calendar.APRIL || myMonth == Calendar.JUNE || myMonth == Calendar.SEPTEMBER || myMonth == Calendar.NOVEMBER) {
+                taskbiggerThanMonth = routine.getRoutineDay() + 30;
+            } else if (myMonth == Calendar.FEBRUARY) {
+                taskbiggerThanMonth = routine.getRoutineDay() + 28;
+            }
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+                routine.setRoutineWeek(routine.getRoutineDay());
+            } else {
+                routine.setRoutineWeek(myDay);
+                routine.setRoutineDay(myDay);
+                routine.setRoutineMonth(myMonth);
+            }
+
+            if (routine.getRoutineMonth() > 11) {
+                routine.setRoutineMonth(0);
+            }
+
+            Log.d("hallo", "day = " + routine.getRoutineDay());
+            Log.d("hallo", "next = " + routine.getRoutineNext());
+            Log.d("hallo", "monthly " + routine.getRoutineMonth());
+        }
+
+
+        //
+        int monthnext0 = routine.getRoutineNext();
+
+        if (cal.get(Calendar.MONTH) == routine.getRoutineMonth()  &&cal.get(Calendar.DAY_OF_MONTH) == monthnext0 && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth || cal.get(Calendar.MONTH) == routine.getRoutineMonth()  &&cal.get(Calendar.DAY_OF_MONTH) == monthnext0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth || cal.get(Calendar.MONTH) == routine.getRoutineMonth()  &&cal.get(Calendar.DAY_OF_MONTH) == monthnext0&& cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth || cal.get(Calendar.MONTH) == routine.getRoutineMonth()  &&cal.get(Calendar.DAY_OF_MONTH) == monthnext0 && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek && !routine.isEveryDay && routine.isEveryMonth || cal.get(Calendar.MONTH) > routine.getRoutineMonth()  &&cal.get(Calendar.DAY_OF_MONTH) < monthnext0 && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.isEveryDay &&  !routine.getIsEveryWeek && routine.isEveryMonth ) {
+
+            Log.d("hallo", "System zeit ist größer month plus 0 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(monthnext0+ 31);
+                routine.setRoutineWeek(myDay + 31);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus1 = routine.getRoutineNext() + 1;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus1 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 1 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 30);
+                routine.setRoutineWeek(myDay + 30);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus2 = routine.getRoutineNext() + 2;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus2 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 2 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 29);
+                routine.setRoutineWeek(myDay + 29);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+
+        monthplus3 = routine.getRoutineNext() + 3;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus3 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 3 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 28);
+                routine.setRoutineWeek(myDay + 28);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus4 = routine.getRoutineNext() + 4;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 4 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 27);
+                routine.setRoutineWeek(myDay + 27);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+
+        monthplus5 = routine.getRoutineNext() + 5;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus5 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 5 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 26);
+                routine.setRoutineWeek(myDay + 26);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus6 = routine.getRoutineNext() + 6;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus4 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus6 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 6 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay+ 25);
+                routine.setRoutineWeek(myDay + 25);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus7 = routine.getRoutineNext() + 7;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus7 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 7 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(routine.getRoutineDay() + 24);
+                routine.setRoutineWeek(myDay + 24);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus8 = routine.getRoutineNext() + 8;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus8 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 8 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 23);
+                routine.setRoutineWeek(myDay + 23);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus9 = routine.getRoutineNext() + 9;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus9 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 9 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 22);
+                routine.setRoutineWeek(myDay + 22);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus10 = routine.getRoutineNext() + 10;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 10 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 21);
+                routine.setRoutineWeek(myDay + 21);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus11 = routine.getRoutineNext() + 11;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus11 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 11 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 20);
+                routine.setRoutineWeek(myDay + 20);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus12 = routine.getRoutineNext() + 12;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus12 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus10 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 12 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 19);
+                routine.setRoutineWeek(myDay + 19);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus13 = routine.getRoutineNext() + 13;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus13 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 13 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 18);
+                routine.setRoutineWeek(myDay + 18);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus14 = routine.getRoutineNext() + 14;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus14 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 14 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 17);
+                routine.setRoutineWeek(myDay + 17);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+
+        monthplus15 = routine.getRoutineNext() + 15;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus15 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 15 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 16);
+                routine.setRoutineWeek(myDay + 16);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus16 = routine.getRoutineNext() + 16;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus16 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 16 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 15);
+                routine.setRoutineWeek(myDay + 15);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus17 = routine.getRoutineNext() + 17;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus17 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 17 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 14);
+                routine.setRoutineWeek(myDay + 14);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus18 = routine.getRoutineNext() + 18;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus18 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 18 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay+ 13);
+                routine.setRoutineWeek(myDay + 13);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus19 = routine.getRoutineNext() + 19;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus19 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 19 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 12);
+                routine.setRoutineWeek(myDay + 12);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus20 = routine.getRoutineNext() + 20;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus20 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 20 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay+ 11);
+                routine.setRoutineWeek(myDay + 11);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus21 = routine.getRoutineNext() + 21;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus21 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 21 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 10);
+                routine.setRoutineWeek(myDay + 10);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus22 = routine.getRoutineNext() + 22;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus22 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 22 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 9);
+                routine.setRoutineWeek(myDay + 9);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus23 = routine.getRoutineNext() + 23;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus23 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 23 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 8);
+                routine.setRoutineWeek(myDay + 8);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus24 = routine.getRoutineNext() + 24;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus24 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 24 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 7);
+                routine.setRoutineWeek(myDay + 7);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus25 = routine.getRoutineNext() + 25;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus25 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 25 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 6);
+                routine.setRoutineWeek(myDay + 6);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus26 = routine.getRoutineNext() + 26;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus26 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 26 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 5);
+                routine.setRoutineWeek(myDay + 5);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus27 = routine.getRoutineNext() + 27;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus27 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 27 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 4);
+                routine.setRoutineWeek(myDay + 4);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus28 = routine.getRoutineNext() + 28;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus28 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 28 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 3);
+                routine.setRoutineWeek(myDay + 3);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus29 = routine.getRoutineNext() + 29;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus29 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 29 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 2);
+                routine.setRoutineWeek(myDay + 2);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        monthplus30 = routine.getRoutineNext() + 30;
+
+
+        if (cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JANUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.FEBRUARY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MARCH || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.APRIL || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.MAY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JUNE || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.JULY || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.AUGUST || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.SEPTEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.OCTOBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.NOVEMBER || cal.get(Calendar.MONTH) >= routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) == monthplus30 && !routine.isEveryDay && !routine.getIsEveryWeek && routine.isEveryMonth && currentMonth == Calendar.DECEMBER) {
+
+            Log.d("hallo", "System zeit ist größer month plus 30 ");
+            cal.set(Calendar.YEAR, routine.getMyYearTask());
+            cal.set(Calendar.MONTH, myMonth + 1);
+            cal.set(Calendar.DAY_OF_MONTH, routine.getRoutineDay());
+            cal.set(Calendar.HOUR_OF_DAY, routine.getRoutineHour());
+            cal.set(Calendar.MINUTE, routine.getRoutineMinute());
+            cal.set(Calendar.SECOND, 000);
+            cal.set(Calendar.MILLISECOND, 000);
+
+            routine.setRoutineMills(cal.getTimeInMillis());
+            cal.setTimeInMillis(routine.getRoutineMills());
+            long mills = cal.getTimeInMillis();
+            routine.setRoutineMills(mills);
+
+            taskbiggerThanMonth = routine.getRoutineDay() + 31;
+
+            if (taskbiggerThanMonth >= 24) {
+
+                routine.setRoutineDay(routine.getRoutineDay());
+
+                routine.setRoutineWeek(routine.getRoutineNext());
+                routine.setRoutineMonth(myMonth + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+
+            } else {
+
+                routine.setRoutineDay(myDay + 1);
+                routine.setRoutineWeek(myDay + 1);
+                if (routine.getRoutineMonth() > 11) {
+                    routine.setRoutineMonth(0);
+                }
+                Log.d("hallo", "next = " + routine.getRoutineNext());
+                Log.d("hallo", "day = " + routine.getRoutineDay());
+                Log.d("hallo", "Month " + routine.getRoutineMonth());
+            }
+        } else {
+            Log.d("hallo", "funktoniert nicht ");
+        }
+
+        randomReqestCode = routine.rendemReqestCodeint + 79879;
+        taskManager.saveTaskList();
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(context, AlertReceiver.class);
+        intent.putExtra("taskgetName", routine.getName());
+        intent.putExtra("ScrollToTask", this.taskPosition);
+        Log.d("ScrollToPosition", "posituion =" + this.taskPosition);
+        intent.putExtra("taskgetIsNoVibration", routine.getIsVibrationNo());
+        intent.putExtra("taskgetIsShortVibration", routine.getIsVibrationShort());
+        intent.putExtra("taskgetIsMediumVibration", routine.getIsVibrationMedium());
+        intent.putExtra("taskgetIsLongVibration", routine.getIsVibrationLong());
+        intent.putExtra("randemAlarmReqest", randomReqestCode);
+        intent.putExtra("taskIsErveryDay", routine.isEveryDay);
+        intent.putExtra("taskIsEveryDayOnce", routine.isEveryDayOnce);
+        intent.putExtra("taskIsNormal", routine.getNotificationNormal());
+        intent.putExtra("taskIsLockScreen", routine.getNotificationlockScreen());
+
+
+        if (!DateFormat.is24HourFormat(context) && !routine.isEveryDay && !routine.isEveryMonth && !routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && !routine.isEveryDay && !routine.isEveryMonth && !routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
+        }
+
+        if (DateFormat.is24HourFormat(context) && !routine.isEveryDay && !routine.isEveryMonth && !routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist aus");
+        }
+
+        if (!DateFormat.is24HourFormat(context) && routine.isEveryDay) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
+            Log.d("t", "test ist daily");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.isEveryDay) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist daily");
+        }
+
+        if (DateFormat.is24HourFormat(context) && routine.isEveryDay) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
+            Log.d("t", "test ist daily");
+        }
+
+        if (!DateFormat.is24HourFormat(context) && routine.isEveryMonth) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
+            Log.d("t", "test ist montly");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.isEveryMonth) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist mothly");
+        }
+        if (DateFormat.is24HourFormat(context) && routine.isEveryMonth) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
+            Log.d("t", "test ist montly");
+        }
+
+        if (!DateFormat.is24HourFormat(context) && routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
+            Log.d("t", "test ist weekly");
+        } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime());
+            Log.d("t", "test ist weekly");
+        }
+        if (DateFormat.is24HourFormat(context) && routine.getIsEveryWeek) {
+            SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
+            taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
+            Log.d("t", "test ist weekly");
+        }
+
+
+        routine.setDate(taskAlarmDate);
+        routine.setRendemReqestCodeint(randomReqestCode);
+        Log.d("cal", "die zahl für Aufgabe  ist " + randomReqestCode);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, randomReqestCode, intent, 0);
+        TaskSettingsManager taskSettingsManager = new TaskSettingsManager(context);
+
+
+        if (routine.isEveryDay) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), AlarmManager.INTERVAL_DAY, pendingIntent);
+            Log.d("t", "wiederhlung ist jede Tag");
+
+
+        } else if (routine.getIsEveryWeek()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), AlarmManager.INTERVAL_DAY * 7, pendingIntent);
+
+            Log.d("t", "wiederhlung ist jede Woche");
+
+        } else if (routine.isEveryMonth) {
+            setMyMonth(routine, currentMonth, alarmManager, routine.getRoutineMills(), pendingIntent, cal);
+        }
+
+
+        if (!routine.isEveryDay && !routine.getIsEveryWeek && !routine.isEveryMonth) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getRoutineMills(), pendingIntent);
+            Log.d("t", "wiederhlung ist jede Tag");
+        }
+
+
+        Toast.makeText(context.getApplicationContext(), context.getString(R.string.NotficationStartToastPart1) + " " + routine.getAlarmDate(), Toast.LENGTH_LONG).show();
+        taskManager.saveTaskList();
+
     }
 
-    public void setMyMonth(Routine routine2, int currentMonth, AlarmManager alarmManager, long mills, PendingIntent pendingIntent, Calendar cal) {
-        if (routine2.isEveryMonth) {
-            if (currentMonth == 0 || currentMonth == 2 || currentMonth == 4 || currentMonth == 6 || currentMonth == 7 || currentMonth == 9 || currentMonth == 11) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    alarmManager.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
+
+    public void setMyMonth(Routine routine, int currentMonth, AlarmManager alarmManager, long mills, PendingIntent pendingIntent, Calendar cal) {
+
+        if (routine.isEveryMonth) {
+            if (currentMonth == Calendar.JANUARY || currentMonth == Calendar.MARCH || currentMonth == Calendar.MAY || currentMonth == Calendar.JULY || currentMonth == Calendar.AUGUST || currentMonth == Calendar.OCTOBER || currentMonth == Calendar.DECEMBER) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
                 }
-                alarmManager.setExact(0, routine2.getRoutineMills(), pendingIntent);
-                alarmManager.setRepeating(0, routine2.getRoutineMills(), 2678400000L, pendingIntent);
-            } else if (currentMonth == 3 || currentMonth == 5 || currentMonth == 8 || currentMonth == 10) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    alarmManager.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getMyMills(), AlarmManager.INTERVAL_DAY * 31, pendingIntent);
+
+            } else if (currentMonth == Calendar.APRIL || currentMonth == Calendar.JUNE || currentMonth == Calendar.SEPTEMBER || currentMonth == Calendar.NOVEMBER) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
                 }
-                alarmManager.setExact(0, routine2.getRoutineMills(), pendingIntent);
-                alarmManager.setRepeating(0, routine2.getRoutineMills(), 2592000000L, pendingIntent);
-            } else if (currentMonth == 1 && ((GregorianCalendar) GregorianCalendar.getInstance()).isLeapYear(cal.get(1))) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    alarmManager.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
+                alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getMyMills(), AlarmManager.INTERVAL_DAY * 30, pendingIntent);
+
+            } else if (currentMonth == Calendar.FEBRUARY) {//for february month)
+                GregorianCalendar gregorianCalendar = (GregorianCalendar) GregorianCalendar.getInstance();
+                if (gregorianCalendar.isLeapYear(cal.get(Calendar.YEAR))) {//for leap year february month
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                    }
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getMyMills(), AlarmManager.INTERVAL_DAY * 29, pendingIntent);
+
                 }
-                alarmManager.setExact(0, routine2.getRoutineMills(), pendingIntent);
-                alarmManager.setRepeating(0, routine2.getRoutineMills(), 2505600000L, pendingIntent);
+
             }
-            if (currentMonth == 1 && !((GregorianCalendar) GregorianCalendar.getInstance()).isLeapYear(cal.get(1))) {
-                if (Build.VERSION.SDK_INT >= 23) {
-                    alarmManager.setExactAndAllowWhileIdle(0, routine2.getRoutineMills(), pendingIntent);
+            if (currentMonth == Calendar.FEBRUARY) {//for february month)
+                GregorianCalendar gregorianCalendar1 = (GregorianCalendar) GregorianCalendar.getInstance();
+                if (!gregorianCalendar1.isLeapYear(cal.get(Calendar.YEAR))) {//for leap year february month
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                    }
+                    alarmManager.setExact(AlarmManager.RTC_WAKEUP, routine.getMyMills(), pendingIntent);
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, routine.getMyMills(), AlarmManager.INTERVAL_DAY * 28, pendingIntent);
+
                 }
-                alarmManager.setExact(0, routine2.getRoutineMills(), pendingIntent);
-                alarmManager.setRepeating(0, routine2.getRoutineMills(), 2419200000L, pendingIntent);
             }
         }
     }
+
+
+
 }
+
+
+
+
+
+
+
+
+

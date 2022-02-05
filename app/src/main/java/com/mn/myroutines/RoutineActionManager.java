@@ -22,40 +22,7 @@ public class RoutineActionManager {
         this.routineSettingsManager = new RoutineSettingsManager(context2);
     }
 
-    /* JADX DEBUG: Multi-variable search result rejected for r8v1, resolved type: android.media.AudioManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v31, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v82, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v131, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v180, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v229, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v278, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v327, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v376, resolved type: android.net.wifi.WifiManager */
-    /* JADX DEBUG: Multi-variable search result rejected for r0v425, resolved type: android.net.wifi.WifiManager */
-    /* JADX WARN: Multi-variable type inference failed */
-    /* JADX WARN: Type inference failed for: r14v1, types: [int, boolean] */
-    /* JADX WARN: Type inference failed for: r14v2 */
-    /* JADX WARN: Type inference failed for: r14v3 */
-    /* JADX WARN: Type inference failed for: r14v4 */
-    /* JADX WARN: Type inference failed for: r14v5 */
-    /* JADX WARN: Type inference failed for: r14v6 */
-    /* JADX WARN: Type inference failed for: r14v7 */
-    /* JADX WARN: Type inference failed for: r14v8 */
-    /* JADX WARN: Type inference failed for: r14v9 */
-    /* JADX WARN: Type inference failed for: r14v10 */
-    /* JADX WARN: Type inference failed for: r14v11 */
-    /* JADX WARN: Type inference failed for: r14v12 */
-    /* JADX WARN: Type inference failed for: r14v13 */
-    /* JADX WARN: Type inference failed for: r14v14 */
-    /* JADX WARN: Type inference failed for: r14v15 */
-    /* JADX WARN: Type inference failed for: r14v16 */
-    /* JADX WARN: Type inference failed for: r14v17 */
-    /* JADX WARN: Type inference failed for: r14v18 */
-    /* JADX WARN: Type inference failed for: r14v19 */
-    /* JADX WARN: Type inference failed for: r14v20 */
-    /* JADX WARN: Type inference failed for: r14v21 */
-    /* JADX WARN: Type inference failed for: r14v22 */
-    /* JADX WARNING: Unknown variable types count: 1 */
+
     public void startRoutine(final Routine routine) {
 
         AudioManager am = (AudioManager) this.context.getSystemService(Context.AUDIO_SERVICE);
@@ -163,10 +130,10 @@ public class RoutineActionManager {
 
             } else if (routine.getRoutineSlot1() == 10) {
                 if (Build.VERSION.SDK_INT >= 29) {
-
+                        wifiManager.setWifiEnabled(false);
 
                 } else {
-                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
 
                 }
             } else if (routine.getRoutineSlot1() != 11) {
