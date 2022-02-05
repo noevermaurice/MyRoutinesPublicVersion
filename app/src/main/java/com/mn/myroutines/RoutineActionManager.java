@@ -5,9 +5,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
+import android.media.audiofx.Equalizer;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.CountDownTimer;
+import android.provider.Settings;
 
 public class RoutineActionManager {
     Context context;
@@ -58,73 +60,39 @@ public class RoutineActionManager {
 
         AudioManager am = (AudioManager) this.context.getSystemService(Context.AUDIO_SERVICE);
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        WifiManager wifiManager = (WifiManager) this.context.getSystemService(Context.WIFI_SERVICE);
         if (routine.getRoutineSlot1() == 0) {
-           /* str = "wifi";
-            str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-            seconds = 1;
-            r14 = 0;
 
-            */
+
+
         } else if (routine.getRoutineSlot1() == 1) {
             if (bluetoothAdapter.isEnabled()) {
                 bluetoothAdapter.disable();
-               /* str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
 
-                */
+
+
             } else {
-               /* str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
 
-                */
+
+
             }
         } else if (routine.getRoutineSlot1() == 2) {
             if (!bluetoothAdapter.isEnabled()) {
                 bluetoothAdapter.enable();
-               /* str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
 
-                */
-            } else {
-               /* str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
-
-                */
             }
         } else if (routine.getRoutineSlot1() == 3) {
             if (Build.VERSION.SDK_INT >= 28) {
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
-               /* str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
 
-                */
             } else {
                 am.adjustStreamVolume(3, am.getStreamMaxVolume(3), 0);
-                /*str = "wifi";
-                str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-                seconds = 1;
-                r14 = 0;
 
-                 */
+
             }
         } else if (routine.getRoutineSlot1() == 4) {
             am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
-           /* str = "wifi";
-            str2 = "android.settings.panel.action.INTERNET_CONNECTIVITY";
-            seconds = 1;
-            r14 = 0;
 
-            */
         } else if (routine.getRoutineSlot1() == 5) {
             if (Build.VERSION.SDK_INT >= 28) {
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
@@ -195,16 +163,16 @@ public class RoutineActionManager {
 
             } else if (routine.getRoutineSlot1() == 10) {
                 if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+
 
                 } else {
-                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                 }
             } else if (routine.getRoutineSlot1() != 11) {
 
             } else if (Build.VERSION.SDK_INT >= 29) {
-                this.context.startActivity(new Intent(str2));
+
 
             } else {
 
@@ -237,10 +205,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot2() == 6) {
@@ -251,10 +221,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot2() == 7) {
@@ -296,31 +268,31 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot2() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot2() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+                //am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot3() != 0) {
-            if (routine.getRoutineSlot3() == seconds) {
+            if (routine.getRoutineSlot3() == 1) {
                 if (bluetoothAdapter.isEnabled()) {
                     bluetoothAdapter.disable();
 
@@ -345,10 +317,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot3() == 6) {
@@ -359,10 +333,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot3() == 7) {
@@ -404,27 +380,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot3() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot3() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+                //am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot4() != 0) {
@@ -453,10 +429,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot4() == 6) {
@@ -467,10 +445,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                        /*am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                         */
 
                     }
                 } else if (routine.getRoutineSlot4() == 7) {
@@ -512,27 +492,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot4() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot4() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+                //am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot5() != 0) {
@@ -561,10 +541,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot5() == 6) {
@@ -575,10 +557,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                        /*am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                         */
 
                     }
                 } else if (routine.getRoutineSlot5() == 7) {
@@ -620,27 +604,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot5() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot5() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+               // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot6() != 0) {
@@ -669,10 +653,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                        /*am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                         */
 
                     }
                 } else if (routine.getRoutineSlot6() == 6) {
@@ -683,10 +669,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                        /*am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                         */
 
                     }
                 } else if (routine.getRoutineSlot6() == 7) {
@@ -728,27 +716,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot6() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot6() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+               // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot7() != 0) {
@@ -777,10 +765,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot7() == 6) {
@@ -791,10 +781,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot7() == 7) {
@@ -836,27 +828,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot6() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot6() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+               // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot8() != 0) {
@@ -885,10 +877,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                      /*  am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                       */
 
                     }
                 } else if (routine.getRoutineSlot8() == 6) {
@@ -899,10 +893,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot8() == 7) {
@@ -944,27 +940,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot8() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot8() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+               // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot9() != 0) {
@@ -993,10 +989,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                       /* am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                        */
 
                     }
                 } else if (routine.getRoutineSlot9() == 6) {
@@ -1007,10 +1005,12 @@ public class RoutineActionManager {
                         am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
                         am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     } else {
-                        am.setStreamVolume(3, -100, r14);
+                        /*am.setStreamVolume(3, -100, r14);
                         am.adjustStreamVolume(1, -100, r14);
                         am.adjustStreamVolume(4, -100, r14);
                         am.adjustStreamVolume(5, -100, r14);
+
+                         */
 
                     }
                 } else if (routine.getRoutineSlot9() == 7) {
@@ -1052,27 +1052,27 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot9() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(str2));
+                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                     } else {
-                        ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                        ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
                 } else if (routine.getRoutineSlot9() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
 
                 } else {
 
-                    ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
                 }
             } else if (Build.VERSION.SDK_INT >= 28) {
 
                 am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
             } else {
 
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+               // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
             }
         }
         if (routine.getRoutineSlot10() != 0) {
@@ -1088,7 +1088,7 @@ public class RoutineActionManager {
                 if (Build.VERSION.SDK_INT >= 28) {
                     am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
                 } else {
-                    am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
+                   // am.adjustStreamVolume(3, am.getStreamMaxVolume(3), r14);
                 }
             } else if (routine.getRoutineSlot10() == 4) {
                 am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
@@ -1100,10 +1100,12 @@ public class RoutineActionManager {
                     am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
                     return;
                 }
-                am.setStreamVolume(3, -100, r14);
+               /* am.setStreamVolume(3, -100, r14);
                 am.adjustStreamVolume(1, -100, r14);
                 am.adjustStreamVolume(4, -100, r14);
                 am.adjustStreamVolume(5, -100, r14);
+
+                */
             } else if (routine.getRoutineSlot10() == 6) {
                 if (Build.VERSION.SDK_INT >= 28) {
                     am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
@@ -1113,10 +1115,12 @@ public class RoutineActionManager {
                     return;
                 }
 
-                am.setStreamVolume(3, -100, i);
+               /* am.setStreamVolume(3, -100, i);
                 am.adjustStreamVolume(1, -100, r14);
                 am.adjustStreamVolume(4, -100, r14);
                 am.adjustStreamVolume(5, -100, r14);
+
+                */
             } else if (routine.getRoutineSlot10() == 7) {
                 if (Build.VERSION.SDK_INT >= 28) {
                     am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
@@ -1152,17 +1156,17 @@ public class RoutineActionManager {
                 this.context.startActivity(intent10);
             } else if (routine.getRoutineSlot10() == 10) {
                 if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
                     return;
                 }
-                ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(r14);
+                ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
             } else if (routine.getRoutineSlot10() != 11) {
             } else {
                 if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(str2));
+                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
                     return;
                 }
-                ((WifiManager) this.context.getSystemService(str)).setWifiEnabled(true);
+                ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
             }
         }
     }
