@@ -14,12 +14,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="myPopupMenuTextAppearanceLarge" parent="@android:style/TextAppearance.DeviceDefault.Widget.PopupMenu.Large">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textColor">@color/black_white</item>
-        <item name="backgroundColor">@color/white_black</item>
-    </style>
-
     <style name="AlertDialogPrefercesOrange" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:textColorPrimary">@color/black_white</item>
         <item name="android:background">@color/recylerviewColor</item>

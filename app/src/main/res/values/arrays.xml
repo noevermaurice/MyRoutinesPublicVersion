@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="CustomDialogListArray">
-        <item>test</item>
-    </array>
     <array name="pref_AppTime_entries">
         <item>1 sek</item>
         <item>2 sek</item>

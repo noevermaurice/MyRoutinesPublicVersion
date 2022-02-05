@@ -34,22 +34,22 @@ public class RoutineListAdapter extends RecyclerView.Adapter<RoutineViewHolder> 
         final Routine routine = this.routineManager.routineList.get(position);
         holder.textViewRoutineHeadline.setText(routine.getRoutineName());
         holder.textViewRoutineDecsription.setText(routine.getDescriptionText());
-        holder.imageViewNotification.setVisibility(4);
+        holder.imageViewNotification.setVisibility(View.INVISIBLE);
         Log.d("RoutineListAdapter", "routine alarm date" + routine.getRoutineAlarmDate());
         if (routine.getIsNotification()) {
-            holder.imageViewNotification.setVisibility(0);
-            holder.textViewAlarmDate.setVisibility(0);
+            holder.imageViewNotification.setVisibility(View.VISIBLE);
+            holder.textViewAlarmDate.setVisibility(View.VISIBLE);
             holder.textViewAlarmDate.setText(routine.getRoutineAlarmDate());
         } else {
-            holder.imageViewNotification.setVisibility(4);
-            holder.textViewAlarmDate.setVisibility(4);
+            holder.imageViewNotification.setVisibility(View.INVISIBLE);
+            holder.textViewAlarmDate.setVisibility(View.INVISIBLE);
         }
         holder.imageViewPlayRoutine.setOnClickListener(new View.OnClickListener() {
             /* class com.mn.myroutines.RoutineListAdapter.AnonymousClass1 */
 
             public void onClick(View view) {
                 new RoutineActionManager(RoutineListAdapter.this.context, RoutineListAdapter.this.mainActivity).startRoutine(routine);
-                Toast.makeText(RoutineListAdapter.this.context, RoutineListAdapter.this.context.getString(R.string.RoutineRun), 0).show();
+                Toast.makeText(RoutineListAdapter.this.context, RoutineListAdapter.this.context.getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
             }
         });
         holder.deleteRoutine.setOnClickListener(new View.OnClickListener() {
