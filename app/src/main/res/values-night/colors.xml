@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#FF9800</color>
+    <color name="colorAccent">#FF9800</color>
+
+    <color name="black_white">#fff</color>
+
+    <color name="recylerviewColor">#121212</color>
+    <color name="white_black">#121212</color>
+</resources>
