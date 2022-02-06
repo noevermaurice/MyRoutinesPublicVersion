@@ -51,4 +51,15 @@
     <string name="pref_DarkMode_default_value">System settings</string>
     <string name="runApp">starte App</string>
     <string name="runTimer">starte Timer</string>
+
+
+    <string name="TaskNotificationChannelNameNo">Aufgaben Benachrichtigungs Kanal keine Vibration</string>
+    <string name="TaskNotificationChannelNameShort">Aufgaben Benachrichtigungs Kanal kurze Vibration</string>
+    <string name="TaskNotificationChannelNameMedium">Aufgaben Benachrichtigungs Kanal mittlere Vibration</string>
+    <string name="TaskNotificationChannelNameLong">Aufgaben Benachrichtigungs Kanal lange Vibration</string>
+    <string name="NotficationStartToastPart1">Benachrichtigung für</string>
+    <string name="TaskNotificationChannelName">Aufgaben Benachrichtigungs Kanal</string>
+    <string name="NotificationCanelToast">Benachrichtigung abgebrochen</string>
+    <string name="NotficationTaskIsfinished">Ja, abhaken</string>
+
 </resources>

@@ -11,10 +11,10 @@ public class AlertReceiver extends BroadcastReceiver {
         int routinePosition = intent.getIntExtra("routinePosition", 0);
         Log.d("AlertReceiver", "position" + routinePosition);
         boolean notSwipping = intent.getBooleanExtra("NotSwipping", false);
-        boolean isNoVibration = intent.getBooleanExtra("taskgetIsNoVibration", false);
-        boolean isShortVibration = intent.getBooleanExtra("taskgetIsShortVibration", false);
-        boolean isMediumVibration = intent.getBooleanExtra("taskgetIsMediumVibration", false);
-        boolean isLongVibration = intent.getBooleanExtra("taskgetIsLongVibration", false);
+        boolean isNoVibration = intent.getBooleanExtra("routineGetIsNoVibration", false);
+        boolean isShortVibration = intent.getBooleanExtra("routineGetIsShortVibration", false);
+        boolean isMediumVibration = intent.getBooleanExtra("routineGetIsMediumVibration", false);
+        boolean isLongVibration = intent.getBooleanExtra("routineGetIsLongVibration", false);
         RoutineManager routineManager = new RoutineManager(context);
         RoutineActionManager routineActionManager = new RoutineActionManager(context, new MainActivity());
         if (!isNoVibration && !isShortVibration && !isMediumVibration && !isLongVibration && !notSwipping) {

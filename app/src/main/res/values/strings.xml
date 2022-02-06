@@ -52,4 +52,19 @@
     <string name="runApp">run app</string>
     <string name="runTimer">run timer</string>
     <string name="NotficationStartToastPart1">Notification for</string>
+
+
+    <string name="TaskNotificationChannelName">Task Notification Channel</string>
+    <string name="TaskNotificationChannelNameNo">Task Notification Channel no Vibration</string>
+    <string name="TaskNotificationChannelNameShort">Task Notification Channel short Vibration</string>
+    <string name="TaskNotificationChannelNameMedium">Task Notification Channel medium Vibration</string>
+    <string name="TaskNotificationChannelNameLong">Task Notification Channel long Vibration</string>
+
+
+
+
+    <string name="NotificationCanelToast"> Notification canceled </string>
+    <string name="NotficationTaskIsfinished">Yes, checked</string>
+
+
 </resources>
