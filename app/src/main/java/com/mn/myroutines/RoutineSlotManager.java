@@ -2081,17 +2081,22 @@ public class RoutineSlotManager {
       com.mn.myroutines.NotificationManager notificationManager = new NotificationManager(context, routineManager, intent);
         notificationManager.startAlarm(routine, this.randemQuestCode, this.myYear, this.myMonth, this.myDay, this.myHour, this.myMinute, routineAlarmDate2);
 
-        Log.d("RoutineSlotManager", "position notification" + routine.getRoutinePosition());
-        notificationManager.updateStartAlarm(routine.routinePosition, routine, this.myYear, this.myMonth, this.myDay, this.myHour, this.myMinute, this.routinebiggerThanMonth,  this.monthplus1, this.monthplus2, this.monthplus3, this.monthplus4, this.monthplus5, this.monthplus6, this.monthplus7, this.monthplus8, this.monthplus9, this.monthplus10, this.monthplus11, this.monthplus12, this.monthplus13, this.monthplus14, this.monthplus15, this.monthplus16, this.monthplus17, this.monthplus18, this.monthplus19, this.monthplus20,this.monthplus21, this.monthplus22, this.monthplus23, this.monthplus24, this.monthplus25, this.monthplus26, this.monthplus27, this.monthplus28,this.monthplus29, this.monthplus30);
-        new NotificationHelper(this.context, intent);
-        new NotificationHelper(this.context, intent);
-        if (!update) {
-            this.routineManager.addRoutine(routine);
-            routine.setRoutinePosition(this.routineManager.getRoutineCount());
+        if(routine.isNotfaction){
+            notificationManager.cancelAlarm(routine);
+            Log.d("RoutineSlotManager", "position notification" + routine.getRoutinePosition());
+            notificationManager.updateStartAlarm(routine.routinePosition, routine, this.myYear, this.myMonth, this.myDay, this.myHour, this.myMinute, this.routinebiggerThanMonth,  this.monthplus1, this.monthplus2, this.monthplus3, this.monthplus4, this.monthplus5, this.monthplus6, this.monthplus7, this.monthplus8, this.monthplus9, this.monthplus10, this.monthplus11, this.monthplus12, this.monthplus13, this.monthplus14, this.monthplus15, this.monthplus16, this.monthplus17, this.monthplus18, this.monthplus19, this.monthplus20,this.monthplus21, this.monthplus22, this.monthplus23, this.monthplus24, this.monthplus25, this.monthplus26, this.monthplus27, this.monthplus28,this.monthplus29, this.monthplus30);
+            new NotificationHelper(this.context, intent);
+            new NotificationHelper(this.context, intent);
+            if (!update) {
+                this.routineManager.addRoutine(routine);
+                routine.setRoutinePosition(this.routineManager.getRoutineCount());
+                this.routineManager.saveRoutineList();
+                return;
+            }
+            this.routineManager.routineList.set(position, routine);
             this.routineManager.saveRoutineList();
-            return;
         }
-        this.routineManager.routineList.set(position, routine);
-        this.routineManager.saveRoutineList();
-    }
+        }
+
+
 }

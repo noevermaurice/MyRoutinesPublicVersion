@@ -104,63 +104,63 @@ public class NotificationManager {
         if (!DateFormat.is24HourFormat(context) && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist aus");
+            Log.d("t", "test ist aus" + taskAlarmDate);
         } else if (!Locale.getDefault().getISO3Language().equals("de") && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist aus");
+            Log.d("t", "test ist aus" + taskAlarmDate);
         }
 
         if (DateFormat.is24HourFormat(context) && !routine.getIsEveryDay() && !routine.getIsEveryMonth() && !routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist aus");
+            Log.d("t", "test ist aus" + taskAlarmDate);
         }
 
         if (!DateFormat.is24HourFormat(context) && routine.getIsEveryDay()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
-            Log.d("t", "test ist daily");
+            Log.d("t", "test ist daily" + taskAlarmDate);
         } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryDay()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist daily");
+            Log.d("t", "test ist daily" + taskAlarmDate);
         }
 
         if (DateFormat.is24HourFormat(context) && routine.getIsEveryDay()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + daily;
-            Log.d("t", "test ist daily");
+            Log.d("t", "test ist daily" + taskAlarmDate);
         }
 
         if (!DateFormat.is24HourFormat(context) && routine.getIsEveryMonth()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
-            Log.d("t", "test ist montly");
+            Log.d("t", "test ist montly" + taskAlarmDate);
         } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryMonth()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist mothly");
+            Log.d("t", "test ist mothly" + taskAlarmDate);
         }
         if (DateFormat.is24HourFormat(context) && routine.getIsEveryMonth()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM  HH:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + monthly;
-            Log.d("t", "test ist montly");
+            Log.d("t", "test ist montly" + taskAlarmDate);
         }
 
         if (!DateFormat.is24HourFormat(context) && routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
-            Log.d("t", "test ist weekly");
+            Log.d("t", "test ist weekly" + taskAlarmDate);
         } else if (!Locale.getDefault().getISO3Language().equals("de") && routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd hh:mm yyyy");
             taskAlarmDate = format.format(cal.getTime());
-            Log.d("t", "test ist weekly");
+            Log.d("t", "test ist weekly" + taskAlarmDate);
         }
         if (DateFormat.is24HourFormat(context) && routine.getIsEveryWeek()) {
             SimpleDateFormat format = new SimpleDateFormat("EEE dd MMM HH:mm yyyy");
             taskAlarmDate = format.format(cal.getTime()) + ", " + weekly;
-            Log.d("t", "test ist weekly");
+            Log.d("t", "test ist weekly" + taskAlarmDate);
         }
 
 
