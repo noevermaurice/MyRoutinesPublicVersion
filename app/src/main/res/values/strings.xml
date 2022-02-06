@@ -51,4 +51,5 @@
     <string name="pref_DarkMode_default_value">System settings</string>
     <string name="runApp">run app</string>
     <string name="runTimer">run timer</string>
+    <string name="NotficationStartToastPart1">Notification for</string>
 </resources>
