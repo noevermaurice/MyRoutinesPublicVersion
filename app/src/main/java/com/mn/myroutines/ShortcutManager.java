@@ -44,7 +44,7 @@ public class ShortcutManager {
             ShortcutManagerCompat.requestPinShortcut(this.context, new ShortcutInfoCompat.Builder(this.context, String.valueOf(this.randemID)).setIntent(intent).setShortLabel(shotcutName2).setIcon(IconCompat.createWithResource(this.context, R.drawable.ic_baseline_play_arrow_24)).build(), null);
             this.isSave = true;
             Context context2 = this.context;
-            Toast.makeText(context2, context2.getString(R.string.AddRoutineToHomeScreen), 0).show();
+            Toast.makeText(context2, context2.getString(R.string.AddRoutineToHomeScreen), Toast.LENGTH_SHORT).show();
             this.activity.finish();
         }
     }
