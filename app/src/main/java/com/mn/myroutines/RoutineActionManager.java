@@ -10,6 +10,7 @@ import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.provider.Settings;
+import android.util.Log;
 
 public class RoutineActionManager {
     Context context;
@@ -130,7 +131,9 @@ public class RoutineActionManager {
 
             } else if (routine.getRoutineSlot1() == 10) {
                 if (Build.VERSION.SDK_INT >= 29) {
-                        wifiManager.setWifiEnabled(false);
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
                     ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
@@ -236,7 +239,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot2() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -245,7 +250,8 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot2() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+                    context.startService(panelIntent);
 
                 } else {
 
@@ -348,7 +354,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot3() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(SettingsActivity.WIFI_SERVICE));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -460,7 +468,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot4() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -572,7 +582,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot5() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -684,7 +696,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot6() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -796,13 +810,15 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot6() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
 
                     }
-                } else if (routine.getRoutineSlot6() != 11) {
+                } else if (routine.getRoutineSlot7() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
                     this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
@@ -908,7 +924,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot8() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -917,7 +935,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot8() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -1020,7 +1040,9 @@ public class RoutineActionManager {
 
                 } else if (routine.getRoutineSlot9() == 10) {
                     if (Build.VERSION.SDK_INT >= 29) {
-                        this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                        mainActivity.startActivityForResult(panelIntent, 1);
 
                     } else {
                         ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
@@ -1029,7 +1051,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot9() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -1124,14 +1148,18 @@ public class RoutineActionManager {
                 this.context.startActivity(intent10);
             } else if (routine.getRoutineSlot10() == 10) {
                 if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
                     return;
                 }
                 ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(true);
             } else if (routine.getRoutineSlot10() != 11) {
             } else {
                 if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
                     return;
                 }
                 ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
