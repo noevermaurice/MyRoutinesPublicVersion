@@ -159,16 +159,12 @@ public class RoutineSlotManager {
     }
 
     public void setDefaultSlots() {
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
+
+        for (int i = 0;  i<10; i++){
+            this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
+        }
+
+
         this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
     }
 
