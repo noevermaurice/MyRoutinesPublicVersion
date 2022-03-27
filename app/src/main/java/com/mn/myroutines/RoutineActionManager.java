@@ -142,7 +142,9 @@ public class RoutineActionManager {
             } else if (routine.getRoutineSlot1() != 11) {
 
             } else if (Build.VERSION.SDK_INT >= 29) {
+                Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
 
+                mainActivity.startActivityForResult(panelIntent, 1);
 
             } else {
 
@@ -251,7 +253,8 @@ public class RoutineActionManager {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
                     Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
-                    context.startService(panelIntent);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -365,7 +368,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot3() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -479,7 +484,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot4() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -593,7 +600,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot5() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -707,7 +716,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot6() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
@@ -821,7 +832,9 @@ public class RoutineActionManager {
                 } else if (routine.getRoutineSlot7() != 11) {
 
                 } else if (Build.VERSION.SDK_INT >= 29) {
-                    this.context.startActivity(new Intent(WifiManager.ACTION_PICK_WIFI_NETWORK));
+                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+                    mainActivity.startActivityForResult(panelIntent, 1);
 
                 } else {
 
