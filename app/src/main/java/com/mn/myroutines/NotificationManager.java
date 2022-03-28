@@ -77,6 +77,11 @@ public class NotificationManager {
         int currentMonth = cal.get(Calendar.MONTH);
         long mills = cal.getTimeInMillis();
         routine.setRoutineMills(mills);
+        routine.setRoutineYear(myYear);
+        routine.setRoutineMonth(myMonth);
+        routine.setRoutineDay(myDay);
+        routine.setRoutineHour(myHour);
+        routine.setRoutineMinute(myMinute);
         Log.d("cal", "das datum ist " + routine.getRoutineMills());
 
         randomReqestCode = random.nextInt(routineManager.getRoutineCount() + 7759);
@@ -269,8 +274,9 @@ public class NotificationManager {
 
         Log.d("hallo", "update alarm run");
         Log.d("hallo", "day in update methode " + routine.getRoutineDay());
-        Log.d("hallo", "minute in update methode " + routine.getTimerMinutes());
-        Log.d("hallo", "hour in update methode " + myHour);
+        Log.d("hallo", "minute in update methode " + routine.getRoutineMinute());
+        Log.d("hallo", "hour in update methode " + routine.getRoutineHour());
+
 
 
 
