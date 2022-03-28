@@ -267,6 +267,14 @@ public class NotificationManager {
 
 
 
+        Log.d("hallo", "update alarm run");
+        Log.d("hallo", "day in update methode " + routine.getRoutineDay());
+        Log.d("hallo", "minute in update methode " + routine.getTimerMinutes());
+        Log.d("hallo", "hour in update methode " + myHour);
+
+
+
+
         // calender system zeit kleiner
         if (cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) >= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour() && cal.get(Calendar.MINUTE) > routine.getRoutineMinute() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth()  || cal.get(Calendar.MONTH) < routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) <= routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) > routine.getRoutineHour() && !routine.getIsEveryWeek() && !routine.getIsEveryDay() && !routine.getIsEveryMonth() || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) == routine.getRoutineHour() && cal.get(Calendar.MINUTE) < routine.getRoutineMinute() && !routine.getIsEveryDay() && ! routine.getIsEveryWeek() && !routine.getIsEveryMonth() || cal.get(Calendar.MONTH) > routine.getRoutineMonth() && cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && cal.get(Calendar.HOUR_OF_DAY) < routine.getRoutineHour()  && !routine.getIsEveryDay() && ! routine.getIsEveryWeek() && !routine.getIsEveryMonth() || cal.get(Calendar.DAY_OF_MONTH) < routine.getRoutineDay() && !routine.getIsEveryDay() && !routine.getIsEveryWeek() && !routine.getIsEveryMonth()) {
             Log.d("hallo", "System zeit ist kleiner no");
@@ -1851,8 +1859,6 @@ public class NotificationManager {
             }
 
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus1 = routine.getRoutineNext() + 1;
@@ -1903,8 +1909,6 @@ public class NotificationManager {
             }
 
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus2 = routine.getRoutineNext() + 2;
@@ -1955,8 +1959,6 @@ public class NotificationManager {
             }
 
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
 
@@ -2007,8 +2009,6 @@ public class NotificationManager {
             }
 
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus4 = routine.getRoutineNext() + 4;
@@ -2059,8 +2059,6 @@ public class NotificationManager {
             }
 
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
 
@@ -2111,8 +2109,6 @@ public class NotificationManager {
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
 
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus6 = routine.getRoutineNext() + 6;
@@ -2160,8 +2156,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus7 = routine.getRoutineNext() + 7;
@@ -2210,8 +2204,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus8 = routine.getRoutineNext() + 8;
@@ -2260,8 +2252,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus9 = routine.getRoutineNext() + 9;
@@ -2310,8 +2300,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus10 = routine.getRoutineNext() + 10;
@@ -2360,8 +2348,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus11 = routine.getRoutineNext() + 11;
@@ -2410,8 +2396,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus12 = routine.getRoutineNext() + 12;
@@ -2460,8 +2444,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus13 = routine.getRoutineNext() + 13;
@@ -2510,10 +2492,7 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
-
         monthplus14 = routine.getRoutineNext() + 14;
 
 
@@ -2560,8 +2539,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
 
@@ -2611,8 +2588,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus16 = routine.getRoutineNext() + 16;
@@ -2661,8 +2636,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus17 = routine.getRoutineNext() + 17;
@@ -2710,8 +2683,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus18 = routine.getRoutineNext() + 18;
@@ -2760,8 +2731,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus19 = routine.getRoutineNext() + 19;
@@ -2810,8 +2779,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus20 = routine.getRoutineNext() + 20;
@@ -2860,8 +2827,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus21 = routine.getRoutineNext() + 21;
@@ -2910,8 +2875,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus22 = routine.getRoutineNext() + 22;
@@ -2960,8 +2923,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus23 = routine.getRoutineNext() + 23;
@@ -3010,8 +2971,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus24 = routine.getRoutineNext() + 24;
@@ -3060,8 +3019,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus25 = routine.getRoutineNext() + 25;
@@ -3110,8 +3067,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus26 = routine.getRoutineNext() + 26;
@@ -3160,8 +3115,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus27 = routine.getRoutineNext() + 27;
@@ -3210,8 +3163,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus28 = routine.getRoutineNext() + 28;
@@ -3260,8 +3211,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus29 = routine.getRoutineNext() + 29;
@@ -3310,8 +3259,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         monthplus30 = routine.getRoutineNext() + 30;
@@ -3360,8 +3307,6 @@ public class NotificationManager {
                 Log.d("hallo", "day = " + routine.getRoutineDay());
                 Log.d("hallo", "Month " + routine.getRoutineMonth());
             }
-        } else {
-            Log.d("hallo", "funktoniert nicht ");
         }
 
         randomReqestCode = routine.rendemReqestCodeint + 79879;
