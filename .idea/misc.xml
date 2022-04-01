@@ -5,7 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_tutorial.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/custom_notification_dialog.xml" value="0.16983695652173914" />
-        <entry key="app/src/main/res/layout/listview_action_row.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/listview_action_row.xml" value="1.2293675740559895" />
+        <entry key="app/src/main/res/layout/login_screen.xml" value="0.37092391304347827" />
         <entry key="app/src/main/res/layout/routine_create_listview.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/routine_row.xml" value="0.67" />
         <entry key="app/src/main/res/layout/set_timer.xml" value="0.18432971014492755" />
@@ -13,7 +14,7 @@
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.2786458333333333" />
         <entry key="app/src/main/res/menu/main_menue.xml" value="0.2786458333333333" />
         <entry key="app/src/main/res/menu/menu_add_edit_activity.xml" value="0.2786458333333333" />
-        <entry key="app/src/main/res/xml/preferences.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/xml/preferences.xml" value="0.5812444051106771" />
       </map>
     </option>
   </component>

@@ -27,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.mn.myroutines.SettingsActivity"/>
+        <activity android:name=".LoginScreen"/>
         <receiver android:name="com.mn.myroutines.AlertReceiver"/>
     </application>
 </manifest>

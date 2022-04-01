@@ -6,5 +6,6 @@
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/about_myroutines">
         <Preference android:title="Tutorial" android:key="TutorialKey"/>
+        <Preference android:title="Login in MyRoutinesPro" android:key="MyRoutinesProKey"/>
     </PreferenceCategory>
 </PreferenceScreen>

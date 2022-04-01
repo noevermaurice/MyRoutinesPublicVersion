@@ -174,6 +174,15 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
+
+        getPreferenceScreen().findPreference("MyRoutinesProKey").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Intent intent = new Intent(SettingsFragment.this.getActivity(), LoginScreen.class);
+                SettingsFragment.this.getActivity().startActivity(intent);
+                return true;
+            }
+        });
     }
 
     /* access modifiers changed from: private */
