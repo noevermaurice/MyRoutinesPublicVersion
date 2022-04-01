@@ -17,7 +17,7 @@ public class RoutineCreateListView extends AppCompatDialogFragment {
         getActivity().getLayoutInflater().inflate(R.layout.routine_create_listview, (ViewGroup) null);
         String[] strArr = {"hh"};
         builder.setTitle("Haalo");
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.listview_action_row);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.custom_list_view_row);
         arrayAdapter.add("Hardik");
         arrayAdapter.add("Archit");
         arrayAdapter.add("Jignesh");

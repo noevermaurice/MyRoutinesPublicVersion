@@ -150,6 +150,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String wifiOff;
     public String wifiOn;
 
+
     /* access modifiers changed from: protected */
     @Override // androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity
     public void onCreate(Bundle savedInstanceState) {
@@ -219,6 +220,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.chooseAppText = textView;
         textView.setVisibility(4);
         this.AllRoutinesActionText = (TextView) findViewById(R.id.textViewAllRoutinesActions);
+
     }
 
     private void initClickListener() {
