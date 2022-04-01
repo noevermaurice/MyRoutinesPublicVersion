@@ -200,7 +200,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.listViewForApps = (ListView) findViewById(R.id.listViewForApps);
         this.listView = (ListView) findViewById(R.id.listviewAddAction);
         this.listViewForApps.setVisibility(4);
-        this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
+
         this.arrayList = new ArrayList<>();
         this.ArrayListSlotDefault = getString(R.string.NoAction);
         this.noActionString = getString(R.string.NoAction);

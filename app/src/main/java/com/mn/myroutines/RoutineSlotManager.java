@@ -123,7 +123,13 @@ public class RoutineSlotManager {
     private String wifiOff;
     private String wifiOn;
 
-    public RoutineSlotManager(Context context2, Activity activity2, ListView listView2, ListviewAdapterRoutine listviewAdapterRoutine2, String ArrayListSlotDefault2, String newActionString2, String noActionString2, String bluetoothOffString2, String bluetothOnString2, String mediaVolumeMuteString2, String mediaVolumeMaxString2, String speakerVolumeMute2, String speakerVolumeVibration2, String speakerVolumeMax2, String runApp2, String runTimer2, String wifiOff2, String wifiOn2, int listviewItemPosition2, int routinelistPositionSlot12, int routinelistPositionSlot22, int routinelistPositionSlot32, int routinelistPositionSlot42, int routinelistPositionSlot52, int routinelistPositionSlot62, int routinelistPositionSlot72, int routinelistPositionSlot82, int routinelistPositionSlot92, int routinelistPositionSlot102, int whichSlotPosition2, EditText editText2) {
+
+
+
+
+
+
+    public RoutineSlotManager(Context context2, Activity activity2, ListView listView2, ListviewAdapterRoutine listviewAdapterRoutine2, String ArrayListSlotDefault2, String newActionString2, String noActionString2, String bluetoothOffString2, String bluetothOnString2, String mediaVolumeMuteString2, String mediaVolumeMaxString2, String speakerVolumeMute2, String speakerVolumeVibration2, String speakerVolumeMax2, String runApp2, String runTimer2, String wifiOff2, String wifiOn2, int listviewItemPosition2, int routinelistPositionSlot12, int routinelistPositionSlot22, int routinelistPositionSlot32, int routinelistPositionSlot42, int routinelistPositionSlot52, int routinelistPositionSlot62, int routinelistPositionSlot72, int routinelistPositionSlot82, int routinelistPositionSlot92, int routinelistPositionSlot102, int whichSlotPosition2, EditText editText2, String[]) {
         this.activity = activity2;
         this.context = context2;
         this.shortcutManager = new ShortcutManager(context2, activity2);
@@ -156,16 +162,21 @@ public class RoutineSlotManager {
         this.routinelistPositionSlot10 = routinelistPositionSlot102;
         this.whichSlotPosition = whichSlotPosition2;
         this.editText = editText2;
+
+
+
+
     }
 
     public void setDefaultSlots() {
 
-        for (int i = 0;  i<10; i++){
-            this.listviewAdapterRoutine.arrayListSlots.add(this.ArrayListSlotDefault);
-        }
+        CustomListViewAdapter customListViewAdapter = new CustomListViewAdapter(context );
 
 
-        this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
+
+
+
+        this.listView.setAdapter();
     }
 
     public void getRoutineSlotActions(Routine oldRoutine2) {
