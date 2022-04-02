@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +17,16 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<String> stringArrayList;
+    int images[];
     LayoutInflater inflater;
 
 
-    public CustomListViewAdapter(Context context, ArrayList<String> stringArrayList){
+    public CustomListViewAdapter(Context context, ArrayList<String> stringArrayList, int [] images){
 
-        this.context = context;
-        this.stringArrayList = stringArrayList;
-
-        this.inflater = LayoutInflater.from(context);
+                this.context = context;
+                this.stringArrayList = stringArrayList;
+                this.images = images;
+                this.inflater = LayoutInflater.from(context);
     }
 
 
@@ -48,7 +50,9 @@ public class CustomListViewAdapter extends BaseAdapter {
 
         view = inflater.inflate(R.layout.custom_list_view_row, null);
         TextView textView = view.findViewById(R.id.textViewAction);
+        ImageView imageView = view.findViewById(R.id.imageViewSlot);
         textView.setText(stringArrayList.get(0));
+        imageView.setImageResource(images[0]);
         return view;
     }
 }

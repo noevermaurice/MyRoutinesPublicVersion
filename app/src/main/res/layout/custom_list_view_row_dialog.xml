@@ -9,7 +9,7 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:src="@drawable/ic_launcher_background"
-        android:id="@+id/imageViewSlot"/>
+        android:id="@+id/imageViewDialog"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textViewAction"
+            android:id="@+id/textViewActionDialog"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/BluetoothOFF"

@@ -10,6 +10,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,6 +102,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public MenuItem itemNotificationSwitch;
     public List<ApplicationInfo> launchableInstalledApps;
     ListView listView;
+   
     private ListView listViewForApps;
     int listViewItemPosition;
     ListviewAdapterRoutine listviewAdapterRoutine;
@@ -149,7 +151,9 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     int whichSlotPosition;
     public String wifiOff;
     public String wifiOn;
-
+    public ArrayList<String> actionDescription = new ArrayList<>();
+        int actionImages []= {R.drawable.ic_baseline_bluetooth_disabled_24};
+        CustomListViewAdapterAlertDialog customListViewAdapterAlertDialog; 
 
     /* access modifiers changed from: protected */
     @Override // androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity
@@ -199,8 +203,17 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.editTextRoutineName = (EditText) findViewById(R.id.EditTextRoutineName);
         this.saveButton = (FloatingActionButton) findViewById(R.id.saveRoutineButton);
         this.listViewForApps = (ListView) findViewById(R.id.listViewForApps);
+      
         this.listView = (ListView) findViewById(R.id.listviewAddAction);
+
         this.listViewForApps.setVisibility(4);
+
+
+        actionDescription.add("NoAction");
+
+        customListViewAdapterAlertDialog = new CustomListViewAdapterAlertDialog(context);
+
+
 
         this.arrayList = new ArrayList<>();
         this.ArrayListSlotDefault = getString(R.string.NoAction);
@@ -230,7 +243,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             @Override // android.widget.AdapterView.OnItemClickListener
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 AddAndEditRoutineActivity.this.ShowDialog();
-                AddAndEditRoutineActivity.this.routineSlotManager.setWhichSlotPosition(position);
+               // AddAndEditRoutineActivity.this.routineSlotManager.setWhichSlotPosition(position);
             }
         });
         this.saveButton.setOnClickListener(new View.OnClickListener() {
@@ -254,8 +267,18 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     private void ShowDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogPrefercesOrangeListView);
         builder.setTitle(getString(R.string.Action));
-        builder.setItems(new String[]{this.noActionString, this.bluetoothOff, this.bluetoothOn, this.mediaVolumeMute, this.mediaVolumeMax, this.speakerVolumeMute, this.speakerVolumeVibration, this.speakerVolumeMax, this.runApp, this.runTimer, this.wifiOff, this.wifiOn}, new DialogInterface.OnClickListener() {
-            /* class com.mn.myroutines.AddAndEditRoutineActivity.AnonymousClass3 */
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.alert_dialog_listview, null);
+        ListView alertDialogListView = (ListView) view.findViewById(R.id.alertDialogListView);
+
+       alertDialogListView.setAdapter(customListViewAdapterAlertDialog);
+       
+       
+
+        builder.setView(view);
+
+        /*builder.setItems(new String[]{this.noActionString, this.bluetoothOff, this.bluetoothOn, this.mediaVolumeMute, this.mediaVolumeMax, this.speakerVolumeMute, this.speakerVolumeVibration, this.speakerVolumeMax, this.runApp, this.runTimer, this.wifiOff, this.wifiOn}, new DialogInterface.OnClickListener() {
+            
 
             public void onClick(DialogInterface dialog, int which) {
                 AddAndEditRoutineActivity.this.routineSlotManager.setRoutineSlots(which);
@@ -291,6 +314,16 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                 }
             }
         });
+
+         */
+
+
+         
+         
+
+
+
+
         builder.create().show();
     }
 

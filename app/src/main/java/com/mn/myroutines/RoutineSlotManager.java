@@ -126,6 +126,7 @@ public class RoutineSlotManager {
     private String wifiOn;
 
     public ArrayList<String> actionDescription = new ArrayList<>();
+    int actionImages []= {R.drawable.ic_baseline_bluetooth_disabled_24};
 
 
 
@@ -166,7 +167,13 @@ public class RoutineSlotManager {
         this.routinelistPositionSlot10 = routinelistPositionSlot102;
         this.whichSlotPosition = whichSlotPosition2;
         this.editText = editText2;
-        actionDescription.add(context.getString(R.string.NoAction));
+
+        for (int i = 0; i <10; i++){
+            actionDescription.add(context.getString(R.string.NoAction));
+
+        }
+
+
 
 
 
@@ -175,7 +182,7 @@ public class RoutineSlotManager {
 
     public void setDefaultSlots() {
 
-        CustomListViewAdapter customListViewAdapter = new CustomListViewAdapter(context, actionDescription);
+        CustomListViewAdapter customListViewAdapter = new CustomListViewAdapter(context, actionDescription, actionImages);
         this.listView.setAdapter(customListViewAdapter);
     }
 

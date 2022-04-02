@@ -67,4 +67,12 @@
     <string name="NotficationTaskIsfinished">Yes, checked</string>
 
 
+    <string-array name="alertDialogActions">
+        <item>No Action</item>
+        <item>Bluetooth off</item>
+        <item>Bluetooth on</item>
+
+    </string-array>
+
+
 </resources>

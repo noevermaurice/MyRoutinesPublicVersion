@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_baseline_bluetooth_disabled_24.xml" value="0.2605" />
+        <entry key="app/src/main/res/layout/activity_add_routine.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/activity_tutorial.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/alert_dialog_listview.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/custom_list_view_row.xml" value="0.26979166666666665" />
+        <entry key="app/src/main/res/layout/custom_list_view_row_dialog.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/custom_notification_dialog.xml" value="0.16983695652173914" />
         <entry key="app/src/main/res/layout/listview_action_row.xml" value="1.2293675740559895" />
         <entry key="app/src/main/res/layout/login_screen.xml" value="0.37092391304347827" />
