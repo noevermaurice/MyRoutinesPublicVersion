@@ -152,7 +152,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     public String wifiOff;
     public String wifiOn;
     public ArrayList<String> actionDescription = new ArrayList<>();
-        int actionImages []= {R.drawable.ic_baseline_bluetooth_disabled_24};
+        int actionImages []= {R.drawable.ic_baseline_not_interested_24,R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24 };
         CustomListViewAdapterAlertDialog customListViewAdapterAlertDialog; 
 
     /* access modifiers changed from: protected */
@@ -272,6 +272,45 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         ListView alertDialogListView = (ListView) view.findViewById(R.id.alertDialogListView);
 
        alertDialogListView.setAdapter(customListViewAdapterAlertDialog);
+       alertDialogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+           @Override
+           public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+
+               AddAndEditRoutineActivity.this.routineSlotManager.setRoutineSlots(i);
+               if (i == 8) {
+                   AddAndEditRoutineActivity.this.listView.setVisibility(4);
+                   AddAndEditRoutineActivity.this.listViewForApps.setVisibility(0);
+                   AddAndEditRoutineActivity.this.listViewForApps.setAdapter((ListAdapter) AddAndEditRoutineActivity.this.allAppsAdapter);
+                   AddAndEditRoutineActivity.this.item1.setVisible(true);
+                   AddAndEditRoutineActivity.this.itemAddToHomeScreen.setVisible(false);
+                   AddAndEditRoutineActivity.this.chooseAppText.setVisibility(0);
+                   AddAndEditRoutineActivity.this.AllRoutinesActionText.setVisibility(4);
+               }
+               if (i == 9) {
+                   AddAndEditRoutineActivity.this.setTimerDialog = new SetTimerDialog();
+                   if (AddAndEditRoutineActivity.this.getIntent().hasExtra("routine")) {
+                       AddAndEditRoutineActivity addAndEditRoutineActivity = AddAndEditRoutineActivity.this;
+                       addAndEditRoutineActivity.oldroutine = (Routine) addAndEditRoutineActivity.getIntent().getSerializableExtra("routine");
+                       AddAndEditRoutineActivity.this.timerBundle.putString("timerName", AddAndEditRoutineActivity.this.oldroutine.timerName);
+                       AddAndEditRoutineActivity.this.timerBundle.putInt("timerSeconds", AddAndEditRoutineActivity.this.oldroutine.timerSeconds);
+                       AddAndEditRoutineActivity.this.timerBundle.putInt("timerMinutes", AddAndEditRoutineActivity.this.oldroutine.timerMinutes);
+                       AddAndEditRoutineActivity.this.timerBundle.putInt("timerHours", AddAndEditRoutineActivity.this.oldroutine.timerHours);
+                       AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
+                       AddAndEditRoutineActivity.this.setTimerDialog.show(AddAndEditRoutineActivity.this.getSupportFragmentManager(), "dialog");
+                       return;
+                   }
+                   AddAndEditRoutineActivity.this.timerBundle.putString("timerName", AddAndEditRoutineActivity.this.timerName);
+                   AddAndEditRoutineActivity.this.timerBundle.putInt("timerSeconds", AddAndEditRoutineActivity.this.timerSeconds);
+                   AddAndEditRoutineActivity.this.timerBundle.putInt("timerMinutes", AddAndEditRoutineActivity.this.timerMinutes);
+                   AddAndEditRoutineActivity.this.timerBundle.putInt("timerHours", AddAndEditRoutineActivity.this.timerHours);
+                   AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
+                   AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
+                   AddAndEditRoutineActivity.this.setTimerDialog.show(AddAndEditRoutineActivity.this.getSupportFragmentManager(), "dialog");
+               }
+           }
+
+       });
        
        
 
@@ -281,38 +320,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             
 
             public void onClick(DialogInterface dialog, int which) {
-                AddAndEditRoutineActivity.this.routineSlotManager.setRoutineSlots(which);
-                if (which == 8) {
-                    AddAndEditRoutineActivity.this.listView.setVisibility(4);
-                    AddAndEditRoutineActivity.this.listViewForApps.setVisibility(0);
-                    AddAndEditRoutineActivity.this.listViewForApps.setAdapter((ListAdapter) AddAndEditRoutineActivity.this.allAppsAdapter);
-                    AddAndEditRoutineActivity.this.item1.setVisible(true);
-                    AddAndEditRoutineActivity.this.itemAddToHomeScreen.setVisible(false);
-                    AddAndEditRoutineActivity.this.chooseAppText.setVisibility(0);
-                    AddAndEditRoutineActivity.this.AllRoutinesActionText.setVisibility(4);
-                }
-                if (which == 9) {
-                    AddAndEditRoutineActivity.this.setTimerDialog = new SetTimerDialog();
-                    if (AddAndEditRoutineActivity.this.getIntent().hasExtra("routine")) {
-                        AddAndEditRoutineActivity addAndEditRoutineActivity = AddAndEditRoutineActivity.this;
-                        addAndEditRoutineActivity.oldroutine = (Routine) addAndEditRoutineActivity.getIntent().getSerializableExtra("routine");
-                        AddAndEditRoutineActivity.this.timerBundle.putString("timerName", AddAndEditRoutineActivity.this.oldroutine.timerName);
-                        AddAndEditRoutineActivity.this.timerBundle.putInt("timerSeconds", AddAndEditRoutineActivity.this.oldroutine.timerSeconds);
-                        AddAndEditRoutineActivity.this.timerBundle.putInt("timerMinutes", AddAndEditRoutineActivity.this.oldroutine.timerMinutes);
-                        AddAndEditRoutineActivity.this.timerBundle.putInt("timerHours", AddAndEditRoutineActivity.this.oldroutine.timerHours);
-                        AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
-                        AddAndEditRoutineActivity.this.setTimerDialog.show(AddAndEditRoutineActivity.this.getSupportFragmentManager(), "dialog");
-                        return;
-                    }
-                    AddAndEditRoutineActivity.this.timerBundle.putString("timerName", AddAndEditRoutineActivity.this.timerName);
-                    AddAndEditRoutineActivity.this.timerBundle.putInt("timerSeconds", AddAndEditRoutineActivity.this.timerSeconds);
-                    AddAndEditRoutineActivity.this.timerBundle.putInt("timerMinutes", AddAndEditRoutineActivity.this.timerMinutes);
-                    AddAndEditRoutineActivity.this.timerBundle.putInt("timerHours", AddAndEditRoutineActivity.this.timerHours);
-                    AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
-                    AddAndEditRoutineActivity.this.setTimerDialog.setArguments(AddAndEditRoutineActivity.this.timerBundle);
-                    AddAndEditRoutineActivity.this.setTimerDialog.show(AddAndEditRoutineActivity.this.getSupportFragmentManager(), "dialog");
-                }
-            }
+
         });
 
          */
@@ -526,7 +534,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     private void initManagers() {
         this.routineManager = new RoutineManager(this.context);
-        this.listviewAdapterRoutine = new ListviewAdapterRoutine(this.context, this.arrayList, this.darkModeManager);
+        this.listviewAdapterRoutine = new ListviewAdapterRoutine(this.context, this.arrayList, this.darkModeManager, this.actionImages);
         this.routineSlotManager = new RoutineSlotManager(this.context, this, this.listView, this.listviewAdapterRoutine, this.ArrayListSlotDefault, this.newActionString, this.noActionString, this.bluetoothOff, this.bluetoothOn, this.mediaVolumeMute, this.mediaVolumeMax, this.speakerVolumeMute, this.speakerVolumeVibration, this.speakerVolumeMax, this.runApp, this.runTimer, this.wifiOff, this.wifiOn, this.listViewItemPosition, this.routinelistPositionSlot1, this.routinelistPositionSlot2, this.routinelistPositionSlot3, this.routinelistPositionSlot4, this.routinelistPositionSlot5, this.routinelistPositionSlot6, this.routinelistPositionSlot7, this.routinelistPositionSlot8, this.routinelistPositionSlot9, this.routinelistPositionSlot10, this.whichSlotPosition, this.editTextRoutineName);
         this.shortcutManager = new ShortcutManager(this.context, this);
         new NotificationManager(this.context, this.routineManager, new Intent());

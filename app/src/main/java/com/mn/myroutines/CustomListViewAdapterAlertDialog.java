@@ -24,7 +24,7 @@ public class CustomListViewAdapterAlertDialog extends BaseAdapter {
 
         Resources resources = context.getResources();
         String[] names = resources.getStringArray(R.array.alertDialogActions);
-        int[] images = {R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_disabled_24};
+        int[] images = {R.drawable.ic_baseline_not_interested_24,R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24 };
 
 
         for (int i = 0; i<names.length; i++){

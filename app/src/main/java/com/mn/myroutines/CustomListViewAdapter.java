@@ -51,8 +51,10 @@ public class CustomListViewAdapter extends BaseAdapter {
         view = inflater.inflate(R.layout.custom_list_view_row, null);
         TextView textView = view.findViewById(R.id.textViewAction);
         ImageView imageView = view.findViewById(R.id.imageViewSlot);
-        textView.setText(stringArrayList.get(0));
+        textView.setText(stringArrayList.get(position));
         imageView.setImageResource(images[0]);
+
+        notifyDataSetChanged();
         return view;
     }
 }

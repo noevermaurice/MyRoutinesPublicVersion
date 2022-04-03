@@ -3,6 +3,7 @@ package com.mn.myroutines;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListAdapter;
@@ -55,6 +56,7 @@ public class RoutineSlotManager {
     public boolean isEverWeek;
     ListView listView;
     ListviewAdapterRoutine listviewAdapterRoutine;
+    CustomListViewAdapter customListViewAdapter;
     int listviewItemPosition;
     private String mediaVolumeMaxString;
     private String mediaVolumeMuteString;
@@ -126,7 +128,8 @@ public class RoutineSlotManager {
     private String wifiOn;
 
     public ArrayList<String> actionDescription = new ArrayList<>();
-    int actionImages []= {R.drawable.ic_baseline_bluetooth_disabled_24};
+    int actionImages []= {R.drawable.ic_baseline_not_interested_24};
+    Drawable image;
 
 
 
@@ -168,10 +171,14 @@ public class RoutineSlotManager {
         this.whichSlotPosition = whichSlotPosition2;
         this.editText = editText2;
 
+
+
         for (int i = 0; i <10; i++){
             actionDescription.add(context.getString(R.string.NoAction));
 
         }
+
+        this.customListViewAdapter = new CustomListViewAdapter(context, actionDescription, actionImages);
 
 
 
@@ -1192,6 +1199,7 @@ public class RoutineSlotManager {
                 break;
             case 1:
                 this.newActionString = this.bluetoothOffString;
+
                 break;
             case 2:
                 this.newActionString = this.bluetothOnString;
@@ -1233,6 +1241,8 @@ public class RoutineSlotManager {
                 break;
         }
         this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
+        Log.d("RoutineSlotManager", "vor dem setzen ist die gedrückte aktion" + this.whichSlotPosition);
+        Log.d("RoutineSlotManager", "vorc dem setzen ist der name" + this.newActionString);
         this.listviewAdapterRoutine.arrayListSlots.set(this.whichSlotPosition, this.newActionString);
     }
 

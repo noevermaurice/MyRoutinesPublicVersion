@@ -71,6 +71,16 @@
         <item>No Action</item>
         <item>Bluetooth off</item>
         <item>Bluetooth on</item>
+        <item>media volume mute</item>
+        <item>media volume up </item>
+        <item>volume mute</item>
+        <item>volume vibration</item>
+        <item>volume up </item>
+        <item>run app</item>
+        <item>run timer</item>
+        <item>wifi off</item>
+        <item>wifi on</item>
+
 
     </string-array>
 
