@@ -1243,7 +1243,10 @@ public class RoutineSlotManager {
         this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
         Log.d("RoutineSlotManager", "vor dem setzen ist die gedrückte aktion" + this.whichSlotPosition);
         Log.d("RoutineSlotManager", "vorc dem setzen ist der name" + this.newActionString);
+        Log.d("RoutineSlotManager", "list size" + listviewAdapterRoutine.arrayListSlots.size());
+
         this.listviewAdapterRoutine.arrayListSlots.set(this.whichSlotPosition, this.newActionString);
+
     }
 
     private void getAppSlotName() {

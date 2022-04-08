@@ -29,7 +29,7 @@ public class ListviewAdapterRoutine extends ArrayAdapter<String> {
         TextView textView = (TextView) row.findViewById(R.id.textViewAction);
         ImageView imageView = (ImageView) row.findViewById(R.id.imageViewSlot);
         textView.setText(this.arrayListSlots.get(position));
-        imageView.setImageResource(images[0]);
+        imageView.setImageResource(images[position]);
         if (this.darkModeManager.getMode() == 1) {
             textView.setTextColor(getContext().getResources().getColor(R.color.black_white));
             notifyDataSetChanged();

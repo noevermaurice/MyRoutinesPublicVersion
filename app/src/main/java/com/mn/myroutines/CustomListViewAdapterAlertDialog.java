@@ -9,9 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 
-public class CustomListViewAdapterAlertDialog extends BaseAdapter {
+public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<RoutineViewHolder> {
 
     Context context;
     ArrayList<SingleAlertDialogRow> stringArrayList;
@@ -33,14 +36,16 @@ public class CustomListViewAdapterAlertDialog extends BaseAdapter {
     }
 
 
+
+    @NonNull
     @Override
-    public int getCount() {
-        return stringArrayList.size();
+    public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return null;
     }
 
     @Override
-    public Object getItem(int i) {
-        return stringArrayList.get(i);
+    public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
+
     }
 
     @Override
@@ -49,6 +54,11 @@ public class CustomListViewAdapterAlertDialog extends BaseAdapter {
     }
 
     @Override
+    public int getItemCount() {
+        return 0;
+    }
+
+   /* @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -62,4 +72,6 @@ public class CustomListViewAdapterAlertDialog extends BaseAdapter {
 
         return view;
     }
+
+    */
 }
