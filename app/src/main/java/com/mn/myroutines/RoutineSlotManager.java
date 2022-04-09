@@ -55,7 +55,7 @@ public class RoutineSlotManager {
     public boolean isEverMonth;
     public boolean isEverWeek;
     ListView listView;
-    ListviewAdapterRoutine listviewAdapterRoutine;
+
     CustomListViewAdapter customListViewAdapter;
     int listviewItemPosition;
     private String mediaVolumeMaxString;
@@ -137,12 +137,12 @@ public class RoutineSlotManager {
 
 
 
-    public RoutineSlotManager(Context context2, Activity activity2, ListView listView2, ListviewAdapterRoutine listviewAdapterRoutine2, String ArrayListSlotDefault2, String newActionString2, String noActionString2, String bluetoothOffString2, String bluetothOnString2, String mediaVolumeMuteString2, String mediaVolumeMaxString2, String speakerVolumeMute2, String speakerVolumeVibration2, String speakerVolumeMax2, String runApp2, String runTimer2, String wifiOff2, String wifiOn2, int listviewItemPosition2, int routinelistPositionSlot12, int routinelistPositionSlot22, int routinelistPositionSlot32, int routinelistPositionSlot42, int routinelistPositionSlot52, int routinelistPositionSlot62, int routinelistPositionSlot72, int routinelistPositionSlot82, int routinelistPositionSlot92, int routinelistPositionSlot102, int whichSlotPosition2, EditText editText2) {
+    public RoutineSlotManager(Context context2, Activity activity2, ListView listView2, CustomListViewAdapter customListViewAdapter, String ArrayListSlotDefault2, String newActionString2, String noActionString2, String bluetoothOffString2, String bluetothOnString2, String mediaVolumeMuteString2, String mediaVolumeMaxString2, String speakerVolumeMute2, String speakerVolumeVibration2, String speakerVolumeMax2, String runApp2, String runTimer2, String wifiOff2, String wifiOn2, int listviewItemPosition2, int routinelistPositionSlot12, int routinelistPositionSlot22, int routinelistPositionSlot32, int routinelistPositionSlot42, int routinelistPositionSlot52, int routinelistPositionSlot62, int routinelistPositionSlot72, int routinelistPositionSlot82, int routinelistPositionSlot92, int routinelistPositionSlot102, int whichSlotPosition2, EditText editText2) {
         this.activity = activity2;
         this.context = context2;
         this.shortcutManager = new ShortcutManager(context2, activity2);
         this.listView = listView2;
-        this.listviewAdapterRoutine = listviewAdapterRoutine2;
+        this.customListViewAdapter = customListViewAdapter;
         this.ArrayListSlotDefault = ArrayListSlotDefault2;
         this.newActionString = newActionString2;
         this.noActionString = noActionString2;
@@ -1240,12 +1240,12 @@ public class RoutineSlotManager {
                 this.newActionString = this.wifiOn;
                 break;
         }
-        this.listView.setAdapter((ListAdapter) this.listviewAdapterRoutine);
+        this.listView.setAdapter((ListAdapter) this.customListViewAdapter);
         Log.d("RoutineSlotManager", "vor dem setzen ist die gedrückte aktion" + this.whichSlotPosition);
         Log.d("RoutineSlotManager", "vorc dem setzen ist der name" + this.newActionString);
-        Log.d("RoutineSlotManager", "list size" + listviewAdapterRoutine.arrayListSlots.size());
+        Log.d("RoutineSlotManager", "list size" + customListViewAdapter.stringArrayList.size());
 
-        this.listviewAdapterRoutine.arrayListSlots.set(this.whichSlotPosition, this.newActionString);
+        this.customListViewAdapter.stringArrayList.set(this.whichSlotPosition, this.newActionString);
 
     }
 

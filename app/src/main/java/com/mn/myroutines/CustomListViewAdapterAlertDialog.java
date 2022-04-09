@@ -1,14 +1,9 @@
 package com.mn.myroutines;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,7 +13,10 @@ import java.util.ArrayList;
 public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<AlertDialogActionsViewHolder> {
 
     Context context;
-    ArrayList<SingleAlertDialogRow> stringArrayList;
+    ArrayList<SingleAlertDialogRow> stringArrayList = new ArrayList<>();
+    private CustomListViewAdapterAlertDialog.onitemclickListener listener;
+
+
 
 
 
@@ -45,11 +43,24 @@ public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<Alert
 
     }
 
+    /* access modifiers changed from: protected */
+    public interface onitemclickListener {
+        void onitemclick(SingleAlertDialogRow arrayList, int i);
+    }
+
+
+
+
 
     @NonNull
     @Override
     public AlertDialogActionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new AlertDialogActionsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_view_row_dialog, parent, false));
+        return new AlertDialogActionsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_view_row_dialog, parent, false), this.listener, stringArrayList);
+    }
+
+    /* access modifiers changed from: protected */
+    public void SetOnItemclickListener(CustomListViewAdapterAlertDialog.onitemclickListener listener2) {
+        this.listener = listener2;
     }
 
     @Override
