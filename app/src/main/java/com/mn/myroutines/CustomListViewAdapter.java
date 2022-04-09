@@ -17,11 +17,11 @@ public class CustomListViewAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<String> stringArrayList;
-    int images[];
+    ArrayList<Integer> images;
     LayoutInflater inflater;
 
 
-    public CustomListViewAdapter(Context context, ArrayList<String> stringArrayList, int [] images){
+    public CustomListViewAdapter(Context context, ArrayList<String> stringArrayList, ArrayList<Integer> images){
 
                 this.context = context;
                 this.stringArrayList = stringArrayList;
@@ -52,7 +52,7 @@ public class CustomListViewAdapter extends BaseAdapter {
         TextView textView = view.findViewById(R.id.textViewAction);
         ImageView imageView = view.findViewById(R.id.imageViewSlot);
         textView.setText(stringArrayList.get(position));
-        imageView.setImageResource(images[0]);
+        imageView.setImageResource(images.get(position));
 
         notifyDataSetChanged();
         return view;

@@ -97,6 +97,7 @@ public class RoutineSlotManager {
     public int myMonth;
     public int myYear;
     public String newActionString;
+    private Integer newImageInteger;
     public String noActionString;
     Routine oldRoutine;
     public int randemQuestCode;
@@ -128,7 +129,7 @@ public class RoutineSlotManager {
     private String wifiOn;
 
     public ArrayList<String> actionDescription = new ArrayList<>();
-    int actionImages []= {R.drawable.ic_baseline_not_interested_24};
+    ArrayList<Integer> actionImages = new ArrayList<>();
     Drawable image;
 
 
@@ -175,6 +176,7 @@ public class RoutineSlotManager {
 
         for (int i = 0; i <10; i++){
             actionDescription.add(context.getString(R.string.NoAction));
+            actionImages.add(R.drawable.ic_baseline_not_interested_24);
 
         }
 
@@ -1196,28 +1198,37 @@ public class RoutineSlotManager {
         switch (this.listviewItemPosition) {
             case 0:
                 this.newActionString = this.noActionString;
+                this.newImageInteger = R.drawable.ic_baseline_not_interested_24;
+
+
                 break;
             case 1:
                 this.newActionString = this.bluetoothOffString;
-
+                this.newImageInteger = R.drawable.ic_baseline_bluetooth_disabled_24;
                 break;
             case 2:
                 this.newActionString = this.bluetothOnString;
+                newImageInteger = R.drawable.ic_baseline_bluetooth_24;
                 break;
             case 3:
                 this.newActionString = this.mediaVolumeMuteString;
+                newImageInteger = R.drawable.ic_baseline_volume_mute_24;
                 break;
             case 4:
                 this.newActionString = this.mediaVolumeMaxString;
+                newImageInteger = R.drawable.ic_baseline_volume_up_24;
                 break;
             case 5:
                 this.newActionString = this.speakerVolumeMute;
+                newImageInteger = R.drawable.ic_baseline_volume_mute_24;
                 break;
             case 6:
                 this.newActionString = this.speakerVolumeVibration;
+                newImageInteger = R.drawable.ic_baseline_vibration_24;
                 break;
             case 7:
                 this.newActionString = this.speakerVolumeMax;
+                newImageInteger = R.drawable.ic_baseline_volume_up_24;
                 break;
             case 8:
                 setAppSlotName();
@@ -1235,9 +1246,11 @@ public class RoutineSlotManager {
                 break;
             case 10:
                 this.newActionString = this.wifiOff;
+                newImageInteger = R.drawable.ic_baseline_wifi_off_24;
                 break;
             case 11:
                 this.newActionString = this.wifiOn;
+                newImageInteger = R.drawable.ic_baseline_wifi_24;
                 break;
         }
         this.listView.setAdapter((ListAdapter) this.customListViewAdapter);
@@ -1246,6 +1259,7 @@ public class RoutineSlotManager {
         Log.d("RoutineSlotManager", "list size" + customListViewAdapter.stringArrayList.size());
 
         this.customListViewAdapter.stringArrayList.set(this.whichSlotPosition, this.newActionString);
+        customListViewAdapter.images.set(this.whichSlotPosition, newImageInteger);
 
     }
 

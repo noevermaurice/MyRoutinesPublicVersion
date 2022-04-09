@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Path;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -160,7 +161,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
     public ArrayList<String> actionDescription = new ArrayList<>();
-        int actionImages []= {R.drawable.ic_baseline_not_interested_24, R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24};
+        private  ArrayList<Integer>  actionImages = new ArrayList();
         CustomListViewAdapterAlertDialog customListViewAdapterAlertDialog; 
 
     /* access modifiers changed from: protected */
@@ -178,9 +179,23 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         stringArrayList = new ArrayList<>();
 
 
+        actionImages.add(R.drawable.ic_baseline_not_interested_24);
+        actionImages.add(R.drawable.ic_baseline_bluetooth_disabled_24);
+        actionImages.add(R.drawable.ic_baseline_volume_mute_24);
+        actionImages.add(R.drawable.ic_baseline_volume_up_24);
+        actionImages.add(R.drawable.ic_baseline_volume_mute_24);
+        actionImages.add(R.drawable.ic_baseline_vibration_24);
+        actionImages.add(R.drawable.ic_baseline_volume_up_24);
+        actionImages.add(R.drawable.ic_baseline_apps_24);
+        actionImages.add(R.drawable.ic_baseline_timer_24);
+        actionImages.add(R.drawable.ic_baseline_wifi_off_24);
+        actionImages.add(R.drawable.ic_baseline_wifi_24);
+
+
         String [] names = context.getResources().getStringArray(R.array.alertDialogActions);
+        int[] images = {R.drawable.ic_baseline_not_interested_24, R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24 };
         for (int i = 0; i<names.length; i++){
-            stringArrayList.add(new SingleAlertDialogRow(names[i], actionImages[i]));
+            stringArrayList.add(new SingleAlertDialogRow(names[i], images[i]));
 
         }
 
@@ -286,6 +301,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     /* access modifiers changed from: public */
     private void ShowDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogPrefercesOrangeListView);
+        AlertDialog OptionDialog = builder.create();
         builder.setTitle(getString(R.string.Action));
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.alert_dialog_listview, null);
@@ -303,17 +319,20 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                Log.d("t", "test slot position " + i);
 
                AddAndEditRoutineActivity.this.routineSlotManager.setRoutineSlots(i);
+               OptionDialog.dismiss();
                if (i == 8) {
 
                    alertDialogListView.setVisibility(View.INVISIBLE);
                    listView.setVisibility(View.INVISIBLE);
+                   OptionDialog.dismiss();
+
 
                    AddAndEditRoutineActivity.this.listViewForApps.setVisibility(View.VISIBLE);
                    AddAndEditRoutineActivity.this.listViewForApps.setAdapter((ListAdapter) AddAndEditRoutineActivity.this.allAppsAdapter);
                    AddAndEditRoutineActivity.this.item1.setVisible(true);
                    AddAndEditRoutineActivity.this.itemAddToHomeScreen.setVisible(false);
-                   AddAndEditRoutineActivity.this.chooseAppText.setVisibility(0);
-                   AddAndEditRoutineActivity.this.AllRoutinesActionText.setVisibility(4);
+                   AddAndEditRoutineActivity.this.chooseAppText.setVisibility(View.VISIBLE);
+                   AddAndEditRoutineActivity.this.AllRoutinesActionText.setVisibility(View.INVISIBLE);
                }
                if (i == 9) {
                    AddAndEditRoutineActivity.this.setTimerDialog = new SetTimerDialog();
@@ -340,7 +359,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
        });
 
-
+        OptionDialog.setView(view);
+        OptionDialog.show();
 
 
 
@@ -349,18 +369,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
        
 
-        builder.setView(view);
 
-
-
-
-         
-         
-
-
-
-
-        builder.create().show();
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
