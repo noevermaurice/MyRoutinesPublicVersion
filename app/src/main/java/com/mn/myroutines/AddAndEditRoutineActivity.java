@@ -30,6 +30,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.view.MenuItemCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mn.myroutines.CustomNotificationDialog;
 import com.mn.myroutines.SetTimerDialog;
@@ -151,6 +154,11 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
     int whichSlotPosition;
     public String wifiOff;
     public String wifiOn;
+
+
+    ArrayList<SingleAlertDialogRow> stringArrayList;
+
+
     public ArrayList<String> actionDescription = new ArrayList<>();
         int actionImages []= {R.drawable.ic_baseline_not_interested_24,R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24 };
         CustomListViewAdapterAlertDialog customListViewAdapterAlertDialog; 
@@ -166,6 +174,17 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.launchableInstalledApps = new ArrayList();
         this.installedApps = this.context.getPackageManager().getInstalledApplications(128);
         this.allAppsAdapter = new AllAppsAdapter(this, 0, this.installedApps, this.appName, this.appPackageName);
+
+        stringArrayList = new ArrayList<>();
+
+
+        String [] names = context.getResources().getStringArray(R.array.alertDialogActions);
+        for (int i = 0; i<names.length; i++){
+            stringArrayList.add(new SingleAlertDialogRow(names[i], actionImages[i]));
+            Log.d("t", "list size  " + stringArrayList.size());
+        }
+
+
         initViews();
         initManagers();
         initClickListener();
@@ -211,7 +230,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
         actionDescription.add("NoAction");
 
-        customListViewAdapterAlertDialog = new CustomListViewAdapterAlertDialog(context);
+        customListViewAdapterAlertDialog = new CustomListViewAdapterAlertDialog(context, stringArrayList);
 
 
 
@@ -269,10 +288,12 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         builder.setTitle(getString(R.string.Action));
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.alert_dialog_listview, null);
-        ListView alertDialogListView = (ListView) view.findViewById(R.id.alertDialogListView);
-
+        RecyclerView alertDialogListView = (RecyclerView) view.findViewById(R.id.alertDialogListView);
+        alertDialogListView.setLayoutManager(new LinearLayoutManager(this));
        alertDialogListView.setAdapter(customListViewAdapterAlertDialog);
-       alertDialogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+       customListViewAdapterAlertDialog.notifyDataSetChanged();
+
+       /*alertDialogListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
            @Override
            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -311,6 +332,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
            }
 
        });
+
+        */
        
        
 

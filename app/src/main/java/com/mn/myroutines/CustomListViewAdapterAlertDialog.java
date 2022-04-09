@@ -2,6 +2,7 @@ package com.mn.myroutines;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,37 +15,57 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<RoutineViewHolder> {
+public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<AlertDialogActionsViewHolder> {
 
     Context context;
     ArrayList<SingleAlertDialogRow> stringArrayList;
 
 
-    public CustomListViewAdapterAlertDialog(Context context ){
 
-                this.context = context;
-                stringArrayList = new ArrayList<>();
 
-        Resources resources = context.getResources();
-        String[] names = resources.getStringArray(R.array.alertDialogActions);
+    public CustomListViewAdapterAlertDialog(Context context, ArrayList<SingleAlertDialogRow> arrayList ){
+
         int[] images = {R.drawable.ic_baseline_not_interested_24,R.drawable.ic_baseline_bluetooth_disabled_24, R.drawable.ic_baseline_bluetooth_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_volume_mute_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_vibration_24, R.drawable.ic_baseline_volume_up_24, R.drawable.ic_baseline_apps_24, R.drawable.ic_baseline_timer_24, R.drawable.ic_baseline_wifi_off_24, R.drawable.ic_baseline_wifi_24 };
+                this.context = context;
+               this.stringArrayList = arrayList;
+
+               Log.d("t", "in list" + stringArrayList.size());
 
 
-        for (int i = 0; i<names.length; i++){
-            stringArrayList.add(new SingleAlertDialogRow(names[i], images[i]));
-        }
+
+
+
+
+
+
+
+
+
+
+
     }
-
 
 
     @NonNull
     @Override
-    public RoutineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+    public AlertDialogActionsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new AlertDialogActionsViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_view_row_dialog, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RoutineViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AlertDialogActionsViewHolder holder, int position) {
+
+        SingleAlertDialogRow singleAlertDialogRow =  stringArrayList.get(holder.getAdapterPosition());
+
+
+
+        holder.textView.setText(singleAlertDialogRow.string);
+        holder.imageView.setImageResource(singleAlertDialogRow.images);
+
+
+
+
+
 
     }
 
@@ -55,7 +76,7 @@ public class CustomListViewAdapterAlertDialog extends RecyclerView.Adapter<Routi
 
     @Override
     public int getItemCount() {
-        return 0;
+        return stringArrayList.size();
     }
 
    /* @Override

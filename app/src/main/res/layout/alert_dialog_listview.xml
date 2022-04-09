@@ -3,9 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:listitem="@layout/custom_list_view_row_dialog"
         android:id="@+id/alertDialogListView"/>
 
 </RelativeLayout>

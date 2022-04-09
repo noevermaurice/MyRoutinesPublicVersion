@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, AddAndEditRoutineActivity.class);
                 intent.putExtra("routine", routine);
                 intent.putExtra("routinePosition", position);
-                Log.d("k", "m" + position);
+
                 MainActivity.this.finish();
                 MainActivity.this.startActivity(intent);
             }
