@@ -181,7 +181,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         String [] names = context.getResources().getStringArray(R.array.alertDialogActions);
         for (int i = 0; i<names.length; i++){
             stringArrayList.add(new SingleAlertDialogRow(names[i], actionImages[i]));
-            Log.d("t", "list size  " + stringArrayList.size());
+
         }
 
 
@@ -263,7 +263,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             @Override // android.widget.AdapterView.OnItemClickListener
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 AddAndEditRoutineActivity.this.ShowDialog();
-               // AddAndEditRoutineActivity.this.routineSlotManager.setWhichSlotPosition(position);
+                 AddAndEditRoutineActivity.this.routineSlotManager.setWhichSlotPosition(position);
             }
         });
         this.saveButton.setOnClickListener(new View.OnClickListener() {
@@ -300,7 +300,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
            @Override
            public void onitemclick(SingleAlertDialogRow arrayList, int i ) {
                Log.d("t", "test" + arrayList.string);
-               Log.d("t", "test po" + i);
+               Log.d("t", "test slot position " + i);
 
                AddAndEditRoutineActivity.this.routineSlotManager.setRoutineSlots(i);
                if (i == 8) {
@@ -351,14 +351,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
         builder.setView(view);
 
-        /*builder.setItems(new String[]{this.noActionString, this.bluetoothOff, this.bluetoothOn, this.mediaVolumeMute, this.mediaVolumeMax, this.speakerVolumeMute, this.speakerVolumeVibration, this.speakerVolumeMax, this.runApp, this.runTimer, this.wifiOff, this.wifiOn}, new DialogInterface.OnClickListener() {
-            
 
-            public void onClick(DialogInterface dialog, int which) {
-
-        });
-
-         */
 
 
          
