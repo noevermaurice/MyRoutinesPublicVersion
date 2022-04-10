@@ -583,8 +583,8 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
     @Override // androidx.activity.ComponentActivity
     public void onBackPressed() {
-        if (this.listViewForApps.getVisibility() == 0) {
-            this.listViewForApps.setVisibility(4);
+        if (this.listViewForApps.getVisibility() == View.VISIBLE) {
+            this.listViewForApps.setVisibility(View.INVISIBLE);
             this.customListViewAdapter.stringArrayList.set(this.routineSlotManager.whichSlotPosition, this.noActionString);
             this.customListViewAdapter.notifyDataSetChanged();
             this.listView.setVisibility(0);

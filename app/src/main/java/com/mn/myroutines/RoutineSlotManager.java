@@ -1232,6 +1232,7 @@ public class RoutineSlotManager {
                 break;
             case 8:
                 setAppSlotName();
+                newImageInteger = R.drawable.ic_baseline_apps_24;
                 if (this.oldRoutine != null) {
                     getAppSlotName();
                     break;
@@ -1239,6 +1240,7 @@ public class RoutineSlotManager {
                 break;
             case 9:
                 this.newActionString = this.runTimer;
+                newImageInteger = R.drawable.ic_baseline_timer_24;
                 if (this.oldRoutine != null) {
                     getTimerTime();
                     break;
@@ -1269,6 +1271,7 @@ public class RoutineSlotManager {
             case 0:
                 if (this.oldRoutine.getAppNameSlot1() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot1();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName1 = this.oldRoutine.getAppNameSlot1();
                     this.appPackageName1 = this.oldRoutine.getAppPackageNameSlot1();
                     return;
@@ -1277,6 +1280,7 @@ public class RoutineSlotManager {
             case 1:
                 if (this.oldRoutine.getAppNameSlot2() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot2();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName2 = this.oldRoutine.getAppNameSlot2();
                     this.appPackageName2 = this.oldRoutine.getAppPackageNameSlot2();
                     return;
@@ -1285,6 +1289,7 @@ public class RoutineSlotManager {
             case 2:
                 if (this.oldRoutine.getAppNameSlot3() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot3();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName3 = this.oldRoutine.getAppNameSlot3();
                     this.appPackageName3 = this.oldRoutine.getAppPackageNameSlot3();
                     return;
@@ -1293,6 +1298,7 @@ public class RoutineSlotManager {
             case 3:
                 if (this.oldRoutine.getAppNameSlot4() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot4();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName4 = this.oldRoutine.getAppNameSlot4();
                     this.appPackageName4 = this.oldRoutine.getAppPackageNameSlot4();
                     return;
@@ -1301,6 +1307,7 @@ public class RoutineSlotManager {
             case 4:
                 if (this.oldRoutine.getAppNameSlot5() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot5();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName5 = this.oldRoutine.getAppNameSlot5();
                     this.appPackageName5 = this.oldRoutine.getAppPackageNameSlot5();
                     return;
@@ -1309,6 +1316,7 @@ public class RoutineSlotManager {
             case 5:
                 if (this.oldRoutine.getAppNameSlot6() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot6();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName6 = this.oldRoutine.getAppNameSlot6();
                     this.appPackageName6 = this.oldRoutine.getAppPackageNameSlot6();
                     return;
@@ -1317,6 +1325,7 @@ public class RoutineSlotManager {
             case 6:
                 if (this.oldRoutine.getAppNameSlot7() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot7();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName7 = this.oldRoutine.getAppNameSlot7();
                     this.appPackageName7 = this.oldRoutine.getAppPackageNameSlot7();
                     return;
@@ -1325,6 +1334,7 @@ public class RoutineSlotManager {
             case 7:
                 if (this.oldRoutine.getAppNameSlot8() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot8();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName8 = this.oldRoutine.getAppNameSlot8();
                     this.appPackageName8 = this.oldRoutine.getAppPackageNameSlot8();
                     return;
@@ -1333,6 +1343,7 @@ public class RoutineSlotManager {
             case 8:
                 if (this.oldRoutine.getAppNameSlot9() != null) {
                     this.newActionString = this.oldRoutine.getAppNameSlot9();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName9 = this.oldRoutine.getAppNameSlot9();
                     this.appPackageName9 = this.oldRoutine.getAppPackageNameSlot9();
                     return;
@@ -1341,6 +1352,7 @@ public class RoutineSlotManager {
             case 9:
                 if (this.oldRoutine.getAppnameSlot10() != null) {
                     this.newActionString = this.oldRoutine.getAppnameSlot10();
+                    newImageInteger = R.drawable.ic_baseline_apps_24;
                     this.appName10 = this.oldRoutine.getAppnameSlot10();
                     this.appPackageName10 = this.oldRoutine.getAppPackageNameSlot10();
                     return;

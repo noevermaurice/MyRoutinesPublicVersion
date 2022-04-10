@@ -8,6 +8,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_bluetooth_disabled_24.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.3195" />
         <entry key="app/src/main/res/drawable/ic_baseline_not_interested_24.xml" value="0.3195" />
+        <entry key="app/src/main/res/drawable/ic_baseline_notifications_active_24.xml" value="0.3425" />
         <entry key="app/src/main/res/drawable/ic_baseline_timer_24.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/ic_baseline_vibration_24.xml" value="0.2815" />
         <entry key="app/src/main/res/drawable/ic_baseline_volume_mute_24.xml" value="0.2815" />
@@ -18,6 +19,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3011474609375" />
         <entry key="app/src/main/res/layout/activity_tutorial.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/alert_dialog_listview.xml" value="0.2734375" />
+        <entry key="app/src/main/res/layout/app_item_row.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/custom_list_view_row.xml" value="0.26979166666666665" />
         <entry key="app/src/main/res/layout/custom_list_view_row_dialog.xml" value="0.2734375" />
         <entry key="app/src/main/res/layout/custom_notification_dialog.xml" value="0.16983695652173914" />
