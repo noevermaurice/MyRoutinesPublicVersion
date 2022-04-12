@@ -29,6 +29,9 @@ public class MainActivity extends AppCompatActivity {
     RoutineListAdapter routineListAdapter;
     RoutineManager routineManager;
     TextView textViewNoRoutinesAvabile;
+    int routinePosition;
+    String routineName;
+    String routineNameInList;
 
     /* access modifiers changed from: protected */
     @Override // androidx.activity.ComponentActivity, androidx.core.app.ComponentActivity, androidx.appcompat.app.AppCompatActivity, androidx.fragment.app.FragmentActivity
@@ -46,7 +49,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkIsNotification() {
-        if (getIntent().hasExtra("routinePosition")) {
+        if (getIntent().hasExtra("routinePosition") && getIntent().hasExtra("notificationText")) {
+
+            routinePosition = getIntent().getIntExtra("routinePosition", 0);
+            routineName = getIntent().getStringExtra("notificationText");
+            routineNameInList = routineManager.routineList.get(routinePosition).getRoutineName();
+
+            Log.d("T", "name in notfication " + routineName);
+            Log.d("T", " name  " + routineNameInList);
+
+            if(routineName.equals(routineNameInList)){
+                Log.d("T", "OK");
+            } else {
+                Log.d("T", "mö");
+            }
+
+
             new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(getIntent().getIntExtra("routinePosition", 0)));
             Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
         }

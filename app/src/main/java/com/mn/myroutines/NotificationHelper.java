@@ -29,6 +29,7 @@ public class NotificationHelper extends ContextWrapper {
     public NotificationHelper(Context base, Intent intent) {
         super(base);
         if (Build.VERSION.SDK_INT >= 26) {
+            String taskMessage = intent.getStringExtra("routineGetName");
             boolean isLongVibration = intent.getBooleanExtra("routineGetIsLongVibration", false);
             boolean isNoVibration = intent.getBooleanExtra("routineGetIsNoVibration", false);
             boolean notSwipping = intent.getBooleanExtra("NotSwipping", false);

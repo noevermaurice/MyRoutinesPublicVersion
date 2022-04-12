@@ -3335,6 +3335,7 @@ public class NotificationManager {
         intent.putExtra("myHour", myHour);
         intent.putExtra("myMonth", myMonth);
         intent.putExtra("routineAlarmDate", taskAlarmDate);
+        intent.putExtra("routinePosition", routine.getRoutinePosition());
 
 
 
