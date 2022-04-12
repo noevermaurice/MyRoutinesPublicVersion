@@ -15,16 +15,33 @@ public class SettingsFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         getPreferenceScreen().findPreference("changeDarkMode").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            /* class com.mn.myroutines.SettingsFragment.AnonymousClass1 */
 
-            /* JADX WARNING: Removed duplicated region for block: B:18:0x003e  */
-            /* JADX WARNING: Removed duplicated region for block: B:22:0x007b  */
-            /* Code decompiled incorrectly, please refer to instructions dump. */
-            public boolean onPreferenceChange(android.preference.Preference r7, java.lang.Object r8) {
-                /*
-                // Method dump skipped, instructions count: 152
-                */
-                throw new UnsupportedOperationException("Method not decompiled: com.mn.myroutines.SettingsFragment.AnonymousClass1.onPreferenceChange(android.preference.Preference, java.lang.Object):boolean");
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+
+                switch (newValue.toString()){
+                    case "System settings":
+                        darkModeManager.setMode(DarkModeManager.DAY_NIGHT);
+                        preference.setSummary((CharSequence) newValue);
+                        refershSettings();
+                        break;
+
+                    case "Light":
+                        darkModeManager.setMode(DarkModeManager.DAY);
+                        preference.setSummary((CharSequence) newValue);
+                        refershSettings();
+                        break;
+
+                    case "Dark":
+                        darkModeManager.setMode(DarkModeManager.NIGHT);
+                        preference.setSummary((CharSequence) newValue);
+                        refershSettings();
+
+
+
+                }
+
+
+                return true;
             }
         });
         getPreferenceScreen().findPreference("changeAppTime").setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
@@ -150,12 +167,12 @@ public class SettingsFragment extends PreferenceFragment {
                         preference.setSummary((CharSequence) newValue);
                         SettingsFragment.this.refershSettings();
                         break;
-                    case '\b':
+                    case 8:
                         SettingsFragment.this.routineSettingsManager.setAppTime(9000);
                         preference.setSummary((CharSequence) newValue);
                         SettingsFragment.this.refershSettings();
                         break;
-                    case '\t':
+                    case 9:
                         SettingsFragment.this.routineSettingsManager.setAppTime(10000);
                         preference.setSummary((CharSequence) newValue);
                         SettingsFragment.this.refershSettings();
