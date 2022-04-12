@@ -53,20 +53,29 @@ public class MainActivity extends AppCompatActivity {
 
             routinePosition = getIntent().getIntExtra("routinePosition", 0);
             routineName = getIntent().getStringExtra("notificationText");
-            routineNameInList = routineManager.routineList.get(routinePosition).getRoutineName();
+
 
             Log.d("T", "name in notfication " + routineName);
-            Log.d("T", " name  " + routineNameInList);
 
-            if(routineName.equals(routineNameInList)){
-                Log.d("T", "OK");
+
+            if(routineManager.routineList.size() == routinePosition){
+                Log.d("T", "Ja Routine nicht mehr vorhanden");
+
             } else {
-                Log.d("T", "mö");
+                Log.d("T", "Routine vorhanden");
+                if(routineName.equals(routineManager.routineList.get(routinePosition).getRoutineName())){
+                    Log.d("T", "Name gleich");
+                    new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(getIntent().getIntExtra("routinePosition", 0)));
+                    Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("T", "Name nicht gleich");
+                }
+
             }
 
 
-            new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(getIntent().getIntExtra("routinePosition", 0)));
-            Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+
+
         }
     }
 
