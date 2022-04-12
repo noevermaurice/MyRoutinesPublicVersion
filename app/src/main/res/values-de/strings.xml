@@ -25,8 +25,8 @@
     <string name="TutorialInformation">Danke das du die App Heruntergeladen hast! Mit einem Tutorial kannst du die App danach Perfekt bedienen. Wenn zu dem Tutorial möchtest drücke auf OK </string>
     <string name="TutorialStep1">1. Schritt Erstellen Sie eine neue Routine. Klicken Sie einfach auf das runde Plus unten rechts</string>
     <string name="TutorialStep2">Schritt 2 Geben Sie einen Namen für die Routine ein und geben Sie die Aktionen an. Drücken Sie dazu Keine Aktion und wählen Sie eine Aktion aus. Es ist wichtig, dass jede Aktion in einer Routine nur einmal ausgeführt wird</string>
-    <string name="WifiOff">Wlan an</string>
-    <string name="WifiOn">Wlan aus</string>
+    <string name="WifiOff">Wlan aus</string>
+    <string name="WifiOn">Wlan an</string>
     <string name="about_myroutines">Über MyRoutines</string>
     <string name="app_name">MyRoutines</string>
     <string name="cancel">Abbrechen</string>
@@ -61,5 +61,24 @@
     <string name="TaskNotificationChannelName">Aufgaben Benachrichtigungs Kanal</string>
     <string name="NotificationCanelToast">Benachrichtigung abgebrochen</string>
     <string name="NotficationTaskIsfinished">Ja, abhaken</string>
+
+
+    <string-array name="alertDialogActions">
+        <item>Keine Aktion</item>
+        <item>Bluetooth Aus</item>
+        <item>Bluetooth An</item>
+        <item>Media Lautstärke lautlos</item>
+        <item>Media Lautstärke max </item>
+        <item>Lautstärke lautlos</item>
+        <item>Lautsträke Vibration</item>
+        <item>Lautstärke max </item>
+        <item>App starten</item>
+        <item>Timer starten</item>
+        <item>WLAN aus</item>
+        <item>WLAN an</item>
+
+
+    </string-array>
+
 
 </resources>
