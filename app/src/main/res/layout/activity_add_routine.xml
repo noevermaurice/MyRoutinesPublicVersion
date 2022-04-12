@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@color/white_black"
     tools:context=".AddAndEditRoutineActivity">
 
     <EditText
@@ -34,7 +34,7 @@
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        android:text="@string/AllRoutinesAction"
-       android:textColor="@android:color/black"
+       android:textColor="@color/black_white"
        android:layout_below="@id/EditTextRoutineName"
        />
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chooseAppText"
-        android:textColor="@android:color/black"
+        android:textColor="@color/black_white"
         tools:visibility="invisible"
         android:layout_below="@id/EditTextRoutineName"/>
 
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white_black"
-
+        tools:listitem="@layout/custom_list_view_row"
         android:layout_below="@id/textViewAllRoutinesActions"/>
 
 
