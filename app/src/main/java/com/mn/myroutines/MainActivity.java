@@ -53,25 +53,9 @@ public class MainActivity extends AppCompatActivity {
 
             routinePosition = getIntent().getIntExtra("routinePosition", 0);
             routineName = getIntent().getStringExtra("notificationText");
+            startRoutine(routinePosition, routineName);
 
 
-            Log.d("T", "name in notfication " + routineName);
-
-
-            if(routineManager.routineList.size() == routinePosition){
-                Log.d("T", "Ja Routine nicht mehr vorhanden");
-
-            } else {
-                Log.d("T", "Routine vorhanden");
-                if(routineName.equals(routineManager.routineList.get(routinePosition).getRoutineName())){
-                    Log.d("T", "Name gleich");
-                    new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(getIntent().getIntExtra("routinePosition", 0)));
-                    Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("T", "Name nicht gleich");
-                }
-
-            }
 
 
 
@@ -80,11 +64,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkIsShortCut() {
-        if (getIntent().hasExtra("isShortcut")) {
-            Log.d("Shortcut", "wurde gestartet");
-            new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(getIntent().getIntExtra("ShortcutPosition", 0)));
-            Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+        if (getIntent().hasExtra("isShortcut") && getIntent().hasExtra("routineGetName")) {
+            routinePosition = getIntent().getIntExtra("ShortcutPosition", 0);
+            routineName = getIntent().getStringExtra("routineGetName");
+            startRoutine(routinePosition, routineName);
+
+
         }
+    }
+
+    private void startRoutine(int routinePosition, String routineName){
+        if(routineManager.routineList.size() == routinePosition){
+
+            if(routineManager.routineList.size() == 1 && routineManager.routineList.size() == routinePosition){
+
+                if(routineManager.routineList.size() == 1){
+
+                    if(routineName.equals(routineManager.routineList.get(0).getRoutineName())){
+                        new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(0));
+                        Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+
+
+            }
+
+
+        } else {
+            Log.d("T", "Routine vorhanden");
+            if(routineName.equals(routineManager.routineList.get(routinePosition).getRoutineName())){
+                Log.d("T", "Name gleich");
+                new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(routinePosition));
+                Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+            } else {
+                Log.d("T", "Name nicht gleich");
+            }
+
+        }
+
     }
 
     @SuppressLint("WrongConstant")

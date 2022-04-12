@@ -37,9 +37,11 @@ public class ShortcutManager {
         }
         this.randemID = this.random.nextInt(this.routineManager.getRoutineCount() + 7759);
         int routinePosition2 = routine2.getRoutinePosition();
+        String routineName = routine2.getRoutineName();
         Intent intent = new Intent(this.context, MainActivity.class).setAction("android.intent.action.MAIN");
         intent.putExtra("isShortcut", (Serializable) true);
         intent.putExtra("ShortcutPosition", routinePosition2);
+        intent.putExtra("routineGetName", routineName);
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(this.context)) {
             ShortcutManagerCompat.requestPinShortcut(this.context, new ShortcutInfoCompat.Builder(this.context, String.valueOf(this.randemID)).setIntent(intent).setShortLabel(shotcutName2).setIcon(IconCompat.createWithResource(this.context, R.drawable.ic_baseline_play_arrow_24)).build(), null);
             this.isSave = true;
