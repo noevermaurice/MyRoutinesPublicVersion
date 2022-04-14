@@ -158,6 +158,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
 
     ArrayList<SingleAlertDialogRow> stringArrayList;
+    NotificationManager notificationManager;
 
 
     public ArrayList<String> actionDescription = new ArrayList<>();
@@ -176,6 +177,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
         this.installedApps = this.context.getPackageManager().getInstalledApplications(128);
         this.allAppsAdapter = new AllAppsAdapter(this, 0, this.installedApps, this.appName, this.appPackageName);
 
+        notificationManager = new NotificationManager(context, routineManager, new Intent());
         stringArrayList = new ArrayList<>();
 
 
@@ -289,7 +291,7 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
                 if (AddAndEditRoutineActivity.this.editTextRoutineName.length() == 0) {
                     Toast.makeText(AddAndEditRoutineActivity.this.context, (int) R.string.RoutineNameIsEmpty, 0).show();
                 } else if (AddAndEditRoutineActivity.this.getIntent().hasExtra("routine")) {
-                    AddAndEditRoutineActivity.this.routineSlotManager.updateRoutine(AddAndEditRoutineActivity.this.routine, AddAndEditRoutineActivity.this.editTextRoutineName, AddAndEditRoutineActivity.this.routineManager, AddAndEditRoutineActivity.this.RoutinePositionInList, AddAndEditRoutineActivity.this.isAddToHomeScreen, AddAndEditRoutineActivity.this.isNotificationUpdate, AddAndEditRoutineActivity.this.MyYearOld, AddAndEditRoutineActivity.this.MyMonthOld, AddAndEditRoutineActivity.this.MyDayOld, AddAndEditRoutineActivity.this.MyHourOld, AddAndEditRoutineActivity.this.MyMinuteOld, 2, "", AddAndEditRoutineActivity.this.isEveryDayOld, AddAndEditRoutineActivity.this.isEveryWeekOld, AddAndEditRoutineActivity.this.isEveryMonthOld);
+                    AddAndEditRoutineActivity.this.routineSlotManager.updateRoutine(AddAndEditRoutineActivity.this.routine, AddAndEditRoutineActivity.this.editTextRoutineName, AddAndEditRoutineActivity.this.routineManager, AddAndEditRoutineActivity.this.RoutinePositionInList, AddAndEditRoutineActivity.this.isAddToHomeScreen, AddAndEditRoutineActivity.this.isNotification, AddAndEditRoutineActivity.this.MyYearOld, AddAndEditRoutineActivity.this.MyMonthOld, AddAndEditRoutineActivity.this.MyDayOld, AddAndEditRoutineActivity.this.MyHourOld, AddAndEditRoutineActivity.this.MyMinuteOld, 0, "", AddAndEditRoutineActivity.this.isEveryDayOld, AddAndEditRoutineActivity.this.isEveryWeekOld, AddAndEditRoutineActivity.this.isEveryMonthOld, notificationManager);
                 } else {
                     AddAndEditRoutineActivity.this.routineSlotManager.createRoutine(AddAndEditRoutineActivity.this.routine, AddAndEditRoutineActivity.this.editTextRoutineName, AddAndEditRoutineActivity.this.routineManager, AddAndEditRoutineActivity.this.isAddToHomeScreen, AddAndEditRoutineActivity.this.isNotification, AddAndEditRoutineActivity.this.myYear, AddAndEditRoutineActivity.this.myMonth, AddAndEditRoutineActivity.this.myDay, AddAndEditRoutineActivity.this.myHour, AddAndEditRoutineActivity.this.myMinute, 2, "", AddAndEditRoutineActivity.this.isEverDay, AddAndEditRoutineActivity.this.isEverWeek, AddAndEditRoutineActivity.this.isEverMonth);
                 }
@@ -413,15 +415,39 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
 
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
                 if (isChecked) {
-                    AddAndEditRoutineActivity.this.isNotification = true;
-                    AddAndEditRoutineActivity.this.routineManager.saveRoutineList();
-                    return;
+
+
+                    isNotification = true;
+                    routineManager.saveRoutineList();
+
+
+
+
                 }
-                AddAndEditRoutineActivity.this.isNotification = false;
+
+                if(!isChecked){
+                    Log.d("T", "aus");
+                    switchNotification.setEnabled(false);
+                    isNotification = false;
+
+                    routineManager.saveRoutineList();
+
+                }
+               /* AddAndEditRoutineActivity.this.isNotification = false;
                 AddAndEditRoutineActivity.this.switchNotification.setChecked(false);
                 AddAndEditRoutineActivity.this.switchNotification.setEnabled(false);
                 AddAndEditRoutineActivity.this.routineManager.saveRoutineList();
+                 */
+
+
+
+
+
             }
+
+
+
+
         });
         return true;
     }
@@ -432,9 +458,11 @@ public class AddAndEditRoutineActivity extends AppCompatActivity implements SetT
             this.switchNotification.setChecked(false);
             this.switchNotification.setEnabled(false);
             return;
+        } else {
+            this.switchNotification.setChecked(true);
+            this.switchNotification.setEnabled(true);
         }
-        this.switchNotification.setChecked(true);
-        this.switchNotification.setEnabled(true);
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

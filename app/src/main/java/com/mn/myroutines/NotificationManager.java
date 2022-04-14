@@ -42,7 +42,7 @@ public class NotificationManager {
 
     }
 
-    public void cancelAlarm(Routine routine) {
+    public void cancelAlarm(Routine routine, RoutineManager routineManager) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlertReceiver.class);
         int reqestcodeint = routine.getroutineRendemRequestCode();
@@ -52,7 +52,10 @@ public class NotificationManager {
 
         if (!routine.isCancel) {
             alarmManager.cancel(pendingIntent);
+            routine.isCancel = true;
             routineManager.saveRoutineList();
+
+
 
 
         }

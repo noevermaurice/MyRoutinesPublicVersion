@@ -131,6 +131,8 @@ public class RoutineSlotManager {
     public ArrayList<String> actionDescription = new ArrayList<>();
     ArrayList<Integer> actionImages = new ArrayList<>();
     Drawable image;
+    Intent intent;
+    NotificationManager notificationManager = new NotificationManager(context, routineManager, intent);
 
 
 
@@ -2004,7 +2006,7 @@ public class RoutineSlotManager {
         routine.setDescriptionText(str);
     }
 
-    public void updateRoutine(Routine routine, EditText editText2, RoutineManager routineManager2, int position, boolean isShortcut, boolean isNotification, int myYear2, int myMonth2, int myDay2, int myHour2, int myMinute2, int randemCode, String RoutineAlarmDate, boolean isEverDay2, boolean isEverWeek2, boolean isEverMonth2) {
+    public void updateRoutine(Routine routine, EditText editText2, RoutineManager routineManager2, int position, boolean isShortcut, boolean isNotification, int myYear2, int myMonth2, int myDay2, int myHour2, int myMinute2, int randemCode, String RoutineAlarmDate, boolean isEverDay2, boolean isEverWeek2, boolean isEverMonth2, NotificationManager notificationManager) {
         this.myYear = myYear2;
         this.myMonth = myMonth2;
         this.myDay = myDay2;
@@ -2098,9 +2100,19 @@ public class RoutineSlotManager {
             if (!routine.getRoutineIsShortcut() && isShortcut) {
                 this.shortcutManager.AddShotcut(editText2.getText().toString(), routine);
             }
-            if (isNotification && 1 != 0) {
+            if (isNotification) {
                 StartNotification(routine, routine.getRoutinePosition(), this.routineAlarmDate, isEverDay2, isEverWeek2, isEverMonth2, true);
             }
+
+            if(!isNotification){
+
+                routine.setNotfaction(false);
+                notificationManager.cancelAlarm(routine, routineManager2);
+                routineManager2.saveRoutineList();
+
+            }
+
+            routineManager2.saveRoutineList();
         }
     }
 
@@ -2135,7 +2147,8 @@ public class RoutineSlotManager {
         notificationManager.startAlarm(routine, this.randemQuestCode, this.myYear, this.myMonth, this.myDay, this.myHour, this.myMinute, routineAlarmDate2);
 
         if(routine.isNotfaction){
-            notificationManager.cancelAlarm(routine);
+            notificationManager.cancelAlarm(routine, routineManager);
+            routineManager.saveRoutineList();
             Log.d("RoutineSlotManager", "position notification" + routine.getRoutinePosition());
             notificationManager.updateStartAlarm(routine.routinePosition, routine, this.myYear, this.myMonth, this.myDay, this.myHour, this.myMinute, this.routinebiggerThanMonth,  this.monthplus1, this.monthplus2, this.monthplus3, this.monthplus4, this.monthplus5, this.monthplus6, this.monthplus7, this.monthplus8, this.monthplus9, this.monthplus10, this.monthplus11, this.monthplus12, this.monthplus13, this.monthplus14, this.monthplus15, this.monthplus16, this.monthplus17, this.monthplus18, this.monthplus19, this.monthplus20,this.monthplus21, this.monthplus22, this.monthplus23, this.monthplus24, this.monthplus25, this.monthplus26, this.monthplus27, this.monthplus28,this.monthplus29, this.monthplus30);
             new NotificationHelper(this.context, intent);
