@@ -63,6 +63,10 @@
     <string name="NotficationTaskIsfinished">Ja, abhaken</string>
 
 
+    <string name="RoutineDelete">Routine nicht vorhanden</string>
+
+
+
     <string-array name="alertDialogActions">
         <item>Keine Aktion</item>
         <item>Bluetooth Aus</item>

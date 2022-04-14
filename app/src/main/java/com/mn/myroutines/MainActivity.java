@@ -75,13 +75,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRoutine(int routinePosition, String routineName){
 
-            Log.d("T", "Routine vorhanden");
 
-            Log.d("Shortcuts", "position in shortcut " + routinePosition);
-            Log.d("Shortcuts", "position in list  " + routineManager.routineList.get(routinePosition).getRoutineName());
 
-            Log.d("Shortcuts", "Text in shortcut  " + routineName);
-            Log.d("Shortcuts", "Text in list   " + routineManager.routineList.get(routinePosition).getRoutineName());
 
 
 
@@ -100,6 +95,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+                } else {
+                    Toast.makeText(this, R.string.RoutineDelete, Toast.LENGTH_SHORT).show();
                 }
             }
 
