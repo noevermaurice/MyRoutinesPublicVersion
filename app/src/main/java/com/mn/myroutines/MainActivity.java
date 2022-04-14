@@ -74,37 +74,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void startRoutine(int routinePosition, String routineName){
-        if(routineManager.routineList.size() == routinePosition){
 
-            if(routineManager.routineList.size() == 1 && routineManager.routineList.size() == routinePosition){
-
-                if(routineManager.routineList.size() == 1){
-
-                    if(routineName.equals(routineManager.routineList.get(0).getRoutineName())){
-                        new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(0));
-                        Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
-                    }
-                }
-
-
-
-
-            }
-
-
-        } else {
             Log.d("T", "Routine vorhanden");
-            if(routineName.equals(routineManager.routineList.get(routinePosition).getRoutineName())){
-                Log.d("T", "Name gleich");
-                new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(routinePosition));
-                Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
-            } else {
-                Log.d("T", "Name nicht gleich");
+
+            Log.d("Shortcuts", "position in shortcut " + routinePosition);
+            Log.d("Shortcuts", "position in list  " + routineManager.routineList.get(routinePosition).getRoutineName());
+
+            Log.d("Shortcuts", "Text in shortcut  " + routineName);
+            Log.d("Shortcuts", "Text in list   " + routineManager.routineList.get(routinePosition).getRoutineName());
+
+
+
+            // search in rountinelist for the right routine name and the right position in list
+            for(Routine routine : routineManager.routineList) {
+                if (routine.getRoutineName().equals(routineName)) {
+
+                    Log.d("Shortcuts", "Shortcut gefunden");
+
+                    int newPosition = routineManager.routineList.indexOf(routine);
+
+                    Log.d("Shortcuts", "Position in list " + newPosition);
+
+                    new RoutineActionManager(this, this).startRoutine(this.routineManager.routineList.get(newPosition));
+                    Toast.makeText(this, getString(R.string.RoutineRun), Toast.LENGTH_SHORT).show();
+
+
+
+                }
             }
+
+
 
         }
 
-    }
+
 
     @SuppressLint("WrongConstant")
     private void initPermissions() {
