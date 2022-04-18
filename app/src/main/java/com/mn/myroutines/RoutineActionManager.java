@@ -24,85 +24,43 @@ public class RoutineActionManager {
     }
 
 
+
     public void startRoutine(final Routine routine) {
 
         AudioManager am = (AudioManager) this.context.getSystemService(Context.AUDIO_SERVICE);
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         WifiManager wifiManager = (WifiManager) this.context.getSystemService(Context.WIFI_SERVICE);
+
+
         if (routine.getRoutineSlot1() == 0) {
 
 
 
+
         } else if (routine.getRoutineSlot1() == 1) {
-            if (bluetoothAdapter.isEnabled()) {
-                bluetoothAdapter.disable();
 
+            setBluetoothStateOn(bluetoothAdapter);
 
-
-            } else {
-
-
-
-            }
         } else if (routine.getRoutineSlot1() == 2) {
-            if (!bluetoothAdapter.isEnabled()) {
-                bluetoothAdapter.enable();
 
-            }
+            setBluetoothStateOff(bluetoothAdapter);
         } else if (routine.getRoutineSlot1() == 3) {
-            if (Build.VERSION.SDK_INT >= 28) {
-                am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
+            setMediaVolumeMute(am);
 
-            } else {
-                am.adjustStreamVolume(3, am.getStreamMaxVolume(3), 0);
-
-
-            }
         } else if (routine.getRoutineSlot1() == 4) {
-            am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
+
+            setMediaVolumeMax(am);
 
         } else if (routine.getRoutineSlot1() == 5) {
-            if (Build.VERSION.SDK_INT >= 28) {
-                am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
-                am.setStreamVolume(1, am.getStreamMinVolume(1), 1);
-                am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
-                am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
 
-            } else {
-                am.setStreamVolume(3, -100, 0);
-                am.adjustStreamVolume(1, -100, 0);
-                am.adjustStreamVolume(4, -100, 0);
-                am.adjustStreamVolume(5, -100, 0);
+            setVolumeMute(am);
 
-            }
         } else if (routine.getRoutineSlot1() == 6) {
-            if (Build.VERSION.SDK_INT >= 28) {
-                am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
-                am.setStreamVolume(1, am.getStreamMinVolume(1), 1);
-                am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
-                am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
+            setVolumeVibration(am);
 
-            } else {
-                am.setStreamVolume(3, -100, 0);
-                am.adjustStreamVolume(1, -100, 0);
-                am.adjustStreamVolume(4, -100, 0);
-                am.adjustStreamVolume(5, -100, 0);
-
-            }
         } else if (routine.getRoutineSlot1() == 7) {
-            if (Build.VERSION.SDK_INT >= 28) {
-                am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
-                am.setStreamVolume(1, am.getStreamMaxVolume(1), 1);
-                am.setStreamVolume(4, am.getStreamMaxVolume(4), 1);
-                am.setStreamVolume(5, am.getStreamMaxVolume(5), 1);
+            setVolumeMax(am);
 
-            } else {
-                am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
-                am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
-                am.setStreamVolume(1, am.getStreamMaxVolume(1), 1);
-                am.setStreamVolume(5, am.getStreamMaxVolume(5), 1);
-
-            }
         } else if (routine.getRoutineSlot1() == 8) {
 
             new CountDownTimer(this.routineSettingsManager.getAppTime(), 1000) {
@@ -130,16 +88,10 @@ public class RoutineActionManager {
                 this.context.startActivity(intent);
 
             } else if (routine.getRoutineSlot1() == 10) {
-                if (Build.VERSION.SDK_INT >= 29) {
-                    Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
 
-                    mainActivity.startActivityForResult(panelIntent, 1);
-
-                } else {
-                    ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
-
-                }
+                setWifiOff();
             } else if (routine.getRoutineSlot1() != 11) {
+
 
             } else if (Build.VERSION.SDK_INT >= 29) {
                 Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
@@ -1177,6 +1129,97 @@ public class RoutineActionManager {
                 }
                 ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
             }
+        }
+    }
+
+    private  void setBluetoothStateOn(BluetoothAdapter bluetoothAdapter){
+        if (bluetoothAdapter.isEnabled()) {
+            bluetoothAdapter.disable();
+
+
+
+        }
+    }
+
+    private void setBluetoothStateOff(BluetoothAdapter bluetoothAdapter){
+        if (!bluetoothAdapter.isEnabled()) {
+            bluetoothAdapter.enable();
+
+        }
+    }
+
+    private void setMediaVolumeMute(AudioManager am){
+        if (Build.VERSION.SDK_INT >= 28) {
+            am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
+
+        } else {
+            am.adjustStreamVolume(3, am.getStreamMaxVolume(3), 0);
+
+
+        }
+    }
+
+    private void setMediaVolumeMax(AudioManager am){
+        am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
+    }
+
+    private void setVolumeMute(AudioManager am){
+        if (Build.VERSION.SDK_INT >= 28) {
+            am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
+            am.setStreamVolume(1, am.getStreamMinVolume(1), 1);
+            am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
+            am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
+
+        } else {
+            am.setStreamVolume(3, -100, 0);
+            am.adjustStreamVolume(1, -100, 0);
+            am.adjustStreamVolume(4, -100, 0);
+            am.adjustStreamVolume(5, -100, 0);
+
+        }
+    }
+
+    private void setVolumeVibration(AudioManager am){
+        if (Build.VERSION.SDK_INT >= 28) {
+            am.setStreamVolume(3, am.getStreamMinVolume(3), 1);
+            am.setStreamVolume(1, am.getStreamMinVolume(1), 1);
+            am.setStreamVolume(4, am.getStreamMinVolume(4), 1);
+            am.setStreamVolume(5, am.getStreamMinVolume(5), 1);
+
+        } else {
+            am.setStreamVolume(3, -100, 0);
+            am.adjustStreamVolume(1, -100, 0);
+            am.adjustStreamVolume(4, -100, 0);
+            am.adjustStreamVolume(5, -100, 0);
+
+        }
+    }
+
+    private void setVolumeMax(AudioManager am){
+        if (Build.VERSION.SDK_INT >= 28) {
+            am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
+            am.setStreamVolume(1, am.getStreamMaxVolume(1), 1);
+            am.setStreamVolume(4, am.getStreamMaxVolume(4), 1);
+            am.setStreamVolume(5, am.getStreamMaxVolume(5), 1);
+
+        } else {
+            am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
+            am.setStreamVolume(3, am.getStreamMaxVolume(3), 1);
+            am.setStreamVolume(1, am.getStreamMaxVolume(1), 1);
+            am.setStreamVolume(5, am.getStreamMaxVolume(5), 1);
+
+        }
+    }
+
+    private void setWifiOff(){
+        if (Build.VERSION.SDK_INT >= 29) {
+            Intent panelIntent = new Intent(Settings.Panel.ACTION_INTERNET_CONNECTIVITY);
+
+            mainActivity.startActivityForResult(panelIntent, 1);
+
+        } else {
+            ((WifiManager) this.context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(false);
+
         }
     }
 
