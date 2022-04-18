@@ -68,6 +68,10 @@
 
     <string name="RoutineDelete">Routine not available</string>
 
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+    <string name="RegisterHere">Register here</string>
+
 
     <string-array name="alertDialogActions">
         <item>No Action</item>

@@ -246,6 +246,7 @@ public class RoutineSlotManager {
         switch (selectActionPosition) {
             case 0:
                 int i = this.whichSlotPosition;
+
                 if (i == 0) {
                     this.listviewItemPosition = selectActionPosition;
                     this.routinelistPositionSlot1 = selectActionPosition;

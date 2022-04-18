@@ -51,6 +51,7 @@
         android:id="@+id/listviewAddAction"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingBottom="20dp"
         android:background="@color/white_black"
         tools:listitem="@layout/custom_list_view_row"
         android:layout_below="@id/textViewAllRoutinesActions"/>

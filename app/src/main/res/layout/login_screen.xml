@@ -3,17 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_baseline_play_arrow_24"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:id="@+id/MyRoutinesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MyRoutines PRO"
+        android:textColor="@android:color/holo_orange_dark"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+    <EditText
+        android:id="@+id/edittextUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/MyRoutinesText"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:hint="@string/Username" />
+
+    <EditText
+        android:id="@+id/edittextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/sign_in_button"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginRight="15dp"
+        android:hint="@string/Password" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerInParent="true" />
 
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/RegisterHere"
+        android:layout_centerHorizontal="true"
+
+        android:layout_marginTop="20dp"
+
+        android:textColor="@android:color/black"
+
+        android:layout_below="@id/sign_in_button"/>
 
 </RelativeLayout>
